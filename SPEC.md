@@ -274,7 +274,7 @@ AI wajib mengusulkan, lalu Abid menyetujui, kasus untuk:
 Tiap fase **selesai hanya jika semua butir Definition of Done terpenuhi, termasuk commit + push ke GitHub ([Bagian 5 — Alur Git & GitHub](#5-alur-git--github-wajib)).**
 
 - [x] **Fase 0 — Fondasi.** Repo GitHub, scaffold Vite+TS, ESLint/Prettier, Vitest, Playwright, struktur folder, `SPEC.md`, `Dockerfile` + `nginx.conf`, CI sederhana (lint+test+build). *DoD:* `docker build` berhasil, halaman awal tampil.
-- [ ] **Fase 1 — Skema data & mesin domain.** Skema JSON komponen/aturan, kompatibilitas, hitung daya, state perakitan, simulasi POST, tabel bip AMI (diverifikasi Abid), diagnosis, skor. *DoD:* semua tes kategori D dan E hijau.
+- [x] **Fase 1 — Skema data & mesin domain.** Skema JSON komponen/aturan, kompatibilitas, hitung daya, state perakitan, simulasi POST, tabel bip AMI (diverifikasi Abid), diagnosis, skor. *DoD:* semua tes kategori D dan E hijau.
 - [ ] **Fase 2 — UI 2D & navigasi.** Hash router, pelajaran, panel spesifikasi, progres (localStorage), penguncian prasyarat, reset, i18n, `<noscript>`. *DoD:* tes kategori A dan C hijau; rencana desain disetujui; checklist [Bagian 15](#15-uiux-sederhana-dan-natural) lolos.
 - [ ] **Fase 3 — Lapisan 3D.** Scene dengan bentuk primitif, kontrol kamera (mouse + sentuh), klik komponen, mode kualitas, cadangan 2D, padanan keyboard. *DoD:* kategori B lolos (otomatis + manual); checklist [Bagian 15](#15-uiux-sederhana-dan-natural) lolos.
 - [ ] **Fase 4 — Simulasi perakitan interaktif.** Hubungkan mesin domain ke 3D, urutan pemasangan, umpan balik kegagalan, layar hasil. *DoD:* seluruh alur rakit → nyalakan → diagnosis jalan; checklist [Bagian 15](#15-uiux-sederhana-dan-natural) lolos.

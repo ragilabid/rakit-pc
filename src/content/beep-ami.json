@@ -1,0 +1,46 @@
+[
+  {
+    "id": "ami-normal-post",
+    "pattern": "1 pendek",
+    "beepCount": 1,
+    "toneType": "SHORT",
+    "meaning": "POST (Power-On Self-Test) berhasil normal tanpa kesalahan perangkat keras.",
+    "targetComponent": "NORMAL",
+    "diagnosticHint": "Sistem lulus pemeriksaan awal dan siap melanjutkan proses boot ke sistem operasi.",
+    "verificationStatus": "TODO-VERIFIKASI",
+    "sourceNote": "TODO-VERIFIKASI: AMI Aptio / AMIBIOS Checkpoints & Beep Codes — 1 short beep = Normal POST / system boots successfully."
+  },
+  {
+    "id": "ami-ram-missing-or-faulty",
+    "pattern": "3 pendek berulang",
+    "beepCount": 3,
+    "toneType": "SHORT",
+    "meaning": "Kegagalan memori utama (Base 64K memory failure / RAM tidak terdeteksi atau rusak).",
+    "targetComponent": "RAM",
+    "diagnosticHint": "Periksa apakah keping RAM sudah terpasang rapat pada slot DIMM, pastikan pengunci slot menutup, atau uji keping RAM satu per satu.",
+    "verificationStatus": "TODO-VERIFIKASI",
+    "sourceNote": "TODO-VERIFIKASI: AMIBIOS8 / Aptio Beep Code Table — 3 short beeps = Base 64K memory failure (beberapa revisi Aptio V memakai 3 bip pendek atau bip berulang untuk kegagalan inisialisasi DRAM)."
+  },
+  {
+    "id": "ami-no-video-card",
+    "pattern": "1 panjang, 3 pendek",
+    "beepCount": "1 panjang + 3 pendek",
+    "toneType": "LONG_SHORT",
+    "meaning": "Kartu grafis (VGA/GPU) tidak terdeteksi atau gagal diinisialisasi.",
+    "targetComponent": "GPU",
+    "diagnosticHint": "Pastikan kartu grafis terpasang penuh di slot PCIe, kabel daya PCIe dari PSU sudah dicolok, dan kabel monitor terhubung ke port GPU.",
+    "verificationStatus": "TODO-VERIFIKASI",
+    "sourceNote": "TODO-VERIFIKASI: AMIBIOS / Aptio — 1 long, 3 short beeps (atau 8 short beeps pada AMIBIOS klasik) = Display memory read/write error / No video card detected. Perlu konfirmasi versi AMI yang dijadikan acuan kurikulum SMK."
+  },
+  {
+    "id": "ami-cpu-failure",
+    "pattern": "5 pendek",
+    "beepCount": 5,
+    "toneType": "SHORT",
+    "meaning": "Kesalahan prosesor (Processor error / CPU tidak terbaca atau gagal inisialisasi).",
+    "targetComponent": "CPU",
+    "diagnosticHint": "Periksa pemasangan CPU di soket, pastikan tidak ada pin bengkok dan kabel daya CPU 8-pin sudah terpasang.",
+    "verificationStatus": "TODO-VERIFIKASI",
+    "sourceNote": "TODO-VERIFIKASI: AMIBIOS Beep Codes — 5 short beeps = Processor Error."
+  }
+]

@@ -1,0 +1,224 @@
+{
+  "cpus": [
+    {
+      "id": "cpu-ryzen5-7600",
+      "name": "AMD Ryzen 5 7600",
+      "category": "cpu",
+      "socket": "AM5",
+      "tdpWatts": 65,
+      "hasIntegratedGraphics": true,
+      "verificationNote": "TODO-VERIFIKASI: TDP 65W resmi AMD Ryzen 5 7600 (AM5)"
+    },
+    {
+      "id": "cpu-i5-13400f",
+      "name": "Intel Core i5-13400F",
+      "category": "cpu",
+      "socket": "LGA1700",
+      "tdpWatts": 148,
+      "hasIntegratedGraphics": false,
+      "verificationNote": "TODO-VERIFIKASI: Base Power 65W / Maximum Turbo Power 148W Intel Core i5-13400F"
+    },
+    {
+      "id": "cpu-i9-13900k",
+      "name": "Intel Core i9-13900K",
+      "category": "cpu",
+      "socket": "LGA1700",
+      "tdpWatts": 250,
+      "hasIntegratedGraphics": true,
+      "verificationNote": "TODO-VERIFIKASI: MTP 253W dibulatkan 250W untuk skenario uji daya 650W (KU-36)"
+    }
+  ],
+  "motherboards": [
+    {
+      "id": "mb-b650-atx",
+      "name": "Motherboard B650 ATX (AM5, DDR5)",
+      "category": "motherboard",
+      "socket": "AM5",
+      "ramType": "DDR5",
+      "ramSlots": ["A1", "A2", "B1", "B2"],
+      "dualChannelPairs": [
+        ["A2", "B2"],
+        ["A1", "B1"]
+      ],
+      "maxRamGb": 128,
+      "formFactor": "ATX",
+      "tdpWatts": 50
+    },
+    {
+      "id": "mb-b760-atx-ddr5",
+      "name": "Motherboard B760 ATX (LGA1700, DDR5)",
+      "category": "motherboard",
+      "socket": "LGA1700",
+      "ramType": "DDR5",
+      "ramSlots": ["A1", "A2", "B1", "B2"],
+      "dualChannelPairs": [
+        ["A2", "B2"],
+        ["A1", "B1"]
+      ],
+      "maxRamGb": 128,
+      "formFactor": "ATX",
+      "tdpWatts": 50
+    },
+    {
+      "id": "mb-b760-itx-ddr4",
+      "name": "Motherboard B760 Mini-ITX (LGA1700, DDR4)",
+      "category": "motherboard",
+      "socket": "LGA1700",
+      "ramType": "DDR4",
+      "ramSlots": ["A1", "B1"],
+      "dualChannelPairs": [["A1", "B1"]],
+      "maxRamGb": 64,
+      "formFactor": "Mini-ITX",
+      "tdpWatts": 40
+    }
+  ],
+  "rams": [
+    {
+      "id": "ram-ddr5-16gb",
+      "name": "RAM DDR5 16 GB 5600 MHz",
+      "category": "ram",
+      "ramType": "DDR5",
+      "capacityGb": 16,
+      "tdpWatts": 5
+    },
+    {
+      "id": "ram-ddr5-64gb",
+      "name": "RAM DDR5 64 GB 5200 MHz",
+      "category": "ram",
+      "ramType": "DDR5",
+      "capacityGb": 64,
+      "tdpWatts": 8
+    },
+    {
+      "id": "ram-ddr4-16gb",
+      "name": "RAM DDR4 16 GB 3200 MHz",
+      "category": "ram",
+      "ramType": "DDR4",
+      "capacityGb": 16,
+      "tdpWatts": 5
+    },
+    {
+      "id": "ram-ddr5-16gb-rusak",
+      "name": "RAM DDR5 16 GB (Modul Bermasalah)",
+      "category": "ram",
+      "ramType": "DDR5",
+      "capacityGb": 16,
+      "tdpWatts": 5,
+      "defective": true
+    }
+  ],
+  "psus": [
+    {
+      "id": "psu-450w",
+      "name": "PSU 450 W 80+ Bronze",
+      "category": "psu",
+      "wattage": 450,
+      "tdpWatts": 0
+    },
+    {
+      "id": "psu-650w",
+      "name": "PSU 650 W 80+ Gold",
+      "category": "psu",
+      "wattage": 650,
+      "tdpWatts": 0
+    }
+  ],
+  "cases": [
+    {
+      "id": "case-mid-atx",
+      "name": "Casing Mid-Tower ATX",
+      "category": "case",
+      "supportedFormFactors": ["ATX", "Micro-ATX", "Mini-ITX"],
+      "tdpWatts": 10
+    },
+    {
+      "id": "case-mini-itx",
+      "name": "Casing Compact Mini-ITX",
+      "category": "case",
+      "supportedFormFactors": ["Mini-ITX"],
+      "tdpWatts": 5
+    }
+  ],
+  "gpus": [
+    {
+      "id": "gpu-rtx-4060",
+      "name": "GPU GeForce RTX 4060 8 GB",
+      "category": "gpu",
+      "requiresPciePower": true,
+      "tdpWatts": 115,
+      "verificationNote": "TODO-VERIFIKASI: TGP RTX 4060 115W"
+    },
+    {
+      "id": "gpu-high-power-320w",
+      "name": "GPU Kelas Atas 320 W",
+      "category": "gpu",
+      "requiresPciePower": true,
+      "tdpWatts": 320,
+      "verificationNote": "TODO-VERIFIKASI: Komponen uji untuk simulasi total beban 650W (KU-36)"
+    }
+  ],
+  "storages": [
+    {
+      "id": "ssd-nvme-512-os",
+      "name": "SSD NVMe M.2 512 GB (OS Terpasang)",
+      "category": "storage",
+      "interface": "NVMe_M2",
+      "hasOsInstalled": true,
+      "tdpWatts": 5
+    },
+    {
+      "id": "ssd-nvme-512-kosong",
+      "name": "SSD NVMe M.2 512 GB (Kosong / Tanpa OS)",
+      "category": "storage",
+      "interface": "NVMe_M2",
+      "hasOsInstalled": false,
+      "tdpWatts": 5
+    }
+  ],
+  "coolers": [
+    {
+      "id": "cooler-tower-universal",
+      "name": "Pendingin CPU Tower Universal (AM5 / LGA1700)",
+      "category": "cooler",
+      "supportedSockets": ["AM5", "LGA1700"],
+      "tdpWatts": 5
+    }
+  ],
+  "cables": [
+    {
+      "id": "cable-atx-24pin",
+      "name": "Kabel Daya Utama ATX 24-pin",
+      "category": "cable",
+      "cableType": "ATX_24PIN",
+      "tdpWatts": 0
+    },
+    {
+      "id": "cable-cpu-8pin",
+      "name": "Kabel Daya CPU EPS 8-pin",
+      "category": "cable",
+      "cableType": "CPU_8PIN",
+      "tdpWatts": 0
+    },
+    {
+      "id": "cable-pcie-8pin",
+      "name": "Kabel Daya GPU PCIe 8-pin",
+      "category": "cable",
+      "cableType": "PCIE_8PIN",
+      "tdpWatts": 0
+    },
+    {
+      "id": "cable-front-panel",
+      "name": "Kabel Front Panel (Power SW, Reset, LED)",
+      "category": "cable",
+      "cableType": "FRONT_PANEL",
+      "tdpWatts": 0
+    },
+    {
+      "id": "cable-monitor-hdmi",
+      "name": "Kabel Monitor HDMI",
+      "category": "cable",
+      "cableType": "MONITOR_HDMI",
+      "tdpWatts": 0
+    }
+  ]
+}
