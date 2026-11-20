@@ -1,0 +1,121 @@
+[
+  {
+    "id": "rule-cpu-socket",
+    "code": "CPU_SOCKET_MISMATCH",
+    "testCaseRef": "KU-31",
+    "level": "PHYSICAL",
+    "severity": "REJECT",
+    "operator": "EQUALS",
+    "leftPath": "cpu.socket",
+    "rightPath": "motherboard.socket",
+    "reason": "Soket CPU tidak cocok dengan soket motherboard (jumlah dan susunan pin berbeda).",
+    "remediation": "Pilih CPU dengan soket yang sama persis dengan soket motherboard (misalnya AM5 dengan AM5, atau LGA1700 dengan LGA1700)."
+  },
+  {
+    "id": "rule-cpu-orientation",
+    "code": "CPU_ORIENTATION_INVALID",
+    "testCaseRef": "KU-33",
+    "level": "PHYSICAL",
+    "severity": "REJECT",
+    "operator": "BOOL_TRUE",
+    "leftPath": "placement.cpuTriangleAligned",
+    "reason": "Orientasi CPU salah karena segitiga penanda di sudut CPU tidak sejajar dengan penanda di soket motherboard.",
+    "remediation": "Putar CPU hingga tanda segitiga emas di sudut CPU tepat sejajar dengan tanda segitiga pada sudut soket motherboard."
+  },
+  {
+    "id": "rule-ram-type",
+    "code": "RAM_TYPE_MISMATCH",
+    "testCaseRef": "KU-32",
+    "level": "PHYSICAL",
+    "severity": "REJECT",
+    "operator": "EQUALS",
+    "leftPath": "ram.ramType",
+    "rightPath": "motherboard.ramType",
+    "reason": "Tipe RAM tidak cocok dengan slot motherboard karena posisi lekukan kunci (notch) DDR4 dan DDR5 berbeda.",
+    "remediation": "Gunakan modul RAM yang sesuai dengan generasi slot memori pada motherboard."
+  },
+  {
+    "id": "rule-ram-orientation",
+    "code": "RAM_ORIENTATION_REVERSED",
+    "testCaseRef": "KU-34",
+    "level": "PHYSICAL",
+    "severity": "REJECT",
+    "operator": "BOOL_TRUE",
+    "leftPath": "placement.ramNotchAligned",
+    "reason": "RAM dipasang terbalik sehingga alur kunci (notch) pada modul tidak searah dengan pembatas di slot DIMM.",
+    "remediation": "Balik posisi modul RAM hingga celah notch sejajar dengan tonjolan pada slot motherboard sebelum menekan."
+  },
+  {
+    "id": "rule-ram-slot-occupied",
+    "code": "SLOT_ALREADY_OCCUPIED",
+    "testCaseRef": "KU-48",
+    "level": "PHYSICAL",
+    "severity": "REJECT",
+    "operator": "SLOT_EMPTY",
+    "leftPath": "placement.targetSlotOccupied",
+    "reason": "Slot memori tersebut sudah terisi komponen lain; satu slot hanya dapat memuat satu keping RAM.",
+    "remediation": "Pilih slot RAM lain yang masih kosong atau lepas modul yang ada terlebih dahulu."
+  },
+  {
+    "id": "rule-case-form-factor",
+    "code": "FORM_FACTOR_INCOMPATIBLE",
+    "testCaseRef": "KU-35",
+    "level": "PHYSICAL",
+    "severity": "REJECT",
+    "operator": "ARRAY_INCLUDES",
+    "leftPath": "case.supportedFormFactors",
+    "rightPath": "motherboard.formFactor",
+    "reason": "Ukuran form factor motherboard terlalu besar dan tidak muat di dalam casing yang dipilih.",
+    "remediation": "Gunakan casing yang mendukung ukuran motherboard tersebut (misalnya casing ATX untuk motherboard ATX), atau pilih motherboard yang lebih kecil.",
+    "proposalNote": "USULAN: KU-35 diperlakukan sebagai kegagalan FISIK (ditolak langsung saat memasang motherboard ke casing)."
+  },
+  {
+    "id": "rule-psu-insufficient",
+    "code": "PSU_WATTAGE_INSUFFICIENT",
+    "testCaseRef": "KU-36",
+    "level": "LOGICAL",
+    "severity": "ERROR",
+    "operator": "WATTAGE_SUFFICIENT",
+    "leftPath": "power.psuWattage",
+    "rightPath": "power.requiredWatts",
+    "reason": "Kapasitas daya PSU lebih kecil daripada total kebutuhan daya komponen sehingga PC gagal menyala.",
+    "remediation": "Ganti PSU dengan kapasitas watt yang lebih tinggi dari total kebutuhan daya sistem (disarankan memiliki ruang cadangan minimal 20%)."
+  },
+  {
+    "id": "rule-psu-tight-headroom",
+    "code": "PSU_TIGHT_HEADROOM",
+    "testCaseRef": "KU-37",
+    "level": "LOGICAL",
+    "severity": "WARNING",
+    "operator": "WATTAGE_HEADROOM",
+    "leftPath": "power.psuWattage",
+    "rightPath": "power.requiredWatts",
+    "thresholdRatio": 0.15,
+    "reason": "Kapasitas PSU hanya sedikit di atas kebutuhan daya komponen (tanpa cadangan daya yang memadai).",
+    "remediation": "Sistem masih dapat menyala, tetapi disarankan memakai PSU dengan cadangan daya minimal 15-20% agar stabil saat beban puncak."
+  },
+  {
+    "id": "rule-ram-max-capacity",
+    "code": "RAM_CAPACITY_EXCEEDED",
+    "testCaseRef": "KU-50",
+    "level": "LOGICAL",
+    "severity": "WARNING",
+    "operator": "SUM_LTE",
+    "leftPath": "memory.totalInstalledGb",
+    "rightPath": "motherboard.maxRamGb",
+    "reason": "Total kapasitas RAM yang terpasang melebihi batas maksimum yang didukung oleh motherboard.",
+    "remediation": "Kurangi kapasitas atau jumlah keping RAM agar totalnya tidak melampaui spesifikasi maksimum motherboard."
+  },
+  {
+    "id": "rule-ram-dual-channel",
+    "code": "RAM_SINGLE_CHANNEL_SUBOPTIMAL",
+    "testCaseRef": "KU-49",
+    "level": "LOGICAL",
+    "severity": "WARNING",
+    "operator": "PAIR_MATCH",
+    "leftPath": "memory.installedSlots",
+    "rightPath": "motherboard.dualChannelPairs",
+    "reason": "Dua keping RAM dipasang pada slot yang tidak berpasangan sehingga tidak berjalan dalam mode dual-channel.",
+    "remediation": "Pasang dua keping RAM pada pasangan slot kanal ganda yang direkomendasikan motherboard (umumnya slot A2 dan B2)."
+  }
+]
