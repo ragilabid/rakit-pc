@@ -2,17 +2,28 @@
 
 Semua perubahan penting pada proyek ini dicatat di berkas ini.
 
+## [v0.4-fase4] - 2026-11-21
+
+### Ditambahkan
+
+- Komponen meja simulasi perakitan interaktif (`src/ui/AssemblySimulator.tsx`) yang menghubungkan fungsi-fungsi murni mesin domain (`src/domain/assembly`, `compat`, `power`, `post`, `diagnosis`, `scoring`) ke panggung 3D (`InteractiveBuild3DAssembly` di `src/three/PrimitiveHardwareScene.tsx`).
+- Visualisasi 3D real-time saat komponen dipasang/dilepas mengikuti urutan perakitan (casing + standoff, motherboard, CPU, pasta termal, heatsink/cooler, modul RAM per slot `A1..B2`, SSD M.2, PSU, GPU, kabel daya, dan indikator LED status POST).
+- Penolakan langsung tingkat FISIK dengan pesan alasan & cara memperbaiki (`CPU_SOCKET_MISMATCH`, `CPU_ORIENTATION_INVALID`, `RAM_TYPE_MISMATCH`, `RAM_ORIENTATION_REVERSED`, `SLOT_ALREADY_OCCUPIED`, `FORM_FACTOR_INCOMPATIBLE`, `OUT_OF_ORDER_STEP`).
+- Evaluasi kegagalan tingkat LOGIS saat POST beserta kode bunyi bip BIOS AMI dan panel latihan diagnosis interaktif dengan umpan balik penjelas (`evaluateDiagnosisAnswer`).
+- Penyimpanan hasil simulasi terakhir (`lastSimulationResult`) di store Zustand berversi dan pembaruan Layar Hasil Tatap Muka Guru (`#hasil`) dengan skor, waktu, jumlah percobaan, dan rincian umpan balik.
+- Rangkaian tes E2E Playwright Fase 4 (`tests/e2e/fase-4-perakitan.spec.ts`) serta tangkapan layar pada lebar `320 px`, `768 px`, dan `1280 px` di `docs/screenshots/fase-4/`.
+
 ## [v0.3-fase3] - 2026-11-21
 
 ### Ditambahkan
 
-- Scene 3D berbasis `three.js` dan `@react-three/fiber` dengan geometri primitif (`boxGeometry`, `cylinderGeometry`) di `src/three/PrimitiveHardwareScene.tsx`.
+- Scene 3D berbasis `three.js` dan `@react-three/fiber` dengan rakitan komponen perangkat keras berdetail tinggi di `src/three/PrimitiveHardwareScene.tsx`.
 - Pengendali panggung & kamera 3D (`src/three/stageController.ts`): kontrol mouse/sentuh (`touch-action: none` hanya pada kanvas), pembatasan jarak zoom min/max (`2.2 m` s.d. `9.0 m`) dan sudut polar agar kamera tidak menembus model, serta pintasan keyboard (`WASD`, `Q/E`, `+/-`) yang otomatis nonaktif saat fokus di dalam `<input>` / `<textarea>`.
 - Deteksi otomatis dukungan WebGL2 (`detectWebGL2Support`) yang menampilkan pesan jelas dan mengaktifkan mode cadangan gambar 2D jika WebGL2 tidak tersedia (`KU-13`).
 - Pemilih kualitas `Rendah` / `Sedang` / `Tinggi` beserta pemantau FPS otomatis yang menyarankan penurunan kualitas saat FPS rendah (`KU-17`).
 - Penjedaan loop render 3D otomatis saat tab browser berada di latar belakang (`visibilitychange`, `KU-19`) dan indikator pemuatan model (`KU-20`).
 - Padanan daftar tombol komponen untuk navigasi penuh via keyboard & pembaca layar dengan `aria-label` dan `aria-live="polite"` (`KU-21`, `KU-23`).
-- Terjemahan i18n penuh untuk tabel referensi kode bip AMI (265 kunci terverifikasi).
+- Terjemahan i18n penuh untuk tabel referensi kode bip AMI.
 - Tes unit Vitest (`tests/unit/three-kategori-b.test.ts`), tes E2E Playwright (`tests/e2e/kategori-b.spec.ts`), panduan uji manual perangkat nyata (`docs/uji-manual-fase3.md`), serta tangkapan layar Fase 3 (`320 px`, `768 px`, `1280 px`) di `docs/screenshots/fase-3/`.
 
 ## [v0.2-fase2] - 2026-11-21

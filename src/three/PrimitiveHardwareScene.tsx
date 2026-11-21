@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { Canvas, useFrame, useThree, type ThreeEvent } from '@react-three/fiber';
 import * as THREE from 'three';
+import type { AssemblyState } from '../domain/assembly';
+import type { RamSlotId } from '../domain/types';
 import {
   getQualityPresetConfig,
   type CameraOrbitState,
@@ -22,6 +24,8 @@ interface PrimitiveHardwareSceneProps {
   qualityMode: QualityLevel;
   isRenderPaused: boolean;
   onFpsSample?: (fps: number) => void;
+  assemblyState?: AssemblyState | null;
+  postSuccess?: boolean | null;
 }
 
 function CameraRig({ cameraState }: { cameraState: CameraOrbitState }) {
@@ -795,6 +799,249 @@ function PsuRealisticAssembly({
   );
 }
 
+/**
+ * 6. RAKITAN INTERAKTIF LANGSUNG DARI STATE MESIN DOMAIN (FASE 4)
+ * Setiap komponen yang dipasang/dilepas siswa langsung muncul atau hilang secara real-time di panggung 3D.
+ */
+function InteractiveBuild3DAssembly({
+  assemblyState,
+  postSuccess,
+  segments,
+}: {
+  assemblyState: AssemblyState;
+  postSuccess?: boolean | null;
+  segments: number;
+}) {
+  const slotXMap: Record<RamSlotId, number> = {
+    A1: 0.35,
+    A2: 0.57,
+    B1: 0.79,
+    B2: 1.01,
+  };
+
+  const isItxBoard = assemblyState.motherboard?.formFactor === 'Mini-ITX';
+  const boardWidth = isItxBoard ? 2.4 : 3.5;
+  const boardDepth = isItxBoard ? 2.1 : 2.65;
+
+  return (
+    <group position={[0, 0.05, 0]}>
+      {/* Baki Casing PC & Baut Standoff bila Casing Sudah Dipilih */}
+      {assemblyState.pcCase && (
+        <group position={[0, -0.14, 0]}>
+          <mesh receiveShadow>
+            <boxGeometry
+              args={[
+                assemblyState.pcCase.id === 'case-mini-itx' ? 2.8 : 4.5,
+                0.08,
+                assemblyState.pcCase.id === 'case-mini-itx' ? 2.4 : 3.3,
+              ]}
+            />
+            <meshStandardMaterial color="#232a31" metalness={0.6} roughness={0.45} />
+          </mesh>
+          {/* Dinding Belakang Casing */}
+          <mesh position={[assemblyState.pcCase.id === 'case-mini-itx' ? -1.35 : -2.2, 0.55, 0]}>
+            <boxGeometry
+              args={[0.08, 1.1, assemblyState.pcCase.id === 'case-mini-itx' ? 2.4 : 3.3]}
+            />
+            <meshStandardMaterial color="#2c353d" metalness={0.65} roughness={0.4} />
+          </mesh>
+          {/* Indikator Baut Standoff (Kuningan jika sesuai, Merah jika salah posisi/korsleting) */}
+          {[-1.3, 0, 1.3].map((sx, idx) => (
+            <mesh key={`case-standoff-${idx}`} position={[sx, 0.07, -0.95]}>
+              <cylinderGeometry args={[0.06, 0.06, 0.08, 6]} />
+              <meshStandardMaterial
+                color={assemblyState.standoffsAligned ? '#d4a843' : '#e5484d'}
+                metalness={0.8}
+                roughness={0.25}
+              />
+            </mesh>
+          ))}
+        </group>
+      )}
+
+      {/* Motherboard */}
+      {assemblyState.motherboard && (
+        <group position={[-0.2, 0, -0.1]}>
+          <mesh receiveShadow castShadow>
+            <boxGeometry args={[boardWidth, 0.08, boardDepth]} />
+            <meshStandardMaterial
+              color={assemblyState.isMountedInCase ? '#163026' : '#162620'}
+              roughness={0.6}
+              metalness={0.18}
+            />
+          </mesh>
+
+          {/* Soket CPU */}
+          <mesh position={[-0.35, 0.07, -0.35]}>
+            <boxGeometry args={[0.92, 0.06, 0.92]} />
+            <meshStandardMaterial color="#2b333b" roughness={0.45} />
+          </mesh>
+
+          {/* 4 Rel Slot DIMM */}
+          {(['A1', 'A2', 'B1', 'B2'] as RamSlotId[]).map((slotId) => (
+            <mesh key={slotId} position={[slotXMap[slotId], 0.08, -0.32]}>
+              <boxGeometry args={[0.1, 0.1, 1.25]} />
+              <meshStandardMaterial color="#252c33" />
+            </mesh>
+          ))}
+
+          {/* Keping RAM yang Terpasang pada Slot Masing-Masing */}
+          {(['A1', 'A2', 'B1', 'B2'] as RamSlotId[]).map((slotId) => {
+            const mod = assemblyState.ramModules[slotId];
+            if (!mod) return null;
+            return (
+              <group key={`installed-ram-${slotId}`} position={[slotXMap[slotId], 0.34, -0.32]}>
+                <mesh castShadow>
+                  <boxGeometry args={[0.07, 0.45, 1.22]} />
+                  <meshStandardMaterial
+                    color={mod.defective ? '#b42318' : '#0f6b4a'}
+                    roughness={0.35}
+                    metalness={0.25}
+                  />
+                </mesh>
+                <mesh position={[0, 0.24, 0]}>
+                  <boxGeometry args={[0.09, 0.06, 1.24]} />
+                  <meshStandardMaterial color="#d5dde6" metalness={0.8} roughness={0.2} />
+                </mesh>
+              </group>
+            );
+          })}
+
+          {/* Prosesor (CPU) Terpasang */}
+          {assemblyState.cpu && (
+            <group position={[-0.35, 0.14, -0.35]}>
+              <mesh castShadow>
+                <boxGeometry args={[0.76, 0.06, 0.76]} />
+                <meshStandardMaterial color="#1b5e43" />
+              </mesh>
+              <mesh position={[0, 0.05, 0]} castShadow>
+                <boxGeometry args={[0.62, 0.06, 0.62]} />
+                <meshStandardMaterial color="#cfd8e0" metalness={0.85} roughness={0.2} />
+              </mesh>
+            </group>
+          )}
+
+          {/* Pasta Termal di Atas CPU */}
+          {assemblyState.cpu && assemblyState.thermalPasteApplied && (
+            <mesh position={[-0.35, 0.23, -0.35]}>
+              <cylinderGeometry args={[0.14, 0.16, 0.03, segments]} />
+              <meshStandardMaterial color="#8c96a0" roughness={0.3} />
+            </mesh>
+          )}
+
+          {/* Pendingin CPU (Tower Heatsink + Kipas) */}
+          {assemblyState.cooler && (
+            <group position={[-0.35, 0.56, -0.35]}>
+              <mesh castShadow>
+                <boxGeometry args={[0.78, 0.62, 0.68]} />
+                <meshStandardMaterial color="#8f9aa4" metalness={0.78} roughness={0.25} />
+              </mesh>
+              <mesh position={[0.42, 0, 0]}>
+                <boxGeometry args={[0.12, 0.58, 0.64]} />
+                <meshStandardMaterial color="#1f252b" />
+              </mesh>
+            </group>
+          )}
+
+          {/* Media Penyimpanan SSD NVMe M.2 */}
+          {assemblyState.storage && (
+            <group position={[-0.25, 0.08, 0.28]}>
+              <mesh castShadow>
+                <boxGeometry args={[0.88, 0.04, 0.28]} />
+                <meshStandardMaterial
+                  color={assemblyState.storage.hasOsInstalled ? '#0f6b4a' : '#8f4b00'}
+                />
+              </mesh>
+              <mesh position={[0.1, 0.03, 0]}>
+                <boxGeometry args={[0.28, 0.03, 0.22]} />
+                <meshStandardMaterial color="#14181d" />
+              </mesh>
+            </group>
+          )}
+
+          {/* Kartu Grafis (GPU) di Slot PCIe x16 */}
+          {assemblyState.gpu && (
+            <group position={[-0.15, 0.36, 0.65]}>
+              <mesh castShadow>
+                <boxGeometry args={[1.85, 0.52, 0.32]} />
+                <meshStandardMaterial color="#262e36" metalness={0.65} roughness={0.32} />
+              </mesh>
+              <mesh position={[-0.45, 0, 0.17]}>
+                <cylinderGeometry args={[0.18, 0.18, 0.04, segments]} />
+                <meshStandardMaterial color="#14181d" />
+              </mesh>
+              <mesh position={[0.45, 0, 0.17]}>
+                <cylinderGeometry args={[0.18, 0.18, 0.04, segments]} />
+                <meshStandardMaterial color="#14181d" />
+              </mesh>
+            </group>
+          )}
+
+          {/* Indikator Kabel Daya ATX 24-pin, CPU 8-pin, PCIe 8-pin, & Monitor */}
+          {assemblyState.powerCables.ATX_24PIN && (
+            <mesh position={[1.45, 0.22, -0.25]}>
+              <boxGeometry args={[0.22, 0.35, 0.72]} />
+              <meshStandardMaterial color="#18a370" />
+            </mesh>
+          )}
+          {assemblyState.powerCables.CPU_8PIN && (
+            <mesh position={[-1.25, 0.22, -1.05]}>
+              <boxGeometry args={[0.28, 0.3, 0.24]} />
+              <meshStandardMaterial color="#18a370" />
+            </mesh>
+          )}
+          {assemblyState.powerCables.PCIE_8PIN && assemblyState.gpu && (
+            <mesh position={[0.65, 0.66, 0.65]}>
+              <boxGeometry args={[0.24, 0.18, 0.24]} />
+              <meshStandardMaterial color="#f5b82e" />
+            </mesh>
+          )}
+          {assemblyState.monitorConnectedTo && (
+            <mesh
+              position={[
+                -1.85,
+                assemblyState.monitorConnectedTo === 'GPU' ? 0.36 : 0.18,
+                assemblyState.monitorConnectedTo === 'GPU' ? 0.65 : -0.45,
+              ]}
+            >
+              <boxGeometry args={[0.38, 0.12, 0.18]} />
+              <meshStandardMaterial
+                color={assemblyState.monitorConnectedTo === 'GPU' ? '#18a370' : '#d99b26'}
+              />
+            </mesh>
+          )}
+
+          {/* Lampu Indikator Status POST di Sudut Motherboard */}
+          {postSuccess !== null && postSuccess !== undefined && (
+            <mesh position={[1.45, 0.12, 0.95]}>
+              <cylinderGeometry args={[0.1, 0.1, 0.08, segments]} />
+              <meshStandardMaterial
+                color={postSuccess ? '#1fd18a' : '#e5484d'}
+                emissive={postSuccess ? '#0f6b4a' : '#b42318'}
+                emissiveIntensity={0.85}
+              />
+            </mesh>
+          )}
+        </group>
+      )}
+
+      {/* Unit Catu Daya (PSU) di Sisi Kanan Bawah Casing */}
+      {assemblyState.psu && (
+        <group position={[1.55, 0.28, 0.95]}>
+          <mesh castShadow>
+            <boxGeometry args={[1.05, 0.62, 0.95]} />
+            <meshStandardMaterial color="#1f2429" metalness={0.55} roughness={0.4} />
+          </mesh>
+          <mesh position={[0, 0.32, 0]}>
+            <cylinderGeometry args={[0.34, 0.34, 0.03, segments]} />
+            <meshStandardMaterial color="#6c7782" metalness={0.75} roughness={0.25} />
+          </mesh>
+        </group>
+      )}
+    </group>
+  );
+}
+
 export function PrimitiveHardwareScene({
   lessonId,
   lessonTitle,
@@ -805,6 +1052,8 @@ export function PrimitiveHardwareScene({
   qualityMode,
   isRenderPaused,
   onFpsSample,
+  assemblyState,
+  postSuccess,
 }: PrimitiveHardwareSceneProps) {
   const preset = getQualityPresetConfig(qualityMode);
 
@@ -846,36 +1095,46 @@ export function PrimitiveHardwareScene({
 
       <primitive object={gridHelper} />
 
-      {sceneType === 'motherboard' && (
-        <MotherboardRealisticAssembly
-          selectedPartId={selectedPartId}
-          onSelectPart={onSelectPart}
+      {assemblyState ? (
+        <InteractiveBuild3DAssembly
+          assemblyState={assemblyState}
+          postSuccess={postSuccess}
           segments={preset.geometrySegments}
         />
-      )}
+      ) : (
+        <>
+          {sceneType === 'motherboard' && (
+            <MotherboardRealisticAssembly
+              selectedPartId={selectedPartId}
+              onSelectPart={onSelectPart}
+              segments={preset.geometrySegments}
+            />
+          )}
 
-      {sceneType === 'cpu' && (
-        <CpuRealisticAssembly selectedPartId={selectedPartId} onSelectPart={onSelectPart} />
-      )}
+          {sceneType === 'cpu' && (
+            <CpuRealisticAssembly selectedPartId={selectedPartId} onSelectPart={onSelectPart} />
+          )}
 
-      {sceneType === 'ram' && (
-        <RamRealisticAssembly selectedPartId={selectedPartId} onSelectPart={onSelectPart} />
-      )}
+          {sceneType === 'ram' && (
+            <RamRealisticAssembly selectedPartId={selectedPartId} onSelectPart={onSelectPart} />
+          )}
 
-      {sceneType === 'storage' && (
-        <StorageRealisticAssembly
-          selectedPartId={selectedPartId}
-          onSelectPart={onSelectPart}
-          segments={preset.geometrySegments}
-        />
-      )}
+          {sceneType === 'storage' && (
+            <StorageRealisticAssembly
+              selectedPartId={selectedPartId}
+              onSelectPart={onSelectPart}
+              segments={preset.geometrySegments}
+            />
+          )}
 
-      {sceneType === 'psu' && (
-        <PsuRealisticAssembly
-          selectedPartId={selectedPartId}
-          onSelectPart={onSelectPart}
-          segments={preset.geometrySegments}
-        />
+          {sceneType === 'psu' && (
+            <PsuRealisticAssembly
+              selectedPartId={selectedPartId}
+              onSelectPart={onSelectPart}
+              segments={preset.geometrySegments}
+            />
+          )}
+        </>
       )}
     </Canvas>
   );
