@@ -160,5 +160,14 @@ test.describe('Kategori B — Tampilan 3D, Kontrol Kamera, Kualitas, dan Aksesib
         fullPage: true,
       });
     }
+
+    await page.setViewportSize({ width: 1280, height: 800 });
+    for (const slug of ['cpu', 'ram', 'storage', 'psu']) {
+      await page.goto(`/#${slug}`);
+      await page.screenshot({
+        path: `docs/screenshots/fase-3/model-3d-${slug}-1280px.png`,
+        fullPage: true,
+      });
+    }
   });
 });

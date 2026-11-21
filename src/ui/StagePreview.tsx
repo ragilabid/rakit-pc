@@ -22,11 +22,12 @@ export interface StagePartItem {
 }
 
 interface StagePreviewProps {
+  lessonId?: string;
   lessonTitle: string;
   parts: StagePartItem[];
 }
 
-export function StagePreview({ lessonTitle, parts }: StagePreviewProps) {
+export function StagePreview({ lessonId, lessonTitle, parts }: StagePreviewProps) {
   const qualityMode = useProgressStore((s) => s.qualityMode);
   const setQualityMode = useProgressStore((s) => s.setQualityMode);
   const fallback2d = useProgressStore((s) => s.fallback2d);
@@ -275,6 +276,7 @@ export function StagePreview({ lessonTitle, parts }: StagePreviewProps) {
         >
           {!effectiveFallback2d ? (
             <PrimitiveHardwareScene
+              lessonId={lessonId}
               lessonTitle={lessonTitle}
               parts={primitiveParts}
               selectedPartId={activePart?.id ?? ''}
