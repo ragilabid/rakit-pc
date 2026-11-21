@@ -1,0 +1,336 @@
+{
+  "app": {
+    "brand": "Rakit PC",
+    "subtitle": "Platform belajar perangkat komputer dan simulasi perakitan PC",
+    "progressLabel": "Progres",
+    "storageWarning": "Penyimpanan lokal browser tidak tersedia atau penuh (misalnya pada mode privat). Aplikasi tetap dapat digunakan, tetapi progres belajar tidak akan tersimpan setelah tab ditutup.",
+    "unknownRouteNotice": "Halaman yang dituju tidak ditemukan. Anda diarahkan kembali ke beranda."
+  },
+  "nav": {
+    "home": "Beranda",
+    "lessons": "Pelajaran",
+    "components": "Komponen",
+    "reference": "Referensi",
+    "results": "Hasil",
+    "settings": "Pengaturan",
+    "languageLabel": "Bahasa",
+    "menuToggle": "Menu navigasi"
+  },
+  "stage": {
+    "heading": "Panggung komponen 3D",
+    "mode3d": "Mode 3D",
+    "mode2d": "Cadangan 2D",
+    "qualityLabel": "Kualitas",
+    "qualityLow": "Rendah",
+    "qualityMedium": "Sedang",
+    "qualityHigh": "Tinggi",
+    "keyboardListLabel": "Daftar komponen di panggung (akses keyboard)",
+    "selectedPartHeading": "Komponen terpilih",
+    "selectedPartFunctionLabel": "Fungsi utama",
+    "controlsHint": "Geser: Seret atau WASD | Putar: Q/E | Zoom: Roda mouse atau cubit layar",
+    "fallback2dNotice": "Mode gambar teknis 2D aktif untuk menghemat sumber daya perangkat."
+  },
+  "stageParts": {
+    "cpuSocket": {
+      "label": "Soket CPU",
+      "name": "Soket Prosesor (AM5 / LGA1700)",
+      "function": "Tempat mendudukkan prosesor di motherboard. Memiliki tanda segitiga di salah satu sudut agar orientasi pemasangan CPU tidak terbalik."
+    },
+    "dimmSlots": {
+      "label": "Slot RAM DIMM",
+      "name": "Slot Memori DDR4 / DDR5",
+      "function": "Jalur pemasangan keping RAM. Setiap generasi DDR memiliki posisi tonjolan pengunci (notch) berbeda untuk mencegah salah pasang."
+    },
+    "atx24": {
+      "label": "Soket ATX 24-pin",
+      "name": "Konektor Daya Utama ATX 24-pin",
+      "function": "Menyalurkan daya listrik utama dari PSU ke papan induk (motherboard)."
+    },
+    "cpuIhs": {
+      "label": "Pelat CPU (IHS)",
+      "name": "Penutup Logam Prosesor (Integrated Heat Spreader)",
+      "function": "Melindungi keping silikon prosesor dan menyebarkan panas ke pasta termal serta pendingin (heatsink)."
+    },
+    "cpuTriangle": {
+      "label": "Segitiga Penanda CPU",
+      "name": "Tanda Orientasi Sudut Prosesor",
+      "function": "Penanda sudut emas yang wajib disejajarkan dengan tanda segitiga pada soket motherboard sebelum pengunci ditutup."
+    },
+    "ramModule": {
+      "label": "Keping RAM",
+      "name": "Modul Memori Utama (DIMM)",
+      "function": "Menyimpan data aplikasi yang sedang diproses secara cepat oleh CPU. Data di dalamnya hilang ketika komputer dimatikan."
+    },
+    "ramNotch": {
+      "label": "Alur Kunci (Notch) RAM",
+      "name": "Celah Penanda Orientasi Modul RAM",
+      "function": "Celah di deretan pin emas bawah RAM agar keping tidak bisa dipasang terbalik atau dimasukkan ke generasi slot yang salah."
+    },
+    "ramLatch": {
+      "label": "Pengunci Slot RAM",
+      "name": "Klip Pengunci Samping DIMM",
+      "function": "Menjepit ujung keping RAM dengan bunyi klik saat modul ditekan tegak lurus hingga rapat."
+    },
+    "nvmeM2": {
+      "label": "Slot NVMe M.2",
+      "name": "Konektor SSD NVMe M.2 (Jalur PCIe)",
+      "function": "Memasang SSD ukuran keping kecil langsung di permukaan motherboard tanpa kabel, dengan kecepatan baca/tulis jauh di atas SATA."
+    },
+    "sataPort": {
+      "label": "Port SATA",
+      "name": "Konektor Data SATA Motherboard",
+      "function": "Menghubungkan SSD 2,5 inci atau hard disk (HDD) menggunakan kabel data SATA berbentuk huruf L."
+    },
+    "psuUnit": {
+      "label": "Unit PSU",
+      "name": "Catu Daya Komputer (Power Supply Unit)",
+      "function": "Mengubah arus listrik bolak-balik (AC) dari stopkontak menjadi arus searah (DC) yang stabil untuk seluruh komponen PC."
+    },
+    "pcieCable": {
+      "label": "Kabel PCIe 8-pin",
+      "name": "Konektor Daya Tambahan GPU (PCIe Power)",
+      "function": "Menyuplai daya langsung dari PSU ke kartu grafis (GPU) kelas menengah ke atas."
+    }
+  },
+  "home": {
+    "lessonListHeading": "Daftar pelajaran",
+    "basicsGroupHeading": "Pengenalan komponen dasar",
+    "practiceGroupHeading": "Simulasi perakitan & diagnosis",
+    "openLessonButton": "Buka pelajaran",
+    "completedBadge": "Selesai",
+    "lockedBadge": "Terkunci",
+    "prerequisitesRequired": "Prasyarat: selesaikan pelajaran berikut terlebih dahulu:",
+    "continueLastLesson": "Lanjutkan pelajaran terakhir"
+  },
+  "lessonPage": {
+    "stepCounter": "Pelajaran {{order}} dari {{total}}",
+    "tabOverview": "Ikhtisar",
+    "tabSpecs": "Spesifikasi",
+    "tabPractice": "Latihan",
+    "completeButton": "Selesaikan pelajaran",
+    "completedNotice": "Pelajaran selesai",
+    "prevLesson": "Sebelumnya",
+    "nextLesson": "Berikutnya",
+    "backToList": "Kembali ke daftar pelajaran",
+    "lockedHeading": "Pelajaran ini masih terkunci",
+    "lockedDescription": "Untuk membuka pelajaran ini, selesaikan terlebih dahulu pelajaran prasyarat di bawah ini agar pemahaman perakitan Anda berurutan:",
+    "goToPrerequisite": "Buka pelajaran prasyarat pertama"
+  },
+  "specs": {
+    "tableHeading": "Spesifikasi teknis perangkat",
+    "columnParameter": "Parameter",
+    "columnDetail": "Keterangan spesifikasi",
+    "labels": {
+      "cpuSocket": "Jenis soket CPU",
+      "ramSlotType": "Slot memori RAM",
+      "formFactor": "Ukuran form factor",
+      "expansionSlots": "Slot ekspansi & penyimpanan",
+      "socketComparison": "Perbandingan soket AM5 vs LGA1700",
+      "alignmentMarker": "Penanda orientasi pemasangan",
+      "coolingRequirement": "Kebutuhan pendingin & pasta termal",
+      "ddr4VsDdr5": "Perbedaan slot DDR4 vs DDR5",
+      "notchKey": "Alur kunci (notch)",
+      "dualChannelSlots": "Pasangan slot dual-channel",
+      "sataVsNvme": "Standar konektor SATA vs NVMe M.2",
+      "hddSsdSshd": "Perbedaan HDD vs SSD vs SSHD",
+      "bootRequirement": "Syarat perangkat boot",
+      "powerCapacity": "Perhitungan daya & ruang cadangan",
+      "mainConnectors": "Konektor daya wajib",
+      "assemblyOrder": "Urutan baku perakitan",
+      "esdSafety": "Keselamatan kerja (ESD & K3)",
+      "amiBeepStandard": "Standar kode bunyi BIOS AMI",
+      "displayOutputCheck": "Pemeriksaan jalur kabel monitor"
+    }
+  },
+  "lessons": {
+    "motherboard": {
+      "title": "Motherboard (papan induk)",
+      "summary": "Motherboard bekerja seperti jalan raya utama di sebuah kota yang menghubungkan prosesor, memori, penyimpanan, dan catu daya agar dapat saling berkomunikasi.",
+      "overview1": "Motherboard adalah papan sirkuit utama tempat seluruh komponen komputer dipasang. Sebelum memilih komponen lain, periksa jenis soket prosesor, generasi slot RAM, dan ukuran fisik (form factor) motherboard.",
+      "overview2": "Klik bagian Soket CPU, Slot RAM DIMM, atau Soket ATX 24-pin pada panggung di samping untuk mengenali letak dan fungsi masing-masing konektor.",
+      "practicePrompt": "Pilih ketiga bagian utama pada panggung (Soket CPU, Slot RAM DIMM, dan Soket ATX 24-pin), lalu periksa tabel di tab Spesifikasi.",
+      "practiceTip": "Pastikan Anda memperhatikan perbedaan soket AM5 dan LGA1700 serta slot DDR4 dan DDR5.",
+      "specSocket": "Mendukung soket spesifik per papan, misalnya AMD AM5 (1718 pin LGA) atau Intel LGA1700 (1700 pin LGA). Soket yang berbeda tidak dapat dipertukarkan.",
+      "specRamSlot": "Slot DIMM dirancang khusus untuk satu generasi memori: slot DDR4 hanya menerima RAM DDR4, sedangkan slot DDR5 hanya menerima RAM DDR5.",
+      "specFormFactor": "ATX (305 x 244 mm), Micro-ATX (244 x 244 mm), dan Mini-ITX (170 x 170 mm). Motherboard ATX tidak muat di dalam casing Mini-ITX.",
+      "specExpansion": "Slot PCIe x16 untuk kartu grafis (GPU), slot M.2 untuk SSD NVMe, serta port SATA untuk penyimpanan tambahan."
+    },
+    "cpu": {
+      "title": "Prosesor (CPU)",
+      "summary": "Prosesor adalah juru masak utama di dapur komputer yang mengeksekusi setiap instruksi program dan mengolah data dari memori.",
+      "overview1": "CPU dipasang pada soket motherboard yang sesuai. Jangan pernah menekan paksa CPU ke dalam soket: cukup sejajarkan tanda segitiga emas di sudut CPU dengan tanda segitiga pada sudut soket.",
+      "overview2": "Saat bekerja, CPU menghasilkan panas tinggi dalam hitungan detik sehingga wajib dilapisi pasta termal dan dipasangi pendingin (heatsink + kipas).",
+      "practicePrompt": "Periksa bagian Segitiga Penanda CPU pada panggung, lalu baca kebutuhan pendinginan pada tab Spesifikasi.",
+      "practiceTip": "Menyalakan komputer tanpa pendingin CPU akan memicu mati otomatis (thermal shutdown) karena suhu kritis.",
+      "specSocketComparison": "AMD AM5 dan Intel LGA1700 sama-sama menggunakan pin di papan induk (LGA), tetapi ukuran fisik dan tata letak kontaknya berbeda sehingga tidak kompatibel silang.",
+      "specTriangleMarker": "Segitiga penanda di sudut kiri bawah CPU wajib bertemu tepat dengan sudut penanda pada bingkai soket motherboard.",
+      "specCooling": "Wajib menggunakan pasta termal untuk mengisi celah mikroskopis dan heatsink berpendingin kipas sesuai TDP prosesor (misal 65 W hingga 250 W)."
+    },
+    "ram": {
+      "title": "Memori akses acak (RAM)",
+      "summary": "RAM bekerja seperti meja kerja tempat prosesor menaruh berkas yang sedang dikerjakan saat ini agar bisa diambil seketika tanpa mencari ke lemari penyimpanan.",
+      "overview1": "Keping RAM memiliki celah kecil di bagian deretan kontak emas yang disebut alur kunci (notch). Celah ini mencegah siswa memasang RAM secara terbalik atau memasukkan RAM DDR4 ke slot DDR5.",
+      "overview2": "Bila memasang dua keping RAM pada motherboard 4 slot, gunakan pasangan slot yang direkomendasikan (umumnya slot A2 dan B2) agar fitur kanal ganda (dual-channel) aktif.",
+      "practicePrompt": "Klik Alur Kunci (Notch) RAM pada panggung untuk melihat fungsinya, lalu buka tab Spesifikasi untuk membandingkan DDR4 dan DDR5.",
+      "practiceTip": "Jika keping RAM belum terdorong rapat sampai klip pengunci menutup, motherboard akan mengeluarkan kode bunyi bip AMI berulang saat dinyalakan.",
+      "specDdr4VsDdr5": "DDR4 (288 pin, tegangan 1,2 V) dan DDR5 (288 pin, tegangan 1,1 V) memiliki posisi celah notch yang digeser beberapa milimeter sehingga tidak bisa saling masuk.",
+      "specNotch": "Jika celah notch tidak sejajar dengan pembatas di slot DIMM, artinya posisi keping RAM terbalik 180 derajat dan harus diputar.",
+      "specDualChannel": "Pasang 2 modul pada pasangan slot berwarna/berjarak selang satu (A2 + B2 atau A1 + B1). Memasang di A1 + A2 tetap menyala, tetapi berjalan di mode kanal tunggal yang lebih lambat."
+    },
+    "storage": {
+      "title": "Media penyimpanan (Storage)",
+      "summary": "Media penyimpanan ibarat lemari arsip permanen tempat sistem operasi, aplikasi, dan dokumen siswa tetap tersimpan meskipun listrik komputer dimatikan.",
+      "overview1": "Komputer modern umumnya memiliki dua standar konektor penyimpanan: SATA (menggunakan kabel data berbentuk L dan kabel daya dari PSU) serta NVMe M.2 (dipasang langsung di slot kecil pada motherboard tanpa kabel).",
+      "overview2": "Dalam katalog komponen, Anda akan menemukan tiga istilah yang sering membingungkan: HDD, SSD, dan SSHD. HDD menggunakan piringan magnetik berputar (kapasitas besar, lebih lambat); SSD menggunakan chip memori flash tanpa bagian bergerak (sangat cepat dan tahan guncangan); sedangkan SSHD adalah hard disk piringan (HDD) yang diberi tambahan chip flash kecil sebagai ruang singgah data yang sering dibuka.",
+      "overview3": "Agar komputer dapat masuk ke sistem operasi setelah lulus POST, media penyimpanan utama harus sudah berisi instalasi sistem operasi (OS).",
+      "practicePrompt": "Bandingkan Slot NVMe M.2 dan Port SATA pada panggung serta tinjau perbedaan HDD, SSD, dan SSHD di tab Spesifikasi.",
+      "practiceTip": "Penyimpanan baru yang masih kosong tanpa sistem operasi akan menampilkan pesan 'No bootable device found' saat komputer dinyalakan.",
+      "specSataVsNvme": "SATA III memakai kabel data dan dibatasi kecepatan sekitar 600 MB/s (dipakai oleh HDD dan SSD SATA). NVMe M.2 menempel langsung di jalur PCIe motherboard dengan kecepatan 3.500 hingga 7.000+ MB/s.",
+      "specHddSsdSshd": "HDD = piringan berputar mekanis (murah untuk kapasitas besar). SSD = chip flash murni (cepat, hening, cocok untuk OS). SSHD = gabungan piringan HDD dengan cache SSD kecil.",
+      "specBootOs": "Minimal satu drive harus memiliki partisi boot dan sistem operasi terpasang; jika kosong, POST berhasil tetapi berhenti di pesan 'No bootable device'."
+    },
+    "psu": {
+      "title": "Catu daya (PSU)",
+      "summary": "PSU berfungsi seperti gardu listrik rumah yang membagi daya dengan tegangan stabil ke setiap ruangan agar peralatan tidak mati mendadak.",
+      "overview1": "Kapasitas watt PSU harus lebih besar daripada total kebutuhan daya seluruh komponen (CPU, GPU, motherboard, RAM, penyimpanan, dan kipas). Pilih PSU dengan ruang cadangan daya minimal 15-20% di atas beban total.",
+      "overview2": "Selain kapasitas watt, pastikan semua kabel daya wajib sudah dicolok: ATX 24-pin untuk motherboard, CPU 8-pin untuk prosesor, dan PCIe 8-pin bila kartu grafis membutuhkannya.",
+      "practicePrompt": "Periksa Unit PSU dan Kabel PCIe 8-pin di panggung, lalu baca rincian konektor wajib di tab Spesifikasi.",
+      "practiceTip": "Lupa mencolok kabel ATX 24-pin atau CPU 8-pin adalah penyebab paling sering PC rakitan sama sekali tidak menyala.",
+      "specWattage": "Contoh: sistem dengan CPU 250 W, GPU 320 W, dan komponen lain 80 W membutuhkan total 650 W. PSU 450 W akan gagal menyala, sedangkan PSU 650 W berjalan tanpa cadangan (disarankan 750-850 W).",
+      "specConnectors": "ATX 24-pin (daya utama motherboard), EPS/CPU 8-pin (daya prosesor), PCIe 6+2/8-pin (daya kartu grafis), dan SATA power (daya drive SATA)."
+    },
+    "rakitPc": {
+      "title": "Simulasi perakitan PC",
+      "summary": "Gabungkan seluruh komponen langkah demi langkah mengikuti urutan perakitan bengkel yang benar, mulai dari persiapan motherboard hingga menyalakan tombol power.",
+      "overview1": "Perakitan yang rapi selalu dimulai di luar casing: pasang CPU, oleskan pasta termal, pasang pendingin, lalu pasang RAM dan SSD M.2 pada motherboard. Setelah itu, periksa dudukan baut standoff di casing sebelum memasukkan motherboard.",
+      "overview2": "Setelah motherboard, PSU, dan GPU terpasang di dalam casing, hubungkan seluruh kabel daya, kabel front panel (Power SW), dan colok kabel monitor ke port kartu grafis (GPU).",
+      "practicePrompt": "Ikuti urutan perakitan standar dan perhatikan umpan balik setiap kali terjadi kesalahan fisik maupun kesalahan logis saat POST.",
+      "practiceTip": "Pengingat keselamatan (ESD): sentuh rangka logam casing sebelum memegang komponen, namun pengingat ini tidak memblokir langkah kerja Anda.",
+      "specOrder": "1. Siapkan motherboard -> 2. Pasang CPU -> 3. Oles pasta termal & pasang pendingin -> 4. Pasang RAM & SSD -> 5. Cek standoff & pasang motherboard ke casing -> 6. Pasang PSU & GPU -> 7. Hubungkan semua kabel.",
+      "specEsd": "Listrik statis tubuh (ESD) dapat merusak chip sensitif. Gunakan gelang antistatik atau sentuh bagian logam casing sebelum merakit."
+    },
+    "diagnosisBip": {
+      "title": "Pemecahan masalah & kode bip AMI",
+      "summary": "Ketika komputer gagal menampilkan gambar saat dinyalakan, pola bunyi bip dari speaker BIOS AMI menjadi petunjuk utama untuk menemukan komponen yang bermasalah.",
+      "overview1": "Pada BIOS standar AMI, satu bunyi bip pendek menandakan pemeriksaan POST berhasil normal. Sebaliknya, tiga bunyi bip pendek berulang mengarahkan pemeriksaan ke modul RAM yang belum terpasang rapat atau rusak.",
+      "overview2": "Jika komputer mengeluarkan 1 bip pendek normal tetapi layar monitor tetap gelap, periksa bagian belakang casing: pastikan kabel monitor dicolok ke port kartu grafis (GPU), bukan ke port motherboard.",
+      "practicePrompt": "Amati gejala bunyi bip dan kondisi layar, lalu tentukan penyebab masalah satu per satu mulai dari jalur daya hingga memori dan tampilan.",
+      "practiceTip": "Bila terdapat beberapa masalah sekaligus (misalnya kabel daya lepas dan RAM rusak), perbaiki masalah daya terlebih dahulu agar pemeriksaan POST dapat berlanjut ke tahap berikutnya.",
+      "specAmiStandard": "1 bip pendek = POST normal; 3 bip pendek berulang = kegagalan memori RAM; 1 bip panjang + 3 pendek = kartu grafis (GPU) tidak terdeteksi; 5 bip pendek = kesalahan prosesor (CPU).",
+      "specDisplayPort": "Pada sistem dengan kartu grafis terpisah dan CPU tanpa grafis bawaan (seperti seri F), port video di motherboard tidak aktif; monitor wajib dicolok ke GPU."
+    }
+  },
+  "catalog": {
+    "heading": "Katalog perangkat komputer",
+    "description": "Referensi perangkat keras internal, perangkat tambahan eksternal (peripheral), serta antarmuka lawas sebagai materi sejarah perkembangan komputer Fase E SMK.",
+    "internalHeading": "1. Perangkat keras internal (dalam casing)",
+    "externalHeading": "2. Perangkat peripheral eksternal (input/output luar)",
+    "legacyHeading": "3. Perangkat & konektor usang (materi sejarah)",
+    "internal": {
+      "mb": {
+        "name": "Motherboard ATX / Mini-ITX",
+        "spec": "Soket AM5 & LGA1700 | Slot DDR4 & DDR5",
+        "description": "Papan sirkuit utama yang menyatukan jalur komunikasi data dan daya antar-komponen internal."
+      },
+      "cpu": {
+        "name": "Prosesor (CPU) Desktop",
+        "spec": "AMD Ryzen (AM5) & Intel Core (LGA1700)",
+        "description": "Pusat pengolahan instruksi program yang wajib dipasang searah tanda segitiga soket dan dilengkapi pendingin."
+      },
+      "ram": {
+        "name": "Memori RAM DDR4 & DDR5",
+        "spec": "DIMM 288-pin dengan posisi notch berbeda",
+        "description": "Memori kerja sementara berkecepatan tinggi; mendukung konfigurasi dual-channel pada slot berpasangan (A2 + B2)."
+      },
+      "storage": {
+        "name": "Penyimpanan SATA & NVMe M.2 (HDD / SSD / SSHD)",
+        "spec": "Konektor SATA III (600 MB/s) & PCIe NVMe M.2 (3.500+ MB/s)",
+        "description": "Media simpan permanen: HDD memakai piringan magnetik, SSD memakai chip flash cepat, dan SSHD menggabungkan piringan HDD dengan cache flash."
+      }
+    },
+    "external": {
+      "keyboard": {
+        "name": "Keyboard (papan ketik)",
+        "spec": "Perangkat input eksternal — USB / Nirkabel",
+        "description": "Perangkat masukan utama untuk mengetik perintah teks, masuk ke menu BIOS (tombol Del/F2), dan mengendalikan pintasan."
+      },
+      "mouse": {
+        "name": "Mouse (tetikus)",
+        "spec": "Perangkat input penunjuk eksternal — USB / Optik",
+        "description": "Perangkat masukan penggerak kursor untuk memilih menu grafis di sistem operasi maupun UEFI BIOS."
+      },
+      "monitor": {
+        "name": "Monitor layar tampil",
+        "spec": "Perangkat output visual eksternal — HDMI / DisplayPort",
+        "description": "Menampilkan keluaran gambar dari komputer; kabelnya wajib dihubungkan ke port kartu grafis (GPU) bila PC memakai kartu grafis terpisah."
+      },
+      "printer": {
+        "name": "Printer (pencetak dokumen)",
+        "spec": "Perangkat output cetak eksternal — USB / Jaringan LAN",
+        "description": "Perangkat keluaran peripheral untuk mencetak dokumen digital menjadi lembaran fisik di kertas."
+      }
+    },
+    "legacy": {
+      "ide": {
+        "name": "Kabel Pita IDE / PATA (Parallel ATA)",
+        "spec": "Konektor penyimpanan usang 40-pin (sebelum era SATA)",
+        "description": "Standar kabel pita lebar untuk hard disk dan CD-ROM lama dengan pengaturan jumper Master/Slave; kini telah digantikan oleh kabel SATA yang ramping dan slot NVMe M.2."
+      },
+      "vga": {
+        "name": "Port VGA D-Sub 15-pin",
+        "spec": "Konektor video analog biru 15-pin (usang)",
+        "description": "Konektor layar berbasis sinyal analog yang rentan bayangan kabur pada resolusi tinggi; kini digantikan oleh konektor digital HDMI dan DisplayPort."
+      },
+      "ps2": {
+        "name": "Port PS/2 Bulat (Ungu & Hijau)",
+        "spec": "Konektor Mini-DIN 6-pin untuk keyboard (ungu) dan mouse (hijau)",
+        "description": "Port khusus keyboard dan mouse era 1990-2000-an yang tidak mendukung cabut-pasang langsung (non hot-plug); kini digantikan oleh port USB universal."
+      }
+    }
+  },
+  "reference": {
+    "heading": "Referensi kontrol & tabel kode bip AMI",
+    "controlsSection": "Pintasan kontrol panggung 3D",
+    "controlMove": "Geser kamera panggung: seret dengan mouse atau tekan tombol W, A, S, D",
+    "controlRotate": "Putar sudut pandang: tekan tombol Q atau E",
+    "controlZoom": "Perbesar / perkecil tampilan: putar roda scroll mouse atau cubit dua jari di layar sentuh",
+    "controlKeyboard": "Aksesibilitas tanpa mouse: gunakan tombol Tab untuk memilih daftar komponen di bawah panggung",
+    "beepSection": "Tabel kode bunyi bip BIOS AMI",
+    "beepPatternCol": "Pola bunyi bip",
+    "beepComponentCol": "Komponen terkait",
+    "beepMeaningCol": "Arti & langkah pemeriksaan"
+  },
+  "results": {
+    "heading": "Hasil simulasi perakitan & POST",
+    "teacherNotice": "Tunjukkan layar ini kepada guru untuk pemeriksaan tatap muka.",
+    "statusLabel": "Status rakitan",
+    "scoreLabel": "Skor akhir",
+    "timeLabel": "Waktu selesai",
+    "attemptsLabel": "Percobaan",
+    "statusSuccess": "POST berhasil (1 bip pendek)",
+    "breakdownHeading": "Rincian penilaian",
+    "breakdownResult": "Kelengkapan & kecocokan komponen",
+    "breakdownTime": "Ketepatan waktu perakitan",
+    "breakdownAttempts": "Efisiensi percobaan",
+    "breakdownWarnings": "Catatan peringatan teknis",
+    "feedbackHeading": "Umpan balik teknis untuk dipelajari",
+    "feedbackItem1": "Semua komponen fisik kompatibel dan melewati pemeriksaan Power-On Self-Test (POST) dengan 1 bunyi bip pendek.",
+    "feedbackItem2": "Pastikan keping RAM selalu dipasang pada pasangan slot kanal ganda (A2 dan B2) serta kabel monitor terhubung ke port kartu grafis (GPU).",
+    "retryButton": "Buka pelajaran perakitan",
+    "backToLessonsButton": "Kembali ke daftar pelajaran"
+  },
+  "settings": {
+    "heading": "Pengaturan aplikasi & progres",
+    "languageSection": "Bahasa tampilan",
+    "languageDescription": "Semua teks antarmuka, spesifikasi, dan label komponen pada panggung akan langsung berganti sesuai bahasa yang dipilih.",
+    "progressSection": "Penyimpanan progres belajar",
+    "progressDescription": "Progres belajar disimpan secara lokal hanya di browser perangkat ini tanpa akun dan tanpa pengiriman data ke server.",
+    "currentProgressText": "Pelajaran selesai saat ini: {{completed}} dari {{total}}",
+    "resetButton": "Hapus seluruh progres belajar",
+    "confirmTitle": "Konfirmasi penghapusan progres",
+    "confirmDescription": "Apakah Anda yakin ingin menghapus seluruh progres belajar dan mengembalikan penghitung ke 0/{{total}}? Tindakan ini tidak dapat dibatalkan.",
+    "confirmYes": "Ya, hapus semua progres",
+    "confirmCancel": "Batal",
+    "resetSuccessNotice": "Seluruh progres belajar telah dikembalikan ke 0."
+  }
+}
