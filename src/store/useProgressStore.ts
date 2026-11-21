@@ -16,6 +16,20 @@ export interface LessonPrerequisiteInfo {
   prerequisites: string[];
 }
 
+export interface SavedSimulationResult {
+  isPostSuccess: boolean;
+  postStatus: string;
+  beepPattern: string | null;
+  totalScore: number;
+  resultScore: number;
+  timeScore: number;
+  attemptScore: number;
+  warningPenalty: number;
+  elapsedSeconds: number;
+  attempts: number;
+  feedbackItems: string[];
+}
+
 export interface ProgressState {
   schemaVersion: number;
   completedLessonIds: string[];
@@ -24,11 +38,13 @@ export interface ProgressState {
   qualityMode: 'low' | 'medium' | 'high';
   fallback2d: boolean;
   storageAvailable: boolean;
+  lastSimulationResult: SavedSimulationResult | null;
   completeLesson: (lessonId: string) => void;
   setCurrentLessonSlug: (slug: string | null) => void;
   setLanguage: (lang: string) => void;
   setQualityMode: (mode: 'low' | 'medium' | 'high') => void;
   setFallback2d: (enabled: boolean) => void;
+  setLastSimulationResult: (result: SavedSimulationResult | null) => void;
   resetProgress: (confirmed: boolean) => void;
 }
 
@@ -152,6 +168,7 @@ export function createProgressStoreInstance(customStorage?: StorageLike | null) 
         qualityMode: 'medium',
         fallback2d: false,
         storageAvailable: isStorageHealthy,
+        lastSimulationResult: null,
 
         completeLesson: (lessonId: string) => {
           const normalized = lessonId.trim().toLowerCase();
@@ -196,11 +213,19 @@ export function createProgressStoreInstance(customStorage?: StorageLike | null) 
           });
         },
 
+        setLastSimulationResult: (result: SavedSimulationResult | null) => {
+          set({
+            lastSimulationResult: result,
+            storageAvailable: isStorageHealthy,
+          });
+        },
+
         resetProgress: (confirmed: boolean) => {
           if (!confirmed) return;
           set({
             completedLessonIds: [],
             currentLessonSlug: null,
+            lastSimulationResult: null,
             storageAvailable: isStorageHealthy,
           });
         },
@@ -216,6 +241,7 @@ export function createProgressStoreInstance(customStorage?: StorageLike | null) 
           language: state.language,
           qualityMode: state.qualityMode,
           fallback2d: state.fallback2d,
+          lastSimulationResult: state.lastSimulationResult,
         }),
         migrate: (persistedState: unknown) => {
           if (!persistedState || typeof persistedState !== 'object') {

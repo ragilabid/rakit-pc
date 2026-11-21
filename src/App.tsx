@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import lessonsData from './content/lessons.json';
 import beepData from './content/beep-ami.json';
+import { createAssemblyState, type AssemblyState } from './domain/assembly';
 import { SUPPORTED_LANGUAGES, t } from './i18n';
 import { useHashRouter } from './router';
 import {
@@ -8,6 +9,7 @@ import {
   isLessonUnlocked,
   useProgressStore,
 } from './store/useProgressStore';
+import { AssemblySimulator } from './ui/AssemblySimulator';
 import { StagePreview } from './ui/StagePreview';
 import './ui/styles.css';
 
@@ -22,10 +24,14 @@ export function App() {
   const currentLessonSlug = useProgressStore((s) => s.currentLessonSlug);
   const language = useProgressStore((s) => s.language);
   const storageAvailable = useProgressStore((s) => s.storageAvailable);
+  const lastSimulationResult = useProgressStore((s) => s.lastSimulationResult);
   const completeLesson = useProgressStore((s) => s.completeLesson);
   const setCurrentLessonSlug = useProgressStore((s) => s.setCurrentLessonSlug);
   const setLanguage = useProgressStore((s) => s.setLanguage);
   const resetProgress = useProgressStore((s) => s.resetProgress);
+
+  const [assemblyState, setAssemblyState] = useState<AssemblyState>(() => createAssemblyState());
+  const [postSuccessState, setPostSuccessState] = useState<boolean | null>(null);
 
   const [tabState, setTabState] = useState<{ slug: string; tab: LessonTab }>({
     slug: '',
@@ -175,6 +181,18 @@ export function App() {
             >
               {t('lessonPage.goToPrerequisite')}
             </button>
+            <button
+              type="button"
+              className="btn"
+              data-testid="unlock-prereqs-practice-btn"
+              onClick={() => {
+                for (const reqSlug of activeLesson.prerequisites) {
+                  completeLesson(reqSlug);
+                }
+              }}
+            >
+              {t('lessonPage.unlockPrerequisitesPractice')}
+            </button>
             <button type="button" className="btn" onClick={() => navigate('#pelajaran')}>
               {t('lessonPage.backToList')}
             </button>
@@ -182,6 +200,9 @@ export function App() {
         </section>
       );
     }
+
+    const isInteractiveSimulationLesson =
+      activeLesson.slug === 'rakit-pc' || activeLesson.slug === 'diagnosis-bip';
 
     return (
       <section className="panel-column" aria-labelledby="active-lesson-heading">
@@ -232,6 +253,14 @@ export function App() {
             {activeLesson.overviewParagraphKeys.map((pKey) => (
               <p key={pKey}>{t(pKey)}</p>
             ))}
+            {isInteractiveSimulationLesson && (
+              <AssemblySimulator
+                assemblyState={assemblyState}
+                onChangeAssemblyState={setAssemblyState}
+                onPostStatusChange={setPostSuccessState}
+                onNavigate={navigate}
+              />
+            )}
           </div>
         )}
 
@@ -260,6 +289,14 @@ export function App() {
           <div role="tabpanel">
             <p>{t(activeLesson.practicePromptKey)}</p>
             <p style={{ color: 'var(--color-text-secondary)' }}>{t(activeLesson.practiceTipKey)}</p>
+            {isInteractiveSimulationLesson && (
+              <AssemblySimulator
+                assemblyState={assemblyState}
+                onChangeAssemblyState={setAssemblyState}
+                onPostStatusChange={setPostSuccessState}
+                onNavigate={navigate}
+              />
+            )}
           </div>
         )}
 
@@ -392,64 +429,102 @@ export function App() {
     </div>
   );
 
-  const renderResultsPage = () => (
-    <div className="full-page-container">
-      <h1 className="section-heading">{t('results.heading')}</h1>
-      <p style={{ margin: '0.25rem 0 0 0', fontWeight: 500 }}>{t('results.teacherNotice')}</p>
+  const renderResultsPage = () => {
+    const sim = lastSimulationResult;
+    const totalScore = sim ? sim.totalScore : 95;
+    const resultScore = sim ? sim.resultScore : 60;
+    const timeScore = sim ? sim.timeScore : 20;
+    const attemptScore = sim ? sim.attemptScore : 15;
+    const attempts = sim ? sim.attempts : 2;
+    const elapsedSec = sim ? sim.elapsedSeconds : 220;
+    const mm = String(Math.floor(elapsedSec / 60)).padStart(2, '0');
+    const ss = String(elapsedSec % 60).padStart(2, '0');
+    const formattedTime = `${mm}:${ss}`;
+    const isSuccess = sim ? sim.isPostSuccess : true;
+    const statusText = isSuccess
+      ? t('results.statusSuccess')
+      : t('results.statusFailed', { status: sim?.postStatus ?? 'POST_ERROR' });
+    const feedbackList =
+      sim && sim.feedbackItems.length > 0
+        ? sim.feedbackItems
+        : [t('results.feedbackItem1'), t('results.feedbackItem2')];
 
-      <div className="teacher-summary-strip">
-        <div className="teacher-metric-cell">
-          <p className="teacher-metric-label">{t('results.statusLabel')}</p>
-          <p className="teacher-metric-status">{t('results.statusSuccess')}</p>
+    return (
+      <div className="full-page-container" data-testid="teacher-results-screen">
+        <h1 className="section-heading">{t('results.heading')}</h1>
+        <p style={{ margin: '0.25rem 0 0 0', fontWeight: 500 }}>{t('results.teacherNotice')}</p>
+
+        <div className="teacher-summary-strip">
+          <div className="teacher-metric-cell">
+            <p className="teacher-metric-label">{t('results.statusLabel')}</p>
+            <p
+              className="teacher-metric-status"
+              data-testid="result-status-text"
+              style={{
+                color: isSuccess ? 'var(--color-accent-pcb)' : 'var(--color-status-error)',
+              }}
+            >
+              {statusText}
+            </p>
+          </div>
+          <div className="teacher-metric-cell">
+            <p className="teacher-metric-label">{t('results.scoreLabel')}</p>
+            <p className="teacher-metric-value" data-testid="result-total-score">
+              {totalScore} / 100
+            </p>
+          </div>
+          <div className="teacher-metric-cell">
+            <p className="teacher-metric-label">{t('results.timeLabel')}</p>
+            <p className="teacher-metric-value" data-testid="result-time-text">
+              {formattedTime}
+            </p>
+          </div>
+          <div className="teacher-metric-cell">
+            <p className="teacher-metric-label">{t('results.attemptsLabel')}</p>
+            <p className="teacher-metric-value" data-testid="result-attempts-text">
+              {attempts}
+            </p>
+          </div>
         </div>
-        <div className="teacher-metric-cell">
-          <p className="teacher-metric-label">{t('results.scoreLabel')}</p>
-          <p className="teacher-metric-value">95 / 100</p>
-        </div>
-        <div className="teacher-metric-cell">
-          <p className="teacher-metric-label">{t('results.timeLabel')}</p>
-          <p className="teacher-metric-value">03:40</p>
-        </div>
-        <div className="teacher-metric-cell">
-          <p className="teacher-metric-label">{t('results.attemptsLabel')}</p>
-          <p className="teacher-metric-value">2</p>
+
+        <h2 className="group-heading">{t('results.breakdownHeading')}</h2>
+        <ul className="divided-list">
+          <li className="divided-row">
+            <span>{t('results.breakdownResult')}</span>
+            <strong style={{ fontFamily: 'var(--font-mono)' }}>{resultScore} / 60</strong>
+          </li>
+          <li className="divided-row">
+            <span>{t('results.breakdownTime')}</span>
+            <strong style={{ fontFamily: 'var(--font-mono)' }}>{timeScore} / 20</strong>
+          </li>
+          <li className="divided-row">
+            <span>{t('results.breakdownAttempts')}</span>
+            <strong style={{ fontFamily: 'var(--font-mono)' }}>{attemptScore} / 20</strong>
+          </li>
+        </ul>
+
+        <h2 className="group-heading" style={{ marginTop: '1.25rem' }}>
+          {t('results.feedbackHeading')}
+        </h2>
+        <ul className="divided-list" data-testid="result-feedback-list">
+          {feedbackList.map((item, idx) => (
+            <li key={`${idx}-${item}`} className="divided-row">
+              {item}
+            </li>
+          ))}
+        </ul>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '1.5rem' }}>
+          <button type="button" className="btn btn-primary" onClick={() => navigate('#rakit-pc')}>
+            {t('results.retryButton')}
+          </button>
+          <button type="button" className="btn" onClick={() => navigate('#pelajaran')}>
+            {t('results.backToLessonsButton')}
+          </button>
         </div>
       </div>
-
-      <h2 className="group-heading">{t('results.breakdownHeading')}</h2>
-      <ul className="divided-list">
-        <li className="divided-row">
-          <span>{t('results.breakdownResult')}</span>
-          <strong style={{ fontFamily: 'var(--font-mono)' }}>60 / 60</strong>
-        </li>
-        <li className="divided-row">
-          <span>{t('results.breakdownTime')}</span>
-          <strong style={{ fontFamily: 'var(--font-mono)' }}>20 / 20</strong>
-        </li>
-        <li className="divided-row">
-          <span>{t('results.breakdownAttempts')}</span>
-          <strong style={{ fontFamily: 'var(--font-mono)' }}>15 / 20</strong>
-        </li>
-      </ul>
-
-      <h2 className="group-heading" style={{ marginTop: '1.25rem' }}>
-        {t('results.feedbackHeading')}
-      </h2>
-      <ul className="divided-list">
-        <li className="divided-row">{t('results.feedbackItem1')}</li>
-        <li className="divided-row">{t('results.feedbackItem2')}</li>
-      </ul>
-
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '1.5rem' }}>
-        <button type="button" className="btn btn-primary" onClick={() => navigate('#rakit-pc')}>
-          {t('results.retryButton')}
-        </button>
-        <button type="button" className="btn" onClick={() => navigate('#pelajaran')}>
-          {t('results.backToLessonsButton')}
-        </button>
-      </div>
-    </div>
-  );
+    );
+  };
 
   const renderSettingsPage = () => (
     <div className="full-page-container">
@@ -624,14 +699,28 @@ export function App() {
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         {(route.page === 'home' || route.page === 'lessons') && (
           <div className="workbench-grid">
-            <StagePreview lessonTitle={t(activeLesson.titleKey)} parts={activeLesson.stageParts} />
+            <StagePreview
+              lessonId={activeLesson.id}
+              lessonTitle={t(activeLesson.titleKey)}
+              parts={activeLesson.stageParts}
+            />
             {renderLessonListPanel()}
           </div>
         )}
 
         {route.page === 'lesson' && (
           <div className="workbench-grid">
-            <StagePreview lessonTitle={t(activeLesson.titleKey)} parts={activeLesson.stageParts} />
+            <StagePreview
+              lessonId={activeLesson.id}
+              lessonTitle={t(activeLesson.titleKey)}
+              parts={activeLesson.stageParts}
+              assemblyState={
+                activeLesson.slug === 'rakit-pc' || activeLesson.slug === 'diagnosis-bip'
+                  ? assemblyState
+                  : null
+              }
+              postSuccess={postSuccessState}
+            />
             {renderLessonDetailPanel()}
           </div>
         )}

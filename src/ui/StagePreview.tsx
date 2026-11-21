@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { AssemblyState } from '../domain/assembly';
 import { t } from '../i18n';
 import { useProgressStore } from '../store/useProgressStore';
 import { PrimitiveHardwareScene } from '../three/PrimitiveHardwareScene';
@@ -25,9 +26,17 @@ interface StagePreviewProps {
   lessonId?: string;
   lessonTitle: string;
   parts: StagePartItem[];
+  assemblyState?: AssemblyState | null;
+  postSuccess?: boolean | null;
 }
 
-export function StagePreview({ lessonId, lessonTitle, parts }: StagePreviewProps) {
+export function StagePreview({
+  lessonId,
+  lessonTitle,
+  parts,
+  assemblyState,
+  postSuccess,
+}: StagePreviewProps) {
   const qualityMode = useProgressStore((s) => s.qualityMode);
   const setQualityMode = useProgressStore((s) => s.setQualityMode);
   const fallback2d = useProgressStore((s) => s.fallback2d);
@@ -285,6 +294,8 @@ export function StagePreview({ lessonId, lessonTitle, parts }: StagePreviewProps
               qualityMode={qualityMode}
               isRenderPaused={isRenderPaused}
               onFpsSample={handleFpsSample}
+              assemblyState={assemblyState}
+              postSuccess={postSuccess}
             />
           ) : (
             <svg
