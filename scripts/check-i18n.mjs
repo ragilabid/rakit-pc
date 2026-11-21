@@ -5,6 +5,7 @@ const root = process.cwd();
 const idPath = path.join(root, 'src/i18n/id.json');
 const enPath = path.join(root, 'src/i18n/en.json');
 const lessonsPath = path.join(root, 'src/content/lessons.json');
+const quizPath = path.join(root, 'src/content/quiz.json');
 
 function flattenKeys(obj, prefix = '') {
   const keys = [];
@@ -22,6 +23,7 @@ function flattenKeys(obj, prefix = '') {
 const idData = JSON.parse(fs.readFileSync(idPath, 'utf8'));
 const enData = JSON.parse(fs.readFileSync(enPath, 'utf8'));
 const lessonsData = JSON.parse(fs.readFileSync(lessonsPath, 'utf8'));
+const quizData = fs.existsSync(quizPath) ? JSON.parse(fs.readFileSync(quizPath, 'utf8')) : {};
 
 const idEntries = flattenKeys(idData);
 const enEntries = flattenKeys(enData);
@@ -67,12 +69,12 @@ function collectLessonKeys(node) {
   return keys;
 }
 
-for (const refKey of collectLessonKeys(lessonsData)) {
+for (const refKey of [...collectLessonKeys(lessonsData), ...collectLessonKeys(quizData)]) {
   if (!idMap.has(refKey)) {
-    errors.push(`Kunci referensi lessons.json tidak ditemukan di id.json: ${refKey}`);
+    errors.push(`Kunci referensi konten tidak ditemukan di id.json: ${refKey}`);
   }
   if (!enMap.has(refKey)) {
-    errors.push(`Kunci referensi lessons.json tidak ditemukan di en.json: ${refKey}`);
+    errors.push(`Kunci referensi konten tidak ditemukan di en.json: ${refKey}`);
   }
 }
 

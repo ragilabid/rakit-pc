@@ -320,6 +320,30 @@
         "nameKey": "catalog.internal.storage.name",
         "specKey": "catalog.internal.storage.spec",
         "descriptionKey": "catalog.internal.storage.description"
+      },
+      {
+        "id": "cat-internal-gpu",
+        "nameKey": "catalog.internal.gpu.name",
+        "specKey": "catalog.internal.gpu.spec",
+        "descriptionKey": "catalog.internal.gpu.description"
+      },
+      {
+        "id": "cat-internal-psu",
+        "nameKey": "catalog.internal.psu.name",
+        "specKey": "catalog.internal.psu.spec",
+        "descriptionKey": "catalog.internal.psu.description"
+      },
+      {
+        "id": "cat-internal-cooler",
+        "nameKey": "catalog.internal.cooler.name",
+        "specKey": "catalog.internal.cooler.spec",
+        "descriptionKey": "catalog.internal.cooler.description"
+      },
+      {
+        "id": "cat-internal-nic",
+        "nameKey": "catalog.internal.nic.name",
+        "specKey": "catalog.internal.nic.spec",
+        "descriptionKey": "catalog.internal.nic.description"
       }
     ],
     "externalPeripherals": [
@@ -346,6 +370,24 @@
         "nameKey": "catalog.external.printer.name",
         "specKey": "catalog.external.printer.spec",
         "descriptionKey": "catalog.external.printer.description"
+      },
+      {
+        "id": "cat-ext-scanner",
+        "nameKey": "catalog.external.scanner.name",
+        "specKey": "catalog.external.scanner.spec",
+        "descriptionKey": "catalog.external.scanner.description"
+      },
+      {
+        "id": "cat-ext-speaker",
+        "nameKey": "catalog.external.speaker.name",
+        "specKey": "catalog.external.speaker.spec",
+        "descriptionKey": "catalog.external.speaker.description"
+      },
+      {
+        "id": "cat-ext-webcam",
+        "nameKey": "catalog.external.webcam.name",
+        "specKey": "catalog.external.webcam.spec",
+        "descriptionKey": "catalog.external.webcam.description"
       }
     ],
     "legacyHistory": [
@@ -366,6 +408,24 @@
         "nameKey": "catalog.legacy.ps2.name",
         "specKey": "catalog.legacy.ps2.spec",
         "descriptionKey": "catalog.legacy.ps2.description"
+      },
+      {
+        "id": "cat-legacy-floppy",
+        "nameKey": "catalog.legacy.floppy.name",
+        "specKey": "catalog.legacy.floppy.spec",
+        "descriptionKey": "catalog.legacy.floppy.description"
+      },
+      {
+        "id": "cat-legacy-lpt",
+        "nameKey": "catalog.legacy.lpt.name",
+        "specKey": "catalog.legacy.lpt.spec",
+        "descriptionKey": "catalog.legacy.lpt.description"
+      },
+      {
+        "id": "cat-legacy-agp",
+        "nameKey": "catalog.legacy.agp.name",
+        "specKey": "catalog.legacy.agp.spec",
+        "descriptionKey": "catalog.legacy.agp.description"
       }
     ]
   }

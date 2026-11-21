@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import lessonsData from './content/lessons.json';
 import beepData from './content/beep-ami.json';
+import quizData from './content/quiz.json';
 import { createAssemblyState, type AssemblyState } from './domain/assembly';
+import { calculateQuizSummary, type QuizQuestionSpec } from './domain/quiz';
 import { SUPPORTED_LANGUAGES, t } from './i18n';
 import { useHashRouter } from './router';
 import {
@@ -10,8 +12,11 @@ import {
   useProgressStore,
 } from './store/useProgressStore';
 import { AssemblySimulator } from './ui/AssemblySimulator';
+import { QuizPanel } from './ui/QuizPanel';
 import { StagePreview } from './ui/StagePreview';
 import './ui/styles.css';
+
+const allQuizQuestions = quizData.questions as unknown as QuizQuestionSpec[];
 
 type LessonTab = 'overview' | 'specs' | 'practice';
 
@@ -25,6 +30,7 @@ export function App() {
   const language = useProgressStore((s) => s.language);
   const storageAvailable = useProgressStore((s) => s.storageAvailable);
   const lastSimulationResult = useProgressStore((s) => s.lastSimulationResult);
+  const quizAnswers = useProgressStore((s) => s.quizAnswers);
   const completeLesson = useProgressStore((s) => s.completeLesson);
   const setCurrentLessonSlug = useProgressStore((s) => s.setCurrentLessonSlug);
   const setLanguage = useProgressStore((s) => s.setLanguage);
@@ -289,6 +295,7 @@ export function App() {
           <div role="tabpanel">
             <p>{t(activeLesson.practicePromptKey)}</p>
             <p style={{ color: 'var(--color-text-secondary)' }}>{t(activeLesson.practiceTipKey)}</p>
+            <QuizPanel lessonId={activeLesson.id} />
             {isInteractiveSimulationLesson && (
               <AssemblySimulator
                 assemblyState={assemblyState}
@@ -431,6 +438,7 @@ export function App() {
 
   const renderResultsPage = () => {
     const sim = lastSimulationResult;
+    const quizSummary = calculateQuizSummary(allQuizQuestions, quizAnswers);
     const totalScore = sim ? sim.totalScore : 95;
     const resultScore = sim ? sim.resultScore : 60;
     const timeScore = sim ? sim.timeScore : 20;
@@ -483,6 +491,19 @@ export function App() {
             <p className="teacher-metric-label">{t('results.attemptsLabel')}</p>
             <p className="teacher-metric-value" data-testid="result-attempts-text">
               {attempts}
+            </p>
+          </div>
+          <div className="teacher-metric-cell">
+            <p className="teacher-metric-label">{t('results.quizScoreLabel')}</p>
+            <p className="teacher-metric-value" data-testid="result-quiz-score">
+              {quizSummary.percentageScore}%
+            </p>
+            <p className="teacher-metric-label" style={{ marginTop: '0.25rem', marginBottom: 0 }}>
+              {t('results.quizAnsweredDetail', {
+                correct: quizSummary.correctCount,
+                total: quizSummary.totalQuestions,
+                attempts: quizSummary.totalAttempts,
+              })}
             </p>
           </div>
         </div>
