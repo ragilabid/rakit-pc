@@ -175,6 +175,28 @@ test.describe('Fase 4 — Simulasi Perakitan Interaktif, Kegagalan Fisik/Logis, 
       );
       expect(hasOverflow).toBe(false);
 
+      // Pastikan panel materi memiliki scroll tersendiri dan tidak menggeser posisi panggung 3D
+      const stageBoxBefore = await page.getByTestId('stage-canvas-container').boundingBox();
+      const scrollVerify = await page.evaluate(() => {
+        const panel = document.querySelector('.panel-column') as HTMLElement | null;
+        if (!panel) return { hasIndependentScroll: false, scrolled: false };
+        const style = window.getComputedStyle(panel);
+        const hasIndependentScroll =
+          (style.overflowY === 'auto' || style.overflowY === 'scroll') &&
+          panel.scrollHeight > panel.clientHeight;
+        panel.scrollTop = 320;
+        return {
+          hasIndependentScroll,
+          scrolled: panel.scrollTop > 0,
+        };
+      });
+
+      expect(scrollVerify.hasIndependentScroll).toBe(true);
+      expect(scrollVerify.scrolled).toBe(true);
+
+      const stageBoxAfter = await page.getByTestId('stage-canvas-container').boundingBox();
+      expect(stageBoxAfter?.y).toBeCloseTo(stageBoxBefore?.y ?? 0, 1);
+
       await page.screenshot({
         path: `docs/screenshots/fase-4/simulasi-rakit-${vp.width}px.png`,
         fullPage: true,

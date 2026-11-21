@@ -207,11 +207,15 @@ a {
   border-color: var(--color-status-error);
 }
 
-/* Tata letak dua kolom panggung 3D + panel materi (Bagian 15.4) */
+/* Tata letak dua kolom panggung 3D + panel materi dengan scroll terpisah (Bagian 15.4) */
 .workbench-grid {
-  flex: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  height: calc(100vh - 61px);
+  max-height: calc(100vh - 61px);
+  min-height: 480px;
+  overflow: hidden;
   border-bottom: 1px solid var(--color-border-line);
 }
 
@@ -222,9 +226,13 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 0.875rem 1rem;
   min-width: 0;
   max-width: 100%;
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .panel-column {
@@ -235,6 +243,11 @@ a {
   gap: 1rem;
   min-width: 0;
   max-width: 100%;
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
 
 /* Elemen di dalam Panggung 3D */
@@ -653,15 +666,35 @@ a {
   margin-top: 1.25rem;
 }
 
-/* Responsif untuk Tablet & HP hingga 320 px (Bagian 15.4 & 15.6) */
+/* Responsif untuk Tablet & HP hingga 320 px: panggung 3D tetap di atas, panel materi punya scroll tersendiri di bawah (Bagian 15.4 & 15.6) */
 @media (max-width: 900px) {
   .workbench-grid {
+    display: grid;
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(210px, 44%) minmax(0, 56%);
+    height: calc(100vh - 60px);
+    max-height: calc(100vh - 60px);
+    min-height: 480px;
+    overflow: hidden;
   }
 
   .stage-column {
+    min-height: 0;
+    height: 100%;
     border-right: none;
-    border-bottom: 1px solid var(--color-border-line);
+    border-bottom: 2px solid var(--color-border-line);
+    overflow-y: auto;
+  }
+
+  .panel-column {
+    min-height: 0;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .stage-viewport {
+    min-height: 175px;
+    margin: 0.5rem 0;
   }
 }
 
