@@ -2,6 +2,17 @@
 
 Semua perubahan penting pada proyek ini dicatat di berkas ini.
 
+## [v0.5-fase5] - 2026-11-21
+
+### Ditambahkan
+
+- Katalog perangkat keras lengkap level Fase E SMK di `src/content/lessons.json` (`deviceCatalog`): komponen **Internal** (motherboard, CPU, RAM, storage SATA/NVMe, GPU PCIe x16, PSU ATX, pendingin CPU, kartu jaringan NIC/Wi-Fi), **Peripheral Eksternal** (keyboard, mouse, monitor, printer, scanner, speaker/headset, webcam), dan **Perangkat Usang / Sejarah** (kabel pita IDE/PATA 40-pin, port VGA D-Sub 15-pin, port PS/2, Floppy Disk Drive 3,5", port paralel LPT1/serial RS-232, slot AGP).
+- Data soal kuis per pelajaran (`src/content/quiz.json`), mesin domain evaluasi kuis murni (`src/domain/quiz/index.ts`), dan komponen antarmuka kuis (`src/ui/QuizPanel.tsx`) dengan umpan balik penjelas mengapa pilihan salah keliru.
+- Penyimpanan lokal jawaban & skor kuis (`quizAnswers`) di store Zustand berversi (`src/store/useProgressStore.ts`), tampil di layar hasil guru (`#hasil`), bertahan saat halaman dimuat ulang, dan terhapus bersih saat reset progres.
+- 6 kasus uji Kategori F (`KU-58` s.d. `KU-63`) yang telah disetujui, diimplementasikan pada Vitest (`tests/unit/domain-kategori-f.test.ts`) dan Playwright (`tests/e2e/kategori-f.spec.ts`), termasuk pemeriksaan bebas permintaan jaringan yang mengirim data siswa.
+- Tabel lengkap `TODO-VERIFIKASI` (Item, Nilai yang Ditulis, Sumber yang Disarankan) di `docs/verifikasi-konten.md`.
+- Pemeriksaan `check-i18n.mjs` diperluas untuk memvalidasi seluruh kunci terjemahan di `src/content/quiz.json`.
+
 ## [v0.4-fase4] - 2026-11-21
 
 ### Ditambahkan
@@ -11,7 +22,7 @@ Semua perubahan penting pada proyek ini dicatat di berkas ini.
 - Penolakan langsung tingkat FISIK dengan pesan alasan & cara memperbaiki (`CPU_SOCKET_MISMATCH`, `CPU_ORIENTATION_INVALID`, `RAM_TYPE_MISMATCH`, `RAM_ORIENTATION_REVERSED`, `SLOT_ALREADY_OCCUPIED`, `FORM_FACTOR_INCOMPATIBLE`, `OUT_OF_ORDER_STEP`).
 - Evaluasi kegagalan tingkat LOGIS saat POST beserta kode bunyi bip BIOS AMI dan panel latihan diagnosis interaktif dengan umpan balik penjelas (`evaluateDiagnosisAnswer`).
 - Penyimpanan hasil simulasi terakhir (`lastSimulationResult`) di store Zustand berversi dan pembaruan Layar Hasil Tatap Muka Guru (`#hasil`) dengan skor, waktu, jumlah percobaan, dan rincian umpan balik.
-- Rangkaian tes E2E Playwright Fase 4 (`tests/e2e/fase-4-perakitan.spec.ts`) serta tangkapan layar pada lebar `320 px`, `768 px`, dan `1280 px` di `docs/screenshots/fase-4/`.
+- Rangkaian tes E2E Playwright Fase 4 (`tests/e2e/fase-4-perakitan.spec.ts`), fitur scroll terpisah pada panel materi/simulasi, serta tangkapan layar pada lebar `320 px`, `768 px`, dan `1280 px` di `docs/screenshots/fase-4/`.
 
 ## [v0.3-fase3] - 2026-11-21
 

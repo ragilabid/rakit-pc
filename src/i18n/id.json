@@ -345,6 +345,26 @@
         "name": "Penyimpanan SATA & NVMe M.2 (HDD / SSD / SSHD)",
         "spec": "Konektor SATA III (600 MB/s) & PCIe NVMe M.2 (3.500+ MB/s)",
         "description": "Media simpan permanen: HDD memakai piringan magnetik, SSD memakai chip flash cepat, dan SSHD menggabungkan piringan HDD dengan cache flash."
+      },
+      "gpu": {
+        "name": "Kartu Grafis (GPU / VGA Card PCIe x16)",
+        "spec": "Slot PCIe x16 | Konektor Daya Tambahan PCIe 8-pin | Output HDMI & DisplayPort",
+        "description": "Mengolah tampilan grafis 2D/3D dan mengirim sinyal gambar ke monitor; wajib dipasangi kabel daya PCIe bila membutuhkan daya di atas 75 W."
+      },
+      "psu": {
+        "name": "Catu Daya Komputer (PSU ATX 80+)",
+        "spec": "Kapasitas 450 W – 750 W | Konektor ATX 24-pin, CPU 8-pin, PCIe 8-pin, SATA",
+        "description": "Menyuplai arus searah (DC) bertegangan stabil (+12V, +5V, +3.3V) ke seluruh perangkat internal komputer."
+      },
+      "cooler": {
+        "name": "Pendingin Prosesor (Heatsink & Kipas CPU)",
+        "spec": "Dudukan AM5 & LGA1700 | Koneksi PWM 4-pin + Pasta Termal",
+        "description": "Menyerap panas dari permukaan IHS prosesor melalui pasta termal dan membuangnya ke udara menggunakan sirip aluminium serta kipas."
+      },
+      "nic": {
+        "name": "Kartu Jaringan (NIC Ethernet / Wi-Fi PCIe)",
+        "spec": "Slot PCIe x1 | Port RJ-45 Gigabit LAN / Antena Wi-Fi Dual-Band",
+        "description": "Menghubungkan komputer ke jaringan lokal (LAN) di laboratorium sekolah maupun jaringan internet nirkabel."
       }
     },
     "external": {
@@ -367,6 +387,21 @@
         "name": "Printer (pencetak dokumen)",
         "spec": "Perangkat output cetak eksternal — USB / Jaringan LAN",
         "description": "Perangkat keluaran peripheral untuk mencetak dokumen digital menjadi lembaran fisik di kertas."
+      },
+      "scanner": {
+        "name": "Scanner (pemindai dokumen)",
+        "spec": "Perangkat input optik eksternal — USB Flatbed",
+        "description": "Memindai lembaran dokumen kertas atau foto fisik menjadi berkas gambar digital di dalam komputer."
+      },
+      "speaker": {
+        "name": "Speaker & Headset Audio",
+        "spec": "Perangkat output suara eksternal — Jack Audio 3,5 mm / USB",
+        "description": "Mengeluarkan suara dari sistem operasi dan aplikasi multimedia melalui port audio hijau (Line-Out) atau USB."
+      },
+      "webcam": {
+        "name": "Webcam (kamera web)",
+        "spec": "Perangkat input video eksternal — USB 2.0/3.0 HD",
+        "description": "Menangkap gambar video secara langsung untuk pembelajaran daring atau konferensi video."
       }
     },
     "legacy": {
@@ -384,6 +419,21 @@
         "name": "Port PS/2 Bulat (Ungu & Hijau)",
         "spec": "Konektor Mini-DIN 6-pin untuk keyboard (ungu) dan mouse (hijau)",
         "description": "Port khusus keyboard dan mouse era 1990-2000-an yang tidak mendukung cabut-pasang langsung (non hot-plug); kini digantikan oleh port USB universal."
+      },
+      "floppy": {
+        "name": "Floppy Disk Drive (FDD 3,5 Inci)",
+        "spec": "Media penyimpanan disket magnetik 1,44 MB dengan kabel pita 34-pin (usang)",
+        "description": "Penggerak disket era 1980-2000-an berkapasitas sangat kecil (1,44 MB) untuk boot DOS atau menyimpan dokumen; kini digantikan oleh USB flash drive."
+      },
+      "lpt": {
+        "name": "Port Paralel LPT1 (DB-25) & Serial COM (RS-232)",
+        "spec": "Konektor printer paralel 25-pin merah muda & serial 9-pin (usang)",
+        "description": "Antarmuka kabel tebal di panel belakang motherboard lama untuk menghubungkan printer dot-matrix dan modem; kini seluruhnya digantikan oleh USB."
+      },
+      "agp": {
+        "name": "Slot Kartu Grafis AGP (Accelerated Graphics Port)",
+        "spec": "Slot kartu grafis cokelat sebelum era PCIe x16 (usang)",
+        "description": "Jalur khusus kartu grafis pada motherboard akhir 1990-an hingga awal 2000-an (AGP 4x/8x) sebelum digantikan sepenuhnya oleh standar PCI Express (PCIe)."
       }
     }
   },
@@ -439,7 +489,79 @@
     "feedbackItem1": "Semua komponen fisik kompatibel dan melewati pemeriksaan Power-On Self-Test (POST) dengan 1 bunyi bip pendek.",
     "feedbackItem2": "Pastikan keping RAM selalu dipasang pada pasangan slot kanal ganda (A2 dan B2) serta kabel monitor terhubung ke port kartu grafis (GPU).",
     "retryButton": "Buka pelajaran perakitan",
-    "backToLessonsButton": "Kembali ke daftar pelajaran"
+    "backToLessonsButton": "Kembali ke daftar pelajaran",
+    "quizScoreLabel": "Skor kuis teori",
+    "quizAnsweredDetail": "{{correct}} benar dari {{total}} soal ({{attempts}} percobaan)"
+  },
+  "quiz": {
+    "sectionHeading": "Kuis pemeriksaan pemahaman",
+    "checkAnswerButton": "Periksa jawaban kuis",
+    "attemptsCount": "Percobaan: {{count}}",
+    "correctHeading": "Jawaban tepat!",
+    "wrongHeading": "Jawaban belum tepat",
+    "mb1": {
+      "prompt": "Mengapa motherboard berukuran standar ATX tidak dapat dipasang ke dalam casing Mini-ITX?",
+      "optA": "Karena motherboard ATX tidak memiliki port USB belakang",
+      "optB": "Karena ukuran fisik papan ATX (305 x 244 mm) lebih besar daripada ruang baki casing Mini-ITX (170 x 170 mm)",
+      "optC": "Karena casing Mini-ITX hanya bisa dinyalakan tanpa tombol power",
+      "wrongA": "Kurang tepat: semua motherboard desktop modern memiliki panel I/O belakang termasuk port USB.",
+      "wrongC": "Kurang tepat: casing Mini-ITX tetap memiliki tombol power dan kabel front panel seperti casing lainnya.",
+      "explanation": "Form factor menentukan dimensi fisik dan posisi baut standoff: casing kecil Mini-ITX hanya memuat papan Mini-ITX, sedangkan casing ATX dapat memuat papan ATX, Micro-ATX, maupun Mini-ITX."
+    },
+    "cpu1": {
+      "prompt": "Apa fungsi tanda segitiga kecil di salah satu sudut prosesor (CPU) dan soket motherboard?",
+      "optA": "Sebagai penanda orientasi sudut agar pin prosesor tidak terpasang terbalik di dalam soket",
+      "optB": "Sebagai tombol untuk melepas pendingin CPU secara otomatis",
+      "optC": "Sebagai penanda bahwa CPU tersebut tidak memerlukan pasta termal",
+      "wrongB": "Kurang tepat: tanda segitiga adalah cetakan visual pada sudut substrat CPU, bukan tombol mekanis.",
+      "wrongC": "Kurang tepat: seluruh prosesor desktop modern tetap membutuhkan pasta termal dan pendingin (heatsink).",
+      "explanation": "Menyejajarkan tanda segitiga di sudut CPU dengan tanda segitiga di sudut soket memastikan ratusan pin kontak bertemu tepat tanpa bengkok."
+    },
+    "ram1": {
+      "prompt": "Mengapa keping RAM DDR4 tidak bisa dimasukkan ke dalam slot memori DDR5 pada motherboard?",
+      "optA": "Karena RAM DDR4 memerlukan kabel data SATA tambahan",
+      "optB": "Karena RAM DDR4 hanya bisa dipasang di slot PCIe kartu grafis",
+      "optC": "Karena posisi celah alur kunci (notch) pada deretan pin DDR4 dan DDR5 sengaja dibuat berbeda",
+      "wrongA": "Kurang tepat: modul RAM langsung menancap di slot DIMM tanpa kabel SATA.",
+      "wrongB": "Kurang tepat: baik DDR4 maupun DDR5 dipasang di slot DIMM, bukan di slot PCIe.",
+      "explanation": "Setiap generasi DDR memiliki posisi celah notch yang berbeda beberapa milimeter untuk mencegah kerusakan akibat tegangan dan sinyal yang tidak kompatibel."
+    },
+    "storage1": {
+      "prompt": "Manakah pernyataan yang paling tepat mengenai perbedaan HDD, SSD, dan SSHD?",
+      "optA": "HDD menggunakan chip flash tanpa komponen bergerak, sedangkan SSD memakai piringan berputar",
+      "optB": "HDD memakai piringan magnetik berputar, SSD memakai chip memori flash cepat, dan SSHD menggabungkan piringan HDD dengan cache flash kecil",
+      "optC": "Ketiganya wajib menggunakan kabel pita lebar IDE 40-pin",
+      "wrongA": "Terbalik: justru HDD yang memakai piringan berputar mekanis dan SSD yang memakai chip memori flash.",
+      "wrongC": "Kurang tepat: kabel IDE 40-pin adalah antarmuka usang; penyimpanan modern memakai SATA atau slot NVMe M.2.",
+      "explanation": "SSD unggul dalam kecepatan baca/tulis karena berbasis chip flash murni, HDD ekonomis untuk kapasitas besar berbasis piringan, dan SSHD adalah jembatan hibrida keduanya."
+    },
+    "psu1": {
+      "prompt": "Apa yang terjadi jika Anda merakit PC dengan total kebutuhan daya komponen 650 W tetapi hanya menggunakan PSU berkapasitas 450 W?",
+      "optA": "Komputer gagal menyala atau mati mendadak saat POST karena suplai daya PSU tidak mencukupi beban komponen",
+      "optB": "Kapasitas RAM akan otomatis bertambah menjadi dua kali lipat",
+      "optC": "Tidak berpengaruh apa-apa karena PSU hanya berfungsi sebagai kipas casing",
+      "wrongB": "Kurang tepat: kapasitas catu daya PSU sama sekali tidak menambah ukuran memori RAM.",
+      "wrongC": "Kurang tepat: PSU adalah penyuplai listrik utama seluruh komponen; jika dayanya kurang, sistem gagal beroperasi.",
+      "explanation": "Kapasitas watt PSU wajib melebihi total kebutuhan daya komponen, dan disarankan memiliki cadangan daya (headroom) minimal 15-20%."
+    },
+    "rakit1": {
+      "prompt": "Manakah urutan perakitan PC yang paling baik dan aman di meja kerja?",
+      "optA": "Memasang PSU dan semua kabel dulu sebelum mengeluarkan motherboard dari kotak",
+      "optB": "Memasang CPU, pasta termal, pendingin, dan RAM di motherboard terlebih dahulu sebelum memasukkan motherboard ke dalam casing",
+      "optC": "Menyalakan tombol power terlebih dahulu lalu memasang prosesor saat listrik menyala",
+      "wrongA": "Kurang tepat: kabel akan menghalangi ruang kerja jika motherboard belum disiapkan dan dipasang.",
+      "wrongC": "Sangat berbahaya: memasang komponen utama saat arus listrik menyala dapat menyebabkan korsleting fatal.",
+      "explanation": "Memasang CPU, pendingin, dan RAM pada motherboard di luar casing jauh lebih leluasa dan aman dibanding memasangnya di ruang casing yang sempit."
+    },
+    "bip1": {
+      "prompt": "Pada BIOS standar AMI, komputer mengeluarkan bunyi 3 bip pendek berulang dan layar gelap. Komponen mana yang harus diperiksa pertama kali?",
+      "optA": "Printer eksternal dan scanner",
+      "optB": "Kabel pita floppy disk drive",
+      "optC": "Modul memori RAM pada slot DIMM (pastikan terpasang rapat hingga pengunci menutup atau cek kerusakan modul)",
+      "wrongA": "Kurang tepat: perangkat cetak eksternal tidak menyebabkan kegagalan inisialisasi memori POST BIOS.",
+      "wrongB": "Kurang tepat: kode 3 bip pendek pada BIOS AMI adalah kode pemeriksaan memori utama (Base 64K RAM), bukan floppy.",
+      "explanation": "Pada tabel kode bip AMI, 3 bip pendek menandakan kegagalan deteksi atau pembacaan memori RAM utama."
+    }
   },
   "settings": {
     "heading": "Pengaturan aplikasi & progres",

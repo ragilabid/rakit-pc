@@ -1,5 +1,6 @@
 import { createStore, useStore } from 'zustand';
 import { createJSONStorage, persist, type StateStorage } from 'zustand/middleware';
+import type { QuizAnswerRecord } from '../domain/quiz';
 import {
   DEFAULT_LANGUAGE,
   normalizeLanguage,
@@ -39,12 +40,14 @@ export interface ProgressState {
   fallback2d: boolean;
   storageAvailable: boolean;
   lastSimulationResult: SavedSimulationResult | null;
+  quizAnswers: Record<string, QuizAnswerRecord>;
   completeLesson: (lessonId: string) => void;
   setCurrentLessonSlug: (slug: string | null) => void;
   setLanguage: (lang: string) => void;
   setQualityMode: (mode: 'low' | 'medium' | 'high') => void;
   setFallback2d: (enabled: boolean) => void;
   setLastSimulationResult: (result: SavedSimulationResult | null) => void;
+  recordQuizAnswer: (questionId: string, selectedOptionId: string, correct: boolean) => void;
   resetProgress: (confirmed: boolean) => void;
 }
 
@@ -169,6 +172,7 @@ export function createProgressStoreInstance(customStorage?: StorageLike | null) 
         fallback2d: false,
         storageAvailable: isStorageHealthy,
         lastSimulationResult: null,
+        quizAnswers: {},
 
         completeLesson: (lessonId: string) => {
           const normalized = lessonId.trim().toLowerCase();
@@ -220,12 +224,29 @@ export function createProgressStoreInstance(customStorage?: StorageLike | null) 
           });
         },
 
+        recordQuizAnswer: (questionId: string, selectedOptionId: string, correct: boolean) => {
+          const prev = get().quizAnswers[questionId];
+          const nextAttempts = (prev?.attempts ?? 0) + 1;
+          set({
+            quizAnswers: {
+              ...get().quizAnswers,
+              [questionId]: {
+                selectedOptionId,
+                correct,
+                attempts: nextAttempts,
+              },
+            },
+            storageAvailable: isStorageHealthy,
+          });
+        },
+
         resetProgress: (confirmed: boolean) => {
           if (!confirmed) return;
           set({
             completedLessonIds: [],
             currentLessonSlug: null,
             lastSimulationResult: null,
+            quizAnswers: {},
             storageAvailable: isStorageHealthy,
           });
         },
@@ -242,6 +263,7 @@ export function createProgressStoreInstance(customStorage?: StorageLike | null) 
           qualityMode: state.qualityMode,
           fallback2d: state.fallback2d,
           lastSimulationResult: state.lastSimulationResult,
+          quizAnswers: state.quizAnswers,
         }),
         migrate: (persistedState: unknown) => {
           if (!persistedState || typeof persistedState !== 'object') {

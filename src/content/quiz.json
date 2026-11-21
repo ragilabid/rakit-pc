@@ -1,0 +1,172 @@
+{
+  "questions": [
+    {
+      "id": "quiz-mb-1",
+      "lessonId": "motherboard",
+      "promptKey": "quiz.mb1.prompt",
+      "correctOptionId": "b",
+      "explanationKey": "quiz.mb1.explanation",
+      "options": [
+        {
+          "id": "a",
+          "textKey": "quiz.mb1.optA",
+          "whyWrongKey": "quiz.mb1.wrongA"
+        },
+        {
+          "id": "b",
+          "textKey": "quiz.mb1.optB",
+          "whyWrongKey": "quiz.mb1.explanation"
+        },
+        {
+          "id": "c",
+          "textKey": "quiz.mb1.optC",
+          "whyWrongKey": "quiz.mb1.wrongC"
+        }
+      ]
+    },
+    {
+      "id": "quiz-cpu-1",
+      "lessonId": "cpu",
+      "promptKey": "quiz.cpu1.prompt",
+      "correctOptionId": "a",
+      "explanationKey": "quiz.cpu1.explanation",
+      "options": [
+        {
+          "id": "a",
+          "textKey": "quiz.cpu1.optA",
+          "whyWrongKey": "quiz.cpu1.explanation"
+        },
+        {
+          "id": "b",
+          "textKey": "quiz.cpu1.optB",
+          "whyWrongKey": "quiz.cpu1.wrongB"
+        },
+        {
+          "id": "c",
+          "textKey": "quiz.cpu1.optC",
+          "whyWrongKey": "quiz.cpu1.wrongC"
+        }
+      ]
+    },
+    {
+      "id": "quiz-ram-1",
+      "lessonId": "ram",
+      "promptKey": "quiz.ram1.prompt",
+      "correctOptionId": "c",
+      "explanationKey": "quiz.ram1.explanation",
+      "options": [
+        {
+          "id": "a",
+          "textKey": "quiz.ram1.optA",
+          "whyWrongKey": "quiz.ram1.wrongA"
+        },
+        {
+          "id": "b",
+          "textKey": "quiz.ram1.optB",
+          "whyWrongKey": "quiz.ram1.wrongB"
+        },
+        {
+          "id": "c",
+          "textKey": "quiz.ram1.optC",
+          "whyWrongKey": "quiz.ram1.explanation"
+        }
+      ]
+    },
+    {
+      "id": "quiz-storage-1",
+      "lessonId": "storage",
+      "promptKey": "quiz.storage1.prompt",
+      "correctOptionId": "b",
+      "explanationKey": "quiz.storage1.explanation",
+      "options": [
+        {
+          "id": "a",
+          "textKey": "quiz.storage1.optA",
+          "whyWrongKey": "quiz.storage1.wrongA"
+        },
+        {
+          "id": "b",
+          "textKey": "quiz.storage1.optB",
+          "whyWrongKey": "quiz.storage1.explanation"
+        },
+        {
+          "id": "c",
+          "textKey": "quiz.storage1.optC",
+          "whyWrongKey": "quiz.storage1.wrongC"
+        }
+      ]
+    },
+    {
+      "id": "quiz-psu-1",
+      "lessonId": "psu",
+      "promptKey": "quiz.psu1.prompt",
+      "correctOptionId": "a",
+      "explanationKey": "quiz.psu1.explanation",
+      "options": [
+        {
+          "id": "a",
+          "textKey": "quiz.psu1.optA",
+          "whyWrongKey": "quiz.psu1.explanation"
+        },
+        {
+          "id": "b",
+          "textKey": "quiz.psu1.optB",
+          "whyWrongKey": "quiz.psu1.wrongB"
+        },
+        {
+          "id": "c",
+          "textKey": "quiz.psu1.optC",
+          "whyWrongKey": "quiz.psu1.wrongC"
+        }
+      ]
+    },
+    {
+      "id": "quiz-rakit-1",
+      "lessonId": "rakit-pc",
+      "promptKey": "quiz.rakit1.prompt",
+      "correctOptionId": "b",
+      "explanationKey": "quiz.rakit1.explanation",
+      "options": [
+        {
+          "id": "a",
+          "textKey": "quiz.rakit1.optA",
+          "whyWrongKey": "quiz.rakit1.wrongA"
+        },
+        {
+          "id": "b",
+          "textKey": "quiz.rakit1.optB",
+          "whyWrongKey": "quiz.rakit1.explanation"
+        },
+        {
+          "id": "c",
+          "textKey": "quiz.rakit1.optC",
+          "whyWrongKey": "quiz.rakit1.wrongC"
+        }
+      ]
+    },
+    {
+      "id": "quiz-bip-1",
+      "lessonId": "diagnosis-bip",
+      "promptKey": "quiz.bip1.prompt",
+      "correctOptionId": "c",
+      "explanationKey": "quiz.bip1.explanation",
+      "options": [
+        {
+          "id": "a",
+          "textKey": "quiz.bip1.optA",
+          "whyWrongKey": "quiz.bip1.wrongA"
+        },
+        {
+          "id": "b",
+          "textKey": "quiz.bip1.optB",
+          "whyWrongKey": "quiz.bip1.wrongB"
+        },
+        {
+          "id": "c",
+          "textKey": "quiz.bip1.optC",
+          "whyWrongKey": "quiz.bip1.explanation"
+        }
+      ]
+    }
+  ]
+}

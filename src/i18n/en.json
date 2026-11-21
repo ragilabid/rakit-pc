@@ -345,6 +345,26 @@
         "name": "SATA & NVMe M.2 Storage (HDD / SSD / SSHD)",
         "spec": "SATA III (600 MB/s) & PCIe NVMe M.2 (3,500+ MB/s)",
         "description": "Non-volatile storage: HDD uses magnetic platters, SSD uses fast flash chips, and SSHD pairs HDD platters with a small flash cache."
+      },
+      "gpu": {
+        "name": "Graphics Card (GPU / PCIe x16 Video Card)",
+        "spec": "PCIe x16 Slot | Auxiliary PCIe 8-pin Power | HDMI & DisplayPort Outputs",
+        "description": "Renders 2D/3D graphics and sends video signals to the monitor; requires a dedicated PCIe power cable from the PSU when drawing over 75 W."
+      },
+      "psu": {
+        "name": "Power Supply Unit (ATX 80+ PSU)",
+        "spec": "450 W – 750 W Capacity | ATX 24-pin, CPU 8-pin, PCIe 8-pin, SATA Connectors",
+        "description": "Supplies regulated DC voltages (+12V, +5V, +3.3V) to all internal computer components."
+      },
+      "cooler": {
+        "name": "Processor Cooler (CPU Heatsink & Fan)",
+        "spec": "AM5 & LGA1700 Mounts | 4-pin PWM Fan + Thermal Paste",
+        "description": "Absorbs heat from the CPU heat spreader through thermal paste and dissipates it into the air via aluminum fins and a fan."
+      },
+      "nic": {
+        "name": "Network Interface Card (Ethernet NIC / PCIe Wi-Fi)",
+        "spec": "PCIe x1 Slot | RJ-45 Gigabit LAN Port / Dual-Band Wi-Fi Antennas",
+        "description": "Connects the computer to wired school lab local area networks (LAN) or wireless networks."
       }
     },
     "external": {
@@ -367,6 +387,21 @@
         "name": "Printer",
         "spec": "External print output peripheral — USB / LAN Network",
         "description": "Output peripheral that prints digital documents onto physical paper."
+      },
+      "scanner": {
+        "name": "Document Scanner",
+        "spec": "External optical input peripheral — USB Flatbed",
+        "description": "Scans physical paper sheets or photos into digital image files on the computer."
+      },
+      "speaker": {
+        "name": "Audio Speakers & Headset",
+        "spec": "External audio output peripheral — 3.5 mm Audio Jack / USB",
+        "description": "Outputs sound from the operating system and media applications via the green Line-Out port or USB."
+      },
+      "webcam": {
+        "name": "Webcam",
+        "spec": "External video input peripheral — USB 2.0/3.0 HD",
+        "description": "Captures live video for remote learning and video conferencing."
       }
     },
     "legacy": {
@@ -384,6 +419,21 @@
         "name": "Round PS/2 Ports (Purple & Green)",
         "spec": "6-pin Mini-DIN connectors for keyboard (purple) and mouse (green)",
         "description": "Dedicated 1990s-2000s keyboard and mouse ports that did not support hot-plugging; replaced by universal USB ports."
+      },
+      "floppy": {
+        "name": "3.5-Inch Floppy Disk Drive (FDD)",
+        "spec": "Obsolete 1.44 MB magnetic diskette drive with 34-pin ribbon cable",
+        "description": "1980s-2000s magnetic diskette drive with tiny 1.44 MB capacity used for DOS boot disks; replaced by USB flash drives."
+      },
+      "lpt": {
+        "name": "LPT1 Parallel Port (DB-25) & RS-232 Serial COM Port",
+        "spec": "Obsolete 25-pin pink parallel printer port & 9-pin serial port",
+        "description": "Bulky rear motherboard connectors used for old dot-matrix printers and modems; completely replaced by USB."
+      },
+      "agp": {
+        "name": "AGP Graphics Slot (Accelerated Graphics Port)",
+        "spec": "Obsolete brown graphics card slot prior to PCIe x16",
+        "description": "Dedicated graphics card slot on late-1990s and early-2000s motherboards (AGP 4x/8x) before being superseded by PCI Express (PCIe)."
       }
     }
   },
@@ -439,7 +489,79 @@
     "feedbackItem1": "All physical components are compatible and passed Power-On Self-Test (POST) with 1 short beep.",
     "feedbackItem2": "Always populate paired dual-channel RAM slots (A2 and B2) and plug the monitor cable into the discrete GPU port.",
     "retryButton": "Open assembly lesson",
-    "backToLessonsButton": "Back to lesson list"
+    "backToLessonsButton": "Back to lesson list",
+    "quizScoreLabel": "Theory quiz score",
+    "quizAnsweredDetail": "{{correct}} correct of {{total}} questions ({{attempts}} attempts)"
+  },
+  "quiz": {
+    "sectionHeading": "Comprehension check quiz",
+    "checkAnswerButton": "Check quiz answer",
+    "attemptsCount": "Attempts: {{count}}",
+    "correctHeading": "Correct answer!",
+    "wrongHeading": "Not quite right",
+    "mb1": {
+      "prompt": "Why cannot a standard ATX motherboard be mounted inside a Mini-ITX case?",
+      "optA": "Because ATX motherboards do not have rear USB ports",
+      "optB": "Because the physical dimensions of an ATX board (305 x 244 mm) are larger than a Mini-ITX case tray (170 x 170 mm)",
+      "optC": "Because Mini-ITX cases operate without a power button",
+      "wrongA": "Incorrect: all modern desktop motherboards feature a rear I/O panel with USB ports.",
+      "wrongC": "Incorrect: Mini-ITX cases still use standard front-panel power buttons and headers.",
+      "explanation": "Form factor determines board dimensions and standoff hole layout: a compact Mini-ITX case only fits Mini-ITX boards, whereas an ATX case can fit ATX, Micro-ATX, and Mini-ITX boards."
+    },
+    "cpu1": {
+      "prompt": "What is the purpose of the small triangle mark on one corner of the processor (CPU) and motherboard socket?",
+      "optA": "As a corner alignment guide so the processor pins are not installed rotated or backwards in the socket",
+      "optB": "As a mechanical release button for the CPU cooler",
+      "optC": "As an indicator that the CPU does not need thermal paste",
+      "wrongB": "Incorrect: the triangle is a visual alignment mark printed on the corner of the CPU substrate, not a button.",
+      "wrongC": "Incorrect: all modern desktop CPUs require thermal paste and a heatsink cooler.",
+      "explanation": "Aligning the CPU corner triangle with the socket corner triangle ensures all contact pads and pins mate accurately without bending."
+    },
+    "ram1": {
+      "prompt": "Why cannot a DDR4 RAM stick be inserted into a DDR5 memory slot on a motherboard?",
+      "optA": "Because DDR4 RAM requires an extra SATA data cable",
+      "optB": "Because DDR4 RAM goes into the graphics card PCIe slot",
+      "optC": "Because the bottom alignment notch cutout on DDR4 and DDR5 pin rows is positioned differently",
+      "wrongA": "Incorrect: RAM modules plug directly into DIMM slots without any SATA cables.",
+      "wrongB": "Incorrect: both DDR4 and DDR5 modules install into DIMM memory slots, never PCIe slots.",
+      "explanation": "Each DDR generation shifts the key notch position by several millimeters to prevent electrical damage from incompatible voltages and signaling."
+    },
+    "storage1": {
+      "prompt": "Which statement accurately describes the difference between HDD, SSD, and SSHD drives?",
+      "optA": "HDD uses solid-state flash chips with no moving parts, while SSD uses spinning platters",
+      "optB": "HDD uses spinning magnetic platters, SSD uses fast flash memory chips, and SSHD combines HDD platters with a small flash cache",
+      "optC": "All three require a 40-pin IDE ribbon cable",
+      "wrongA": "Reversed: HDDs use mechanical spinning platters, whereas SSDs use solid-state flash memory chips.",
+      "wrongC": "Incorrect: 40-pin IDE is an obsolete legacy interface; modern drives use SATA or NVMe M.2 slots.",
+      "explanation": "SSDs deliver fast read/write speeds using flash chips, HDDs offer economical bulk capacity on spinning disks, and SSHDs bridge both with a small flash buffer."
+    },
+    "psu1": {
+      "prompt": "What happens if you build a PC whose components draw 650 W total but power it with a 450 W PSU?",
+      "optA": "The PC fails to power on or shuts down during POST because PSU capacity is lower than component demand",
+      "optB": "RAM capacity automatically doubles",
+      "optC": "Nothing changes because the PSU only acts as a case fan",
+      "wrongB": "Incorrect: power supply wattage has no effect on memory capacity.",
+      "wrongC": "Incorrect: the PSU powers every component; insufficient wattage prevents the system from running.",
+      "explanation": "PSU wattage must exceed combined component power draw, ideally with at least 15-20% extra headroom."
+    },
+    "rakit1": {
+      "prompt": "Which PC assembly sequence is the safest and most practical on a workbench?",
+      "optA": "Install the PSU and all cables before taking the motherboard out of its box",
+      "optB": "Install the CPU, thermal paste, cooler, and RAM on the motherboard outside the case before mounting the board inside the case",
+      "optC": "Turn the power on first and insert the processor while electricity is flowing",
+      "wrongA": "Incorrect: loose cables clutter the case tray if routed before the motherboard is prepared and mounted.",
+      "wrongC": "Dangerous: installing core components while powered on can cause severe short circuits.",
+      "explanation": "Installing the CPU, cooler, and RAM on the motherboard outside the case gives clear access before lowering the assembly into the chassis."
+    },
+    "bip1": {
+      "prompt": "On an AMI BIOS motherboard, the PC emits 3 repeating short beeps and the screen stays blank. Which component should you inspect first?",
+      "optA": "The external printer and scanner",
+      "optB": "The floppy disk drive ribbon cable",
+      "optC": "The RAM memory modules in the DIMM slots (verify firm seating until latches click or test for a faulty stick)",
+      "wrongA": "Incorrect: external printers do not trigger BIOS POST memory beep codes.",
+      "wrongB": "Incorrect: 3 short beeps in AMI BIOS indicates a Base 64K RAM memory failure, not a floppy drive issue.",
+      "explanation": "In the AMI BIOS beep code standard, 3 repeating short beeps point directly to missing, loose, or defective RAM."
+    }
   },
   "settings": {
     "heading": "Application & progress settings",
