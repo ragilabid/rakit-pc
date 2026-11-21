@@ -222,6 +222,8 @@ a {
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .panel-column {
@@ -230,6 +232,8 @@ a {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  min-width: 0;
+  max-width: 100%;
 }
 
 /* Elemen di dalam Panggung 3D */
@@ -285,8 +289,11 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 0.5rem;
   touch-action: none;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .stage-schematic-svg {
@@ -313,6 +320,61 @@ a {
   margin: 0.25rem 0 0 0;
   font-size: var(--text-sm);
   color: #dfe4ea;
+}
+
+.stage-alert-box {
+  margin-top: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid #d99b26;
+  background-color: #2b2312;
+  color: #fff3d6;
+  font-size: var(--text-sm);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.stage-status-bar {
+  margin-top: 0.5rem;
+  padding: 0.375rem 0.625rem;
+  border: 1px solid #323a42;
+  background-color: #1f252b;
+  color: #cfd6de;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.stage-camera-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: #cfd6de;
+}
+
+.stage-filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.stage-search-input {
+  min-height: 44px;
+  padding: 0.375rem 0.625rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  border-radius: 4px;
+  border: 1px solid #47525e;
+  background-color: #242a30;
+  color: #ffffff;
+  width: 100%;
 }
 
 .stage-keyboard-list {
@@ -540,7 +602,7 @@ a {
 /* Responsif untuk Tablet & HP hingga 320 px (Bagian 15.4 & 15.6) */
 @media (max-width: 900px) {
   .workbench-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .stage-column {

@@ -377,12 +377,12 @@ export function App() {
         <tbody>
           {beepData.map((entry) => (
             <tr key={entry.id}>
-              <td className="spec-param-cell">{entry.pattern}</td>
+              <td className="spec-param-cell">{t(`reference.beeps.${entry.id}.pattern`)}</td>
               <td style={{ fontFamily: 'var(--font-mono)' }}>{entry.targetComponent}</td>
               <td>
-                <strong>{entry.meaning}</strong>
+                <strong>{t(`reference.beeps.${entry.id}.meaning`)}</strong>
                 <div style={{ marginTop: '0.25rem', color: 'var(--color-text-secondary)' }}>
-                  {entry.diagnosticHint}
+                  {t(`reference.beeps.${entry.id}.hint`)}
                 </div>
               </td>
             </tr>

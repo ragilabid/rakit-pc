@@ -28,7 +28,18 @@
     "selectedPartHeading": "Komponen terpilih",
     "selectedPartFunctionLabel": "Fungsi utama",
     "controlsHint": "Geser: Seret atau WASD | Putar: Q/E | Zoom: Roda mouse atau cubit layar",
-    "fallback2dNotice": "Mode gambar teknis 2D aktif untuk menghemat sumber daya perangkat."
+    "fallback2dNotice": "Mode gambar teknis 2D aktif untuk menghemat sumber daya perangkat.",
+    "webgl2UnavailableNotice": "WebGL2 tidak tersedia pada perangkat atau browser ini. Menampilkan mode cadangan gambar 2D secara otomatis.",
+    "fpsLowSuggestion": "FPS rendah terdeteksi pada perangkat ini. Turunkan kualitas tampilan agar pergerakan panggung lebih lancar.",
+    "fpsDowngradeButton": "Turunkan kualitas ke Rendah",
+    "loadingModelText": "Memuat model komponen ({{progress}}%)...",
+    "renderPausedText": "Render 3D dijeda saat tab di latar belakang",
+    "cameraZoomIn": "Perbesar kamera",
+    "cameraZoomOut": "Perkecil kamera",
+    "cameraReset": "Reset posisi kamera",
+    "cameraStatusLabel": "Jarak kamera: {{distance}} m (batas {{min}}–{{max}} m)",
+    "quickSearchLabel": "Cari bagian di panggung",
+    "quickSearchPlaceholder": "Ketik nama bagian (pintasan WASD dinonaktifkan saat mengetik)"
   },
   "stageParts": {
     "cpuSocket": {
@@ -298,7 +309,29 @@
     "beepSection": "Tabel kode bunyi bip BIOS AMI",
     "beepPatternCol": "Pola bunyi bip",
     "beepComponentCol": "Komponen terkait",
-    "beepMeaningCol": "Arti & langkah pemeriksaan"
+    "beepMeaningCol": "Arti & langkah pemeriksaan",
+    "beeps": {
+      "ami-normal-post": {
+        "pattern": "1 pendek",
+        "meaning": "POST (Power-On Self-Test) berhasil normal tanpa kesalahan perangkat keras.",
+        "hint": "Sistem lulus pemeriksaan awal dan siap melanjutkan proses boot ke sistem operasi."
+      },
+      "ami-ram-missing-or-faulty": {
+        "pattern": "3 pendek berulang",
+        "meaning": "Kegagalan memori utama (Base 64K memory failure / RAM tidak terdeteksi atau rusak).",
+        "hint": "Periksa apakah keping RAM sudah terpasang rapat pada slot DIMM, pastikan pengunci slot menutup, atau uji keping RAM satu per satu."
+      },
+      "ami-no-video-card": {
+        "pattern": "1 panjang, 3 pendek",
+        "meaning": "Kartu grafis (VGA/GPU) tidak terdeteksi atau gagal diinisialisasi.",
+        "hint": "Pastikan kartu grafis terpasang penuh di slot PCIe, kabel daya PCIe dari PSU sudah dicolok, dan kabel monitor terhubung ke port GPU."
+      },
+      "ami-cpu-failure": {
+        "pattern": "5 pendek",
+        "meaning": "Kesalahan prosesor (Processor error / CPU tidak terbaca atau gagal inisialisasi).",
+        "hint": "Periksa pemasangan CPU di soket, pastikan tidak ada pin bengkok dan kabel daya CPU 8-pin sudah terpasang."
+      }
+    }
   },
   "results": {
     "heading": "Hasil simulasi perakitan & POST",

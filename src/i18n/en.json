@@ -28,7 +28,18 @@
     "selectedPartHeading": "Selected component",
     "selectedPartFunctionLabel": "Main function",
     "controlsHint": "Pan: Drag or WASD | Rotate: Q/E | Zoom: Mouse wheel or pinch",
-    "fallback2dNotice": "2D technical diagram mode is active to save device resources."
+    "fallback2dNotice": "2D technical diagram mode is active to save device resources.",
+    "webgl2UnavailableNotice": "WebGL2 is not available on this device or browser. Automatically displaying 2D fallback diagram mode.",
+    "fpsLowSuggestion": "Low frame rate detected on this device. Lower the display quality for smoother stage interaction.",
+    "fpsDowngradeButton": "Lower quality to Low",
+    "loadingModelText": "Loading component model ({{progress}}%)...",
+    "renderPausedText": "3D rendering paused while tab is in background",
+    "cameraZoomIn": "Zoom camera in",
+    "cameraZoomOut": "Zoom camera out",
+    "cameraReset": "Reset camera view",
+    "cameraStatusLabel": "Camera distance: {{distance}} m (bounds {{min}}–{{max}} m)",
+    "quickSearchLabel": "Filter parts on stage",
+    "quickSearchPlaceholder": "Type part name (WASD shortcuts disabled while typing)"
   },
   "stageParts": {
     "cpuSocket": {
@@ -298,7 +309,29 @@
     "beepSection": "AMI BIOS beep code reference table",
     "beepPatternCol": "Beep pattern",
     "beepComponentCol": "Target component",
-    "beepMeaningCol": "Meaning & diagnostic action"
+    "beepMeaningCol": "Meaning & diagnostic action",
+    "beeps": {
+      "ami-normal-post": {
+        "pattern": "1 short",
+        "meaning": "POST (Power-On Self-Test) succeeded normally with no hardware errors.",
+        "hint": "System passed initial hardware checks and is ready to boot the operating system."
+      },
+      "ami-ram-missing-or-faulty": {
+        "pattern": "3 repeating short",
+        "meaning": "Base 64K memory failure (RAM not detected or faulty).",
+        "hint": "Check that RAM modules are firmly seated in DIMM slots with latches clicked shut, or test sticks one at a time."
+      },
+      "ami-no-video-card": {
+        "pattern": "1 long, 3 short",
+        "meaning": "Graphics card (VGA/GPU) not detected or failed video initialization.",
+        "hint": "Ensure the GPU is fully seated in the PCIe slot, the PCIe power cable is plugged in, and the monitor connects to the GPU port."
+      },
+      "ami-cpu-failure": {
+        "pattern": "5 short",
+        "meaning": "Processor error (CPU not detected or failed initialization).",
+        "hint": "Inspect CPU socket seating, check for bent pins, and verify the 8-pin CPU power cable is connected."
+      }
+    }
   },
   "results": {
     "heading": "Assembly & POST simulation results",
