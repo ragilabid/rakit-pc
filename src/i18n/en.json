@@ -1,0 +1,336 @@
+{
+  "app": {
+    "brand": "Rakit PC",
+    "subtitle": "Interactive computer hardware learning and PC assembly simulation platform",
+    "progressLabel": "Progress",
+    "storageWarning": "Browser local storage is unavailable or full (for example in private mode). The app still works, but your learning progress will not be saved after closing the tab.",
+    "unknownRouteNotice": "The requested page was not found. You have been redirected to the home page."
+  },
+  "nav": {
+    "home": "Home",
+    "lessons": "Lessons",
+    "components": "Components",
+    "reference": "Reference",
+    "results": "Results",
+    "settings": "Settings",
+    "languageLabel": "Language",
+    "menuToggle": "Navigation menu"
+  },
+  "stage": {
+    "heading": "3D component stage",
+    "mode3d": "3D mode",
+    "mode2d": "2D fallback",
+    "qualityLabel": "Quality",
+    "qualityLow": "Low",
+    "qualityMedium": "Medium",
+    "qualityHigh": "High",
+    "keyboardListLabel": "Components on stage (keyboard access)",
+    "selectedPartHeading": "Selected component",
+    "selectedPartFunctionLabel": "Main function",
+    "controlsHint": "Pan: Drag or WASD | Rotate: Q/E | Zoom: Mouse wheel or pinch",
+    "fallback2dNotice": "2D technical diagram mode is active to save device resources."
+  },
+  "stageParts": {
+    "cpuSocket": {
+      "label": "CPU Socket",
+      "name": "Processor Socket (AM5 / LGA1700)",
+      "function": "Holds the processor on the motherboard. Features a corner triangle marker so CPU orientation cannot be reversed."
+    },
+    "dimmSlots": {
+      "label": "DIMM RAM Slots",
+      "name": "DDR4 / DDR5 Memory Slots",
+      "function": "Slots for installing RAM modules. Each DDR generation has a different key notch position to prevent mismatched installation."
+    },
+    "atx24": {
+      "label": "ATX 24-pin Socket",
+      "name": "Main ATX 24-pin Power Connector",
+      "function": "Delivers primary electrical power from the PSU to the motherboard."
+    },
+    "cpuIhs": {
+      "label": "CPU Heat Spreader (IHS)",
+      "name": "Processor Integrated Heat Spreader",
+      "function": "Protects the silicon die and transfers heat to the thermal paste and CPU cooler."
+    },
+    "cpuTriangle": {
+      "label": "CPU Triangle Marker",
+      "name": "Processor Corner Alignment Marker",
+      "function": "Golden corner triangle that must align with the triangle mark on the motherboard socket before locking."
+    },
+    "ramModule": {
+      "label": "RAM Stick",
+      "name": "Main Memory Module (DIMM)",
+      "function": "Temporarily stores active data for quick access by the CPU. Contents clear when power is turned off."
+    },
+    "ramNotch": {
+      "label": "RAM Key Notch",
+      "name": "RAM Module Alignment Notch",
+      "function": "Cutout along the bottom gold pins that prevents installing RAM backwards or into an incompatible slot generation."
+    },
+    "ramLatch": {
+      "label": "RAM Slot Latch",
+      "name": "DIMM Side Retaining Clip",
+      "function": "Locks the ends of the RAM module with an audible click when pressed straight down."
+    },
+    "nvmeM2": {
+      "label": "NVMe M.2 Slot",
+      "name": "NVMe M.2 SSD Connector (PCIe Lane)",
+      "function": "Mounts compact SSD gumsticks directly onto the motherboard without cables, delivering speeds far above SATA."
+    },
+    "sataPort": {
+      "label": "SATA Port",
+      "name": "Motherboard SATA Data Connector",
+      "function": "Connects 2.5-inch SSDs or mechanical hard drives (HDD) using an L-shaped SATA data cable."
+    },
+    "psuUnit": {
+      "label": "PSU Unit",
+      "name": "Computer Power Supply Unit",
+      "function": "Converts AC wall power into regulated DC power rails for every PC component."
+    },
+    "pcieCable": {
+      "label": "PCIe 8-pin Cable",
+      "name": "GPU Auxiliary Power Connector (PCIe Power)",
+      "function": "Supplies dedicated power from the PSU directly to discrete graphics cards."
+    }
+  },
+  "home": {
+    "lessonListHeading": "Lesson list",
+    "basicsGroupHeading": "Core component fundamentals",
+    "practiceGroupHeading": "Assembly simulation & troubleshooting",
+    "openLessonButton": "Open lesson",
+    "completedBadge": "Completed",
+    "lockedBadge": "Locked",
+    "prerequisitesRequired": "Prerequisites: complete the following lessons first:",
+    "continueLastLesson": "Continue last lesson"
+  },
+  "lessonPage": {
+    "stepCounter": "Lesson {{order}} of {{total}}",
+    "tabOverview": "Overview",
+    "tabSpecs": "Specifications",
+    "tabPractice": "Practice",
+    "completeButton": "Complete lesson",
+    "completedNotice": "Lesson completed",
+    "prevLesson": "Previous",
+    "nextLesson": "Next",
+    "backToList": "Back to lesson list",
+    "lockedHeading": "This lesson is still locked",
+    "lockedDescription": "To unlock this lesson, complete the prerequisite lessons below so your assembly knowledge builds in order:",
+    "goToPrerequisite": "Open first prerequisite lesson"
+  },
+  "specs": {
+    "tableHeading": "Technical specifications",
+    "columnParameter": "Parameter",
+    "columnDetail": "Specification details",
+    "labels": {
+      "cpuSocket": "CPU socket type",
+      "ramSlotType": "RAM memory slots",
+      "formFactor": "Form factor size",
+      "expansionSlots": "Expansion & storage slots",
+      "socketComparison": "AM5 vs LGA1700 socket comparison",
+      "alignmentMarker": "Installation alignment marker",
+      "coolingRequirement": "Cooler & thermal paste requirement",
+      "ddr4VsDdr5": "DDR4 vs DDR5 slot difference",
+      "notchKey": "Alignment notch key",
+      "dualChannelSlots": "Dual-channel slot pairs",
+      "sataVsNvme": "SATA vs NVMe M.2 connector standard",
+      "hddSsdSshd": "HDD vs SSD vs SSHD difference",
+      "bootRequirement": "Bootable drive requirement",
+      "powerCapacity": "Power calculation & headroom",
+      "mainConnectors": "Mandatory power connectors",
+      "assemblyOrder": "Standard assembly sequence",
+      "esdSafety": "Workplace safety (ESD & K3)",
+      "amiBeepStandard": "AMI BIOS beep code standard",
+      "displayOutputCheck": "Monitor cable port check"
+    }
+  },
+  "lessons": {
+    "motherboard": {
+      "title": "Motherboard (mainboard)",
+      "summary": "The motherboard acts like a city's main highway network connecting the processor, memory, storage, and power supply so they can communicate.",
+      "overview1": "The motherboard is the primary circuit board where every component connects. Before choosing other parts, verify the CPU socket type, RAM slot generation, and board form factor.",
+      "overview2": "Select the CPU Socket, DIMM RAM Slots, or ATX 24-pin Socket on the stage to inspect each connector's location and purpose.",
+      "practicePrompt": "Inspect all three main parts on the stage (CPU Socket, DIMM RAM Slots, and ATX 24-pin Socket), then review the Specifications tab.",
+      "practiceTip": "Pay close attention to the difference between AM5 and LGA1700 sockets and DDR4 vs DDR5 slots.",
+      "specSocket": "Supports one specific socket per board, such as AMD AM5 (1718-pin LGA) or Intel LGA1700 (1700-pin LGA). Different sockets are physically incompatible.",
+      "specRamSlot": "DIMM slots are keyed for a single memory generation: DDR4 slots only accept DDR4 modules, and DDR5 slots only accept DDR5 modules.",
+      "specFormFactor": "ATX (305 x 244 mm), Micro-ATX (244 x 244 mm), and Mini-ITX (170 x 170 mm). An ATX motherboard cannot fit inside a Mini-ITX case.",
+      "specExpansion": "PCIe x16 slot for graphics card (GPU), M.2 slots for NVMe SSDs, and SATA ports for additional drives."
+    },
+    "cpu": {
+      "title": "Processor (CPU)",
+      "summary": "The processor is the head chef in the computer's kitchen, executing program instructions and processing data from memory.",
+      "overview1": "A CPU sits in a matching motherboard socket. Never force a CPU down: align the golden triangle on the corner of the CPU with the triangle mark on the socket corner.",
+      "overview2": "Because CPUs generate intense heat within seconds, they must be coated with thermal paste and topped with a heatsink cooler.",
+      "practicePrompt": "Select the CPU Triangle Marker on stage, then read the cooling requirements in the Specifications tab.",
+      "practiceTip": "Powering on a PC without a CPU cooler causes an immediate thermal shutdown due to critical temperatures.",
+      "specSocketComparison": "AMD AM5 and Intel LGA1700 both place pins on the motherboard (LGA), but their dimensions and pin maps differ and cannot be mixed.",
+      "specTriangleMarker": "The triangle mark at the bottom-left corner of the CPU must align directly with the corner indicator on the socket frame.",
+      "specCooling": "Requires thermal paste to fill microscopic air gaps plus a heatsink and fan rated for the processor TDP (65 W to 250 W)."
+    },
+    "ram": {
+      "title": "Random access memory (RAM)",
+      "summary": "RAM works like a desk surface where the processor keeps files currently in use for instant access without walking back to the filing cabinet.",
+      "overview1": "Each RAM stick has a bottom key cutout called a notch. This notch prevents installing RAM backwards or inserting DDR4 RAM into a DDR5 slot.",
+      "overview2": "When installing two RAM modules on a 4-slot motherboard, use the recommended paired slots (typically A2 and B2) so dual-channel mode activates.",
+      "practicePrompt": "Select the RAM Key Notch on stage to read its function, then open Specifications to compare DDR4 and DDR5.",
+      "practiceTip": "If a RAM module is not pressed firmly until the side latches click shut, the motherboard will emit repeating AMI beep codes on startup.",
+      "specDdr4VsDdr5": "DDR4 (288-pin, 1.2 V) and DDR5 (288-pin, 1.1 V) place the bottom key notch at different positions so they cannot be cross-inserted.",
+      "specNotch": "If the notch does not line up with the ridge inside the DIMM slot, the module is reversed 180 degrees and must be flipped.",
+      "specDualChannel": "Install 2 modules in alternating paired slots (A2 + B2 or A1 + B1). Installing in A1 + A2 still boots, but runs in slower single-channel mode."
+    },
+    "storage": {
+      "title": "Storage drives",
+      "summary": "Storage is the permanent filing cabinet where the operating system, apps, and student files remain safe even when the computer is powered off.",
+      "overview1": "Modern PCs commonly use two storage connector standards: SATA (using an L-shaped data cable plus a PSU power cable) and NVMe M.2 (mounted directly onto a compact motherboard slot without cables).",
+      "overview2": "In hardware catalogs you will encounter three related terms: HDD, SSD, and SSHD. An HDD uses spinning magnetic platters (high capacity, slower); an SSD uses solid-state flash chips with no moving parts (very fast and shock-resistant); an SSHD is a mechanical hard drive (HDD) combined with a small flash cache for frequently opened files.",
+      "overview3": "For a PC to boot after passing POST, the primary storage drive must have an operating system (OS) installed.",
+      "practicePrompt": "Compare the NVMe M.2 Slot and SATA Port on stage, then review the HDD, SSD, and SSHD comparison in Specifications.",
+      "practiceTip": "A blank storage drive without an OS will display 'No bootable device found' when turned on.",
+      "specSataVsNvme": "SATA III uses cables and tops out around 600 MB/s (used by HDDs and SATA SSDs). NVMe M.2 connects directly to PCIe lanes at 3,500 to 7,000+ MB/s.",
+      "specHddSsdSshd": "HDD = mechanical spinning platters (economical bulk storage). SSD = pure flash memory (fast OS boot). SSHD = mechanical HDD with a small SSD cache.",
+      "specBootOs": "At least one drive must contain a boot partition and operating system; otherwise POST succeeds but stops at 'No bootable device'."
+    },
+    "psu": {
+      "title": "Power supply unit (PSU)",
+      "summary": "The PSU acts like a building's electrical distribution box, supplying steady voltage to every component so the system never browns out.",
+      "overview1": "PSU wattage must exceed the combined power draw of all installed components (CPU, GPU, motherboard, RAM, storage, and fans). Aim for at least 15-20% wattage headroom above peak load.",
+      "overview2": "In addition to wattage capacity, ensure every mandatory power cable is plugged in: ATX 24-pin for the motherboard, CPU 8-pin for the processor, and PCIe 8-pin if required by the graphics card.",
+      "practicePrompt": "Inspect the PSU Unit and PCIe 8-pin Cable on stage, then review mandatory power connectors in Specifications.",
+      "practiceTip": "Forgetting the ATX 24-pin or CPU 8-pin power cable is the most common reason a newly built PC fails to power on.",
+      "specWattage": "Example: a build with a 250 W CPU, 320 W GPU, and 80 W of other parts needs 650 W total. A 450 W PSU fails to boot, while a 650 W PSU runs with zero headroom.",
+      "specConnectors": "ATX 24-pin (main board power), EPS/CPU 8-pin (processor power), PCIe 6+2/8-pin (graphics card power), and SATA power."
+    },
+    "rakitPc": {
+      "title": "PC assembly simulation",
+      "summary": "Combine all components step by step following proper workshop assembly order, from motherboard preparation to pressing the power button.",
+      "overview1": "Clean assembly starts outside the case: install the CPU, apply thermal paste, mount the cooler, and insert RAM and M.2 storage on the motherboard. Next, verify case standoffs before lowering the motherboard into the case.",
+      "overview2": "Once the motherboard, PSU, and GPU are mounted inside the case, connect all power cables, front panel headers (Power SW), and plug the monitor cable into the GPU port.",
+      "practicePrompt": "Follow the standard assembly order and observe feedback whenever a physical rejection or logical POST error occurs.",
+      "practiceTip": "ESD safety reminder: touch bare metal on the case before handling electronics; this reminder does not block your workflow.",
+      "specOrder": "1. Prepare motherboard -> 2. Install CPU -> 3. Apply thermal paste & cooler -> 4. Install RAM & SSD -> 5. Check standoffs & mount board in case -> 6. Install PSU & GPU -> 7. Connect all cables.",
+      "specEsd": "Electrostatic discharge (ESD) can damage sensitive chips. Wear an antistatic wrist strap or touch unpainted metal on the case first."
+    },
+    "diagnosisBip": {
+      "title": "Troubleshooting & AMI beep codes",
+      "summary": "When a PC fails to display video on startup, the beep pattern from the AMI BIOS speaker points directly to the failing hardware subsystem.",
+      "overview1": "In standard AMI BIOS, one short beep confirms a normal POST. In contrast, three repeating short beeps point to missing or faulty RAM modules.",
+      "overview2": "If the PC emits 1 normal short beep but the monitor stays blank, check the rear panel: make sure the monitor cable is plugged into the graphics card (GPU), not the motherboard video port.",
+      "practicePrompt": "Observe the beep pattern and display state, then diagnose root causes one by one from power delivery to memory and video output.",
+      "practiceTip": "When multiple faults exist at once (such as a disconnected power cable and faulty RAM), fix the power issue first so POST can advance.",
+      "specAmiStandard": "1 short beep = Normal POST; 3 repeating short beeps = RAM memory failure; 1 long + 3 short beeps = GPU video error; 5 short beeps = CPU processor error.",
+      "specDisplayPort": "On systems with a discrete GPU and a CPU without integrated graphics (such as F-series CPUs), motherboard video ports are inactive; plug the monitor into the GPU."
+    }
+  },
+  "catalog": {
+    "heading": "Computer hardware catalog",
+    "description": "Reference covering internal components, external input/output peripherals, and legacy interfaces taught as computer history for Vocational Grade 10 (Fase E SMK).",
+    "internalHeading": "1. Internal hardware components (inside the case)",
+    "externalHeading": "2. External peripheral devices (input/output)",
+    "legacyHeading": "3. Obsolete devices & connectors (historical reference)",
+    "internal": {
+      "mb": {
+        "name": "ATX / Mini-ITX Motherboard",
+        "spec": "AM5 & LGA1700 Sockets | DDR4 & DDR5 Slots",
+        "description": "Primary circuit board uniting data buses and power rails across internal components."
+      },
+      "cpu": {
+        "name": "Desktop Processor (CPU)",
+        "spec": "AMD Ryzen (AM5) & Intel Core (LGA1700)",
+        "description": "Central instruction processor that must be aligned with the socket triangle mark and cooled with a heatsink."
+      },
+      "ram": {
+        "name": "DDR4 & DDR5 RAM Memory",
+        "spec": "288-pin DIMM with generation-specific key notch",
+        "description": "High-speed volatile working memory supporting dual-channel mode in paired slots (A2 + B2)."
+      },
+      "storage": {
+        "name": "SATA & NVMe M.2 Storage (HDD / SSD / SSHD)",
+        "spec": "SATA III (600 MB/s) & PCIe NVMe M.2 (3,500+ MB/s)",
+        "description": "Non-volatile storage: HDD uses magnetic platters, SSD uses fast flash chips, and SSHD pairs HDD platters with a small flash cache."
+      }
+    },
+    "external": {
+      "keyboard": {
+        "name": "Keyboard",
+        "spec": "External input peripheral — USB / Wireless",
+        "description": "Primary text input device used to enter commands, access BIOS setup (Del/F2), and trigger shortcuts."
+      },
+      "mouse": {
+        "name": "Mouse",
+        "spec": "External pointing input peripheral — USB / Optical",
+        "description": "Pointing device for navigating graphical interfaces in the operating system and UEFI BIOS."
+      },
+      "monitor": {
+        "name": "Display Monitor",
+        "spec": "External visual output peripheral — HDMI / DisplayPort",
+        "description": "Renders video output from the PC; must connect to the discrete GPU port when a dedicated graphics card is installed."
+      },
+      "printer": {
+        "name": "Printer",
+        "spec": "External print output peripheral — USB / LAN Network",
+        "description": "Output peripheral that prints digital documents onto physical paper."
+      }
+    },
+    "legacy": {
+      "ide": {
+        "name": "IDE / PATA Ribbon Cable (Parallel ATA)",
+        "spec": "Obsolete 40-pin storage connector (pre-SATA era)",
+        "description": "Wide ribbon cable used for older hard drives and optical drives requiring Master/Slave jumpers; replaced by slim SATA cables and NVMe M.2 slots."
+      },
+      "vga": {
+        "name": "15-pin VGA D-Sub Port",
+        "spec": "Obsolete blue 15-pin analog video connector",
+        "description": "Analog display connector prone to signal blur at high resolutions; replaced by digital HDMI and DisplayPort interfaces."
+      },
+      "ps2": {
+        "name": "Round PS/2 Ports (Purple & Green)",
+        "spec": "6-pin Mini-DIN connectors for keyboard (purple) and mouse (green)",
+        "description": "Dedicated 1990s-2000s keyboard and mouse ports that did not support hot-plugging; replaced by universal USB ports."
+      }
+    }
+  },
+  "reference": {
+    "heading": "Controls reference & AMI beep code table",
+    "controlsSection": "3D stage control shortcuts",
+    "controlMove": "Pan stage camera: drag with mouse or press W, A, S, D keys",
+    "controlRotate": "Rotate camera view: press Q or E keys",
+    "controlZoom": "Zoom in / out: scroll mouse wheel or pinch with two fingers on touchscreens",
+    "controlKeyboard": "Keyboard accessibility: press Tab to focus the component list directly below the stage",
+    "beepSection": "AMI BIOS beep code reference table",
+    "beepPatternCol": "Beep pattern",
+    "beepComponentCol": "Target component",
+    "beepMeaningCol": "Meaning & diagnostic action"
+  },
+  "results": {
+    "heading": "Assembly & POST simulation results",
+    "teacherNotice": "Show this screen to your teacher for in-person review.",
+    "statusLabel": "Build status",
+    "scoreLabel": "Final score",
+    "timeLabel": "Completion time",
+    "attemptsLabel": "Attempts",
+    "statusSuccess": "POST succeeded (1 short beep)",
+    "breakdownHeading": "Score breakdown",
+    "breakdownResult": "Component completeness & compatibility",
+    "breakdownTime": "Assembly time efficiency",
+    "breakdownAttempts": "Attempt efficiency",
+    "breakdownWarnings": "Technical warning notes",
+    "feedbackHeading": "Technical feedback to review",
+    "feedbackItem1": "All physical components are compatible and passed Power-On Self-Test (POST) with 1 short beep.",
+    "feedbackItem2": "Always populate paired dual-channel RAM slots (A2 and B2) and plug the monitor cable into the discrete GPU port.",
+    "retryButton": "Open assembly lesson",
+    "backToLessonsButton": "Back to lesson list"
+  },
+  "settings": {
+    "heading": "Application & progress settings",
+    "languageSection": "Display language",
+    "languageDescription": "All interface text, technical specifications, and stage component labels update immediately when you switch languages.",
+    "progressSection": "Learning progress storage",
+    "progressDescription": "Learning progress is stored locally in this browser only, without user accounts or server uploads.",
+    "currentProgressText": "Completed lessons: {{completed}} of {{total}}",
+    "resetButton": "Reset all learning progress",
+    "confirmTitle": "Confirm progress reset",
+    "confirmDescription": "Are you sure you want to delete all learning progress and reset the counter to 0/{{total}}? This action cannot be undone.",
+    "confirmYes": "Yes, delete all progress",
+    "confirmCancel": "Cancel",
+    "resetSuccessNotice": "All learning progress has been reset to 0."
+  }
+}

@@ -1,0 +1,372 @@
+{
+  "lessons": [
+    {
+      "id": "motherboard",
+      "slug": "motherboard",
+      "order": 1,
+      "group": "basics",
+      "prerequisites": [],
+      "titleKey": "lessons.motherboard.title",
+      "summaryKey": "lessons.motherboard.summary",
+      "overviewParagraphKeys": ["lessons.motherboard.overview1", "lessons.motherboard.overview2"],
+      "practicePromptKey": "lessons.motherboard.practicePrompt",
+      "practiceTipKey": "lessons.motherboard.practiceTip",
+      "specs": [
+        {
+          "labelKey": "specs.labels.cpuSocket",
+          "valueKey": "lessons.motherboard.specSocket"
+        },
+        {
+          "labelKey": "specs.labels.ramSlotType",
+          "valueKey": "lessons.motherboard.specRamSlot"
+        },
+        {
+          "labelKey": "specs.labels.formFactor",
+          "valueKey": "lessons.motherboard.specFormFactor"
+        },
+        {
+          "labelKey": "specs.labels.expansionSlots",
+          "valueKey": "lessons.motherboard.specExpansion"
+        }
+      ],
+      "stageParts": [
+        {
+          "id": "part-cpu-socket",
+          "labelKey": "stageParts.cpuSocket.label",
+          "nameKey": "stageParts.cpuSocket.name",
+          "functionKey": "stageParts.cpuSocket.function"
+        },
+        {
+          "id": "part-dimm-slots",
+          "labelKey": "stageParts.dimmSlots.label",
+          "nameKey": "stageParts.dimmSlots.name",
+          "functionKey": "stageParts.dimmSlots.function"
+        },
+        {
+          "id": "part-atx24-connector",
+          "labelKey": "stageParts.atx24.label",
+          "nameKey": "stageParts.atx24.name",
+          "functionKey": "stageParts.atx24.function"
+        }
+      ]
+    },
+    {
+      "id": "cpu",
+      "slug": "cpu",
+      "order": 2,
+      "group": "basics",
+      "prerequisites": [],
+      "titleKey": "lessons.cpu.title",
+      "summaryKey": "lessons.cpu.summary",
+      "overviewParagraphKeys": ["lessons.cpu.overview1", "lessons.cpu.overview2"],
+      "practicePromptKey": "lessons.cpu.practicePrompt",
+      "practiceTipKey": "lessons.cpu.practiceTip",
+      "specs": [
+        {
+          "labelKey": "specs.labels.socketComparison",
+          "valueKey": "lessons.cpu.specSocketComparison"
+        },
+        {
+          "labelKey": "specs.labels.alignmentMarker",
+          "valueKey": "lessons.cpu.specTriangleMarker"
+        },
+        {
+          "labelKey": "specs.labels.coolingRequirement",
+          "valueKey": "lessons.cpu.specCooling"
+        }
+      ],
+      "stageParts": [
+        {
+          "id": "part-cpu-ihs",
+          "labelKey": "stageParts.cpuIhs.label",
+          "nameKey": "stageParts.cpuIhs.name",
+          "functionKey": "stageParts.cpuIhs.function"
+        },
+        {
+          "id": "part-cpu-triangle",
+          "labelKey": "stageParts.cpuTriangle.label",
+          "nameKey": "stageParts.cpuTriangle.name",
+          "functionKey": "stageParts.cpuTriangle.function"
+        }
+      ]
+    },
+    {
+      "id": "ram",
+      "slug": "ram",
+      "order": 3,
+      "group": "basics",
+      "prerequisites": [],
+      "titleKey": "lessons.ram.title",
+      "summaryKey": "lessons.ram.summary",
+      "overviewParagraphKeys": ["lessons.ram.overview1", "lessons.ram.overview2"],
+      "practicePromptKey": "lessons.ram.practicePrompt",
+      "practiceTipKey": "lessons.ram.practiceTip",
+      "specs": [
+        {
+          "labelKey": "specs.labels.ddr4VsDdr5",
+          "valueKey": "lessons.ram.specDdr4VsDdr5"
+        },
+        {
+          "labelKey": "specs.labels.notchKey",
+          "valueKey": "lessons.ram.specNotch"
+        },
+        {
+          "labelKey": "specs.labels.dualChannelSlots",
+          "valueKey": "lessons.ram.specDualChannel"
+        }
+      ],
+      "stageParts": [
+        {
+          "id": "part-ram-module",
+          "labelKey": "stageParts.ramModule.label",
+          "nameKey": "stageParts.ramModule.name",
+          "functionKey": "stageParts.ramModule.function"
+        },
+        {
+          "id": "part-ram-notch",
+          "labelKey": "stageParts.ramNotch.label",
+          "nameKey": "stageParts.ramNotch.name",
+          "functionKey": "stageParts.ramNotch.function"
+        },
+        {
+          "id": "part-ram-latch",
+          "labelKey": "stageParts.ramLatch.label",
+          "nameKey": "stageParts.ramLatch.name",
+          "functionKey": "stageParts.ramLatch.function"
+        }
+      ]
+    },
+    {
+      "id": "storage",
+      "slug": "storage",
+      "order": 4,
+      "group": "basics",
+      "prerequisites": [],
+      "titleKey": "lessons.storage.title",
+      "summaryKey": "lessons.storage.summary",
+      "overviewParagraphKeys": [
+        "lessons.storage.overview1",
+        "lessons.storage.overview2",
+        "lessons.storage.overview3"
+      ],
+      "practicePromptKey": "lessons.storage.practicePrompt",
+      "practiceTipKey": "lessons.storage.practiceTip",
+      "specs": [
+        {
+          "labelKey": "specs.labels.sataVsNvme",
+          "valueKey": "lessons.storage.specSataVsNvme"
+        },
+        {
+          "labelKey": "specs.labels.hddSsdSshd",
+          "valueKey": "lessons.storage.specHddSsdSshd"
+        },
+        {
+          "labelKey": "specs.labels.bootRequirement",
+          "valueKey": "lessons.storage.specBootOs"
+        }
+      ],
+      "stageParts": [
+        {
+          "id": "part-nvme-m2",
+          "labelKey": "stageParts.nvmeM2.label",
+          "nameKey": "stageParts.nvmeM2.name",
+          "functionKey": "stageParts.nvmeM2.function"
+        },
+        {
+          "id": "part-sata-port",
+          "labelKey": "stageParts.sataPort.label",
+          "nameKey": "stageParts.sataPort.name",
+          "functionKey": "stageParts.sataPort.function"
+        }
+      ]
+    },
+    {
+      "id": "psu",
+      "slug": "psu",
+      "order": 5,
+      "group": "basics",
+      "prerequisites": [],
+      "titleKey": "lessons.psu.title",
+      "summaryKey": "lessons.psu.summary",
+      "overviewParagraphKeys": ["lessons.psu.overview1", "lessons.psu.overview2"],
+      "practicePromptKey": "lessons.psu.practicePrompt",
+      "practiceTipKey": "lessons.psu.practiceTip",
+      "specs": [
+        {
+          "labelKey": "specs.labels.powerCapacity",
+          "valueKey": "lessons.psu.specWattage"
+        },
+        {
+          "labelKey": "specs.labels.mainConnectors",
+          "valueKey": "lessons.psu.specConnectors"
+        }
+      ],
+      "stageParts": [
+        {
+          "id": "part-psu-unit",
+          "labelKey": "stageParts.psuUnit.label",
+          "nameKey": "stageParts.psuUnit.name",
+          "functionKey": "stageParts.psuUnit.function"
+        },
+        {
+          "id": "part-pcie-cable",
+          "labelKey": "stageParts.pcieCable.label",
+          "nameKey": "stageParts.pcieCable.name",
+          "functionKey": "stageParts.pcieCable.function"
+        }
+      ]
+    },
+    {
+      "id": "rakit-pc",
+      "slug": "rakit-pc",
+      "order": 6,
+      "group": "practice",
+      "prerequisites": ["motherboard", "cpu", "ram", "storage", "psu"],
+      "titleKey": "lessons.rakitPc.title",
+      "summaryKey": "lessons.rakitPc.summary",
+      "overviewParagraphKeys": ["lessons.rakitPc.overview1", "lessons.rakitPc.overview2"],
+      "practicePromptKey": "lessons.rakitPc.practicePrompt",
+      "practiceTipKey": "lessons.rakitPc.practiceTip",
+      "specs": [
+        {
+          "labelKey": "specs.labels.assemblyOrder",
+          "valueKey": "lessons.rakitPc.specOrder"
+        },
+        {
+          "labelKey": "specs.labels.esdSafety",
+          "valueKey": "lessons.rakitPc.specEsd"
+        }
+      ],
+      "stageParts": [
+        {
+          "id": "part-cpu-socket",
+          "labelKey": "stageParts.cpuSocket.label",
+          "nameKey": "stageParts.cpuSocket.name",
+          "functionKey": "stageParts.cpuSocket.function"
+        },
+        {
+          "id": "part-ram-module",
+          "labelKey": "stageParts.ramModule.label",
+          "nameKey": "stageParts.ramModule.name",
+          "functionKey": "stageParts.ramModule.function"
+        },
+        {
+          "id": "part-psu-unit",
+          "labelKey": "stageParts.psuUnit.label",
+          "nameKey": "stageParts.psuUnit.name",
+          "functionKey": "stageParts.psuUnit.function"
+        }
+      ]
+    },
+    {
+      "id": "diagnosis-bip",
+      "slug": "diagnosis-bip",
+      "order": 7,
+      "group": "practice",
+      "prerequisites": ["rakit-pc"],
+      "titleKey": "lessons.diagnosisBip.title",
+      "summaryKey": "lessons.diagnosisBip.summary",
+      "overviewParagraphKeys": ["lessons.diagnosisBip.overview1", "lessons.diagnosisBip.overview2"],
+      "practicePromptKey": "lessons.diagnosisBip.practicePrompt",
+      "practiceTipKey": "lessons.diagnosisBip.practiceTip",
+      "specs": [
+        {
+          "labelKey": "specs.labels.amiBeepStandard",
+          "valueKey": "lessons.diagnosisBip.specAmiStandard"
+        },
+        {
+          "labelKey": "specs.labels.displayOutputCheck",
+          "valueKey": "lessons.diagnosisBip.specDisplayPort"
+        }
+      ],
+      "stageParts": [
+        {
+          "id": "part-ram-module",
+          "labelKey": "stageParts.ramModule.label",
+          "nameKey": "stageParts.ramModule.name",
+          "functionKey": "stageParts.ramModule.function"
+        },
+        {
+          "id": "part-pcie-cable",
+          "labelKey": "stageParts.pcieCable.label",
+          "nameKey": "stageParts.pcieCable.name",
+          "functionKey": "stageParts.pcieCable.function"
+        }
+      ]
+    }
+  ],
+  "deviceCatalog": {
+    "internal": [
+      {
+        "id": "cat-internal-mb",
+        "nameKey": "catalog.internal.mb.name",
+        "specKey": "catalog.internal.mb.spec",
+        "descriptionKey": "catalog.internal.mb.description"
+      },
+      {
+        "id": "cat-internal-cpu",
+        "nameKey": "catalog.internal.cpu.name",
+        "specKey": "catalog.internal.cpu.spec",
+        "descriptionKey": "catalog.internal.cpu.description"
+      },
+      {
+        "id": "cat-internal-ram",
+        "nameKey": "catalog.internal.ram.name",
+        "specKey": "catalog.internal.ram.spec",
+        "descriptionKey": "catalog.internal.ram.description"
+      },
+      {
+        "id": "cat-internal-storage",
+        "nameKey": "catalog.internal.storage.name",
+        "specKey": "catalog.internal.storage.spec",
+        "descriptionKey": "catalog.internal.storage.description"
+      }
+    ],
+    "externalPeripherals": [
+      {
+        "id": "cat-ext-keyboard",
+        "nameKey": "catalog.external.keyboard.name",
+        "specKey": "catalog.external.keyboard.spec",
+        "descriptionKey": "catalog.external.keyboard.description"
+      },
+      {
+        "id": "cat-ext-mouse",
+        "nameKey": "catalog.external.mouse.name",
+        "specKey": "catalog.external.mouse.spec",
+        "descriptionKey": "catalog.external.mouse.description"
+      },
+      {
+        "id": "cat-ext-monitor",
+        "nameKey": "catalog.external.monitor.name",
+        "specKey": "catalog.external.monitor.spec",
+        "descriptionKey": "catalog.external.monitor.description"
+      },
+      {
+        "id": "cat-ext-printer",
+        "nameKey": "catalog.external.printer.name",
+        "specKey": "catalog.external.printer.spec",
+        "descriptionKey": "catalog.external.printer.description"
+      }
+    ],
+    "legacyHistory": [
+      {
+        "id": "cat-legacy-ide",
+        "nameKey": "catalog.legacy.ide.name",
+        "specKey": "catalog.legacy.ide.spec",
+        "descriptionKey": "catalog.legacy.ide.description"
+      },
+      {
+        "id": "cat-legacy-vga",
+        "nameKey": "catalog.legacy.vga.name",
+        "specKey": "catalog.legacy.vga.spec",
+        "descriptionKey": "catalog.legacy.vga.description"
+      },
+      {
+        "id": "cat-legacy-ps2",
+        "nameKey": "catalog.legacy.ps2.name",
+        "specKey": "catalog.legacy.ps2.spec",
+        "descriptionKey": "catalog.legacy.ps2.description"
+      }
+    ]
+  }
+}

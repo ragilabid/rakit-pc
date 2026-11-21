@@ -1,0 +1,588 @@
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/600.css';
+
+:root {
+  /* Token warna perangkat keras sesuai docs/desain.md */
+  --color-surface-canvas: #181c20;
+  --color-surface-page: #f6f7f8;
+  --color-surface-panel: #eaecef;
+  --color-border-line: #c8d0d8;
+  --color-text-primary: #14181d;
+  --color-text-secondary: #47525e;
+  --color-accent-pcb: #0f6b4a;
+
+  /* Warna semantik status (khusus umpan balik simulasi & peringatan) */
+  --color-status-error: #b42318;
+  --color-status-error-bg: #fef3f2;
+  --color-status-warn: #8f4b00;
+  --color-status-warn-bg: #fffaeb;
+
+  /* Tipografi lokal tanpa CDN */
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', Consolas, 'Courier New', monospace;
+
+  /* Skala ukuran */
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-display: 2.5rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-surface-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: left;
+  overflow-x: hidden;
+}
+
+p,
+li,
+dd {
+  max-width: 68ch;
+}
+
+a {
+  color: var(--color-accent-pcb);
+  text-decoration: underline;
+}
+
+/* Fokus keyboard wajib terlihat jelas (Bagian 15.6) */
+:focus-visible {
+  outline: 2px solid var(--color-accent-pcb);
+  outline-offset: 2px;
+}
+
+/* Bilah menu atas */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-bar {
+  background-color: var(--color-surface-panel);
+  border-bottom: 1px solid var(--color-border-line);
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-link {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.375rem 0.75rem;
+  border-radius: 4px;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-size: var(--text-base);
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.nav-link[aria-current='page'] {
+  background-color: var(--color-accent-pcb);
+  color: #ffffff;
+}
+
+.top-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progress-pill {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  background-color: var(--color-surface-page);
+  border: 1px solid var(--color-border-line);
+  padding: 0.375rem 0.625rem;
+  border-radius: 4px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.lang-select-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.control-select,
+.btn {
+  min-height: 44px;
+  padding: 0.5rem 0.875rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  border-radius: 4px;
+  border: 1px solid var(--color-border-line);
+  background-color: var(--color-surface-panel);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-accent-pcb);
+  border-color: var(--color-accent-pcb);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.btn-danger {
+  background-color: var(--color-status-error);
+  border-color: var(--color-status-error);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Banner peringatan */
+.notice-banner {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border-line);
+  font-size: var(--text-base);
+}
+
+.notice-warn {
+  background-color: var(--color-status-warn-bg);
+  color: var(--color-status-warn);
+  border-color: var(--color-status-warn);
+}
+
+.notice-error {
+  background-color: var(--color-status-error-bg);
+  color: var(--color-status-error);
+  border-color: var(--color-status-error);
+}
+
+/* Tata letak dua kolom panggung 3D + panel materi (Bagian 15.4) */
+.workbench-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  border-bottom: 1px solid var(--color-border-line);
+}
+
+.stage-column {
+  background-color: var(--color-surface-canvas);
+  color: #f6f7f8;
+  border-right: 1px solid var(--color-border-line);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.panel-column {
+  background-color: var(--color-surface-page);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Elemen di dalam Panggung 3D */
+.stage-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-bottom: 1px solid #323a42;
+  padding-bottom: 0.75rem;
+}
+
+.stage-title {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin: 0;
+  color: #f6f7f8;
+}
+
+.stage-controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stage-select,
+.stage-btn {
+  min-height: 44px;
+  padding: 0.375rem 0.625rem;
+  font-size: var(--text-sm);
+  border-radius: 4px;
+  background-color: #242a30;
+  color: #f6f7f8;
+  border: 1px solid #47525e;
+  cursor: pointer;
+}
+
+.stage-btn[aria-pressed='true'] {
+  background-color: var(--color-accent-pcb);
+  border-color: #ffffff;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.stage-viewport {
+  margin: 1rem 0;
+  min-height: 250px;
+  border: 1px solid #323a42;
+  background-color: #121518;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  touch-action: none;
+}
+
+.stage-schematic-svg {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+}
+
+.stage-part-inspector {
+  border: 1px solid var(--color-border-line);
+  background-color: #181c20;
+  padding: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+.stage-part-inspector h3 {
+  margin: 0 0 0.25rem 0;
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.stage-part-inspector p {
+  margin: 0.25rem 0 0 0;
+  font-size: var(--text-sm);
+  color: #dfe4ea;
+}
+
+.stage-keyboard-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.stage-hint-bar {
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #323a42;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: #cfd6de;
+}
+
+/* Daftar pelajaran datar berbatas garis 1px (tanpa kartu & bayangan) */
+.section-heading {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.group-heading {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: 0.75rem 0 0.25rem 0;
+  color: var(--color-text-primary);
+}
+
+.divided-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--color-border-line);
+}
+
+.divided-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border-line);
+}
+
+.lesson-row-info {
+  flex: 1 1 200px;
+}
+
+.lesson-row-title {
+  font-weight: 600;
+  font-size: var(--text-base);
+  margin: 0;
+}
+
+.lesson-row-meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin: 0.25rem 0 0 0;
+}
+
+.status-tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--color-border-line);
+  background-color: var(--color-surface-panel);
+  color: var(--color-text-primary);
+  margin-left: 0.5rem;
+}
+
+.status-tag-done {
+  background-color: var(--color-accent-pcb);
+  border-color: var(--color-accent-pcb);
+  color: #ffffff;
+}
+
+/* Tab Pelajaran */
+.tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--color-border-line);
+  gap: 0.25rem;
+}
+
+.tab-btn {
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 500;
+  background-color: var(--color-surface-panel);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-line);
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+}
+
+.tab-btn[aria-selected='true'] {
+  background-color: var(--color-accent-pcb);
+  border-color: var(--color-accent-pcb);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Tabel spesifikasi teknis */
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--color-border-line);
+}
+
+.spec-table th,
+.spec-table td {
+  border: 1px solid var(--color-border-line);
+  padding: 0.625rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+  font-size: var(--text-base);
+}
+
+.spec-table th {
+  background-color: var(--color-surface-panel);
+  font-weight: 600;
+}
+
+.spec-param-cell {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  width: 35%;
+}
+
+.lesson-footer-actions {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border-line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* Halaman penuh (Komponen, Referensi, Hasil Guru, Pengaturan) */
+.full-page-container {
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+/* Layar Hasil untuk Dilihat Guru Secara Tatap Muka */
+.teacher-summary-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  border: 1px solid var(--color-border-line);
+  background-color: var(--color-surface-panel);
+  margin: 1rem 0 1.5rem 0;
+}
+
+.teacher-metric-cell {
+  padding: 1rem;
+  border-right: 1px solid var(--color-border-line);
+  border-bottom: 1px solid var(--color-border-line);
+}
+
+.teacher-metric-label {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin: 0 0 0.25rem 0;
+}
+
+.teacher-metric-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.teacher-metric-status {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: 0.35rem 0 0 0;
+  color: var(--color-accent-pcb);
+}
+
+/* Modal Konfirmasi Reset Progres */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(20, 24, 29, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+}
+
+.modal-dialog {
+  background-color: var(--color-surface-page);
+  border: 2px solid var(--color-border-line);
+  border-radius: 8px;
+  max-width: 460px;
+  width: 100%;
+  padding: 1.25rem;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+/* Responsif untuk Tablet & HP hingga 320 px (Bagian 15.4 & 15.6) */
+@media (max-width: 900px) {
+  .workbench-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stage-column {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border-line);
+  }
+}
+
+@media (max-width: 480px) {
+  .top-bar {
+    padding: 0.5rem;
+  }
+
+  .panel-column,
+  .stage-column,
+  .full-page-container {
+    padding: 0.75rem;
+  }
+
+  .spec-table th,
+  .spec-table td {
+    padding: 0.5rem;
+    font-size: var(--text-sm);
+    word-break: break-word;
+  }
+
+  .spec-param-cell {
+    width: 42%;
+  }
+
+  .teacher-metric-value {
+    font-size: 1.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
