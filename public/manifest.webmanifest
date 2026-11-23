@@ -1,0 +1,12 @@
+{
+  "name": "Rakit PC — Platform Belajar Perangkat Komputer & Simulasi Perakitan",
+  "short_name": "Rakit PC",
+  "description": "Aplikasi web interaktif untuk siswa Fase E SMK belajar perangkat komputer 3D dan simulasi perakitan PC.",
+  "lang": "id",
+  "start_url": "/#beranda",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f7f8",
+  "theme_color": "#0f6b4a",
+  "icons": []
+}

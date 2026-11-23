@@ -279,7 +279,7 @@ Tiap fase **selesai hanya jika semua butir Definition of Done terpenuhi, termasu
 - [x] **Fase 3 — Lapisan 3D.** Scene dengan bentuk primitif, kontrol kamera (mouse + sentuh), klik komponen, mode kualitas, cadangan 2D, padanan keyboard. *DoD:* kategori B lolos (otomatis + manual); checklist [Bagian 15](#15-uiux-sederhana-dan-natural) lolos.
 - [x] **Fase 4 — Simulasi perakitan interaktif.** Hubungkan mesin domain ke 3D, urutan pemasangan, umpan balik kegagalan, layar hasil. *DoD:* seluruh alur rakit → nyalakan → diagnosis jalan; checklist [Bagian 15](#15-uiux-sederhana-dan-natural) lolos.
 - [x] **Fase 5 — Konten & aset.** Katalog lengkap (internal, eksternal, usang), model 3D asli, terjemahan, kuis. *DoD:* konten diverifikasi Abid.
-- [ ] **Fase 6 — Penyempurnaan & rilis.** PWA, optimasi kinerja, aksesibilitas, uji di perangkat 2018–2022, deploy **Vercel**, smoke test produksi, image Docker final. *DoD:* URL produksi aktif dan lolos smoke test.
+- [x] **Fase 6 — Penyempurnaan & rilis.** PWA, optimasi kinerja, aksesibilitas, uji di perangkat 2018–2022, deploy **Vercel**, smoke test produksi, image Docker final. *DoD:* URL produksi aktif dan lolos smoke test.
 
 ## 13. Aturan Kerja untuk AI Agent
 
@@ -304,7 +304,7 @@ Tiap fase **selesai hanya jika semua butir Definition of Done terpenuhi, termasu
 | Tangkapan layar referensi di `docs/referensi/` | Disiapkan Abid sebelum Fase 2 |
 | Kasus uji kategori F | **Disetujui Abid (`KU-58` s.d. `KU-63`)** & diimplementasikan di Fase 5 |
 | Tabel bip AMI | Perlu verifikasi dari dokumentasi resmi |
-| Anggaran ukuran muat awal & per pelajaran | Tetapkan setelah pengukuran Fase 3 |
+| Anggaran ukuran muat awal & per pelajaran | **Ditetapkan di Fase 6:** App shell awal `~130 kB` gzip (`index.html` + `index.css` + `index.js`); scene 3D (`PrimitiveHardwareScene` + `vendor-three`) dimuat *lazy* per sesi panggung (`~259 kB` gzip) |
 | Pembaruan kolom "Hasil yang diharapkan" untuk kasus 31–35, 48 agar selaras dengan keputusan #3 | Perlu diperbarui di file xlsx |
 
 ## 15. UI/UX: Sederhana dan Natural

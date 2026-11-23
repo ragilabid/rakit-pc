@@ -871,21 +871,55 @@ function InteractiveBuild3DAssembly({
             />
           </mesh>
 
-          {/* Soket CPU */}
-          <mesh position={[-0.35, 0.07, -0.35]}>
-            <boxGeometry args={[0.92, 0.06, 0.92]} />
-            <meshStandardMaterial color="#2b333b" roughness={0.45} />
+          {/* Rear I/O Shield Aluminium & Heatsink VRM Motherboard */}
+          <mesh position={[-boardWidth / 2 + 0.18, 0.22, -0.35]} castShadow>
+            <boxGeometry args={[0.28, 0.36, 1.35]} />
+            <meshStandardMaterial color="#8c96a0" metalness={0.78} roughness={0.25} />
+          </mesh>
+          <mesh position={[-0.95, 0.18, -0.35]} castShadow>
+            <boxGeometry args={[0.26, 0.28, 0.98]} />
+            <meshStandardMaterial color="#39424a" metalness={0.7} roughness={0.3} />
+          </mesh>
+          <mesh position={[-0.35, 0.18, -0.92]} castShadow>
+            <boxGeometry args={[0.88, 0.26, 0.24]} />
+            <meshStandardMaterial color="#39424a" metalness={0.7} roughness={0.3} />
           </mesh>
 
-          {/* 4 Rel Slot DIMM */}
-          {(['A1', 'A2', 'B1', 'B2'] as RamSlotId[]).map((slotId) => (
-            <mesh key={slotId} position={[slotXMap[slotId], 0.08, -0.32]}>
-              <boxGeometry args={[0.1, 0.1, 1.25]} />
-              <meshStandardMaterial color="#252c33" />
+          {/* Soket CPU LGA + Bingkai Logam ILM + Segitiga Sudut Emas */}
+          <group position={[-0.35, 0.07, -0.35]}>
+            <mesh>
+              <boxGeometry args={[0.92, 0.06, 0.92]} />
+              <meshStandardMaterial color="#2b333b" roughness={0.45} />
             </mesh>
+            <mesh position={[0, 0.04, 0]}>
+              <boxGeometry args={[0.82, 0.03, 0.82]} />
+              <meshStandardMaterial color="#9aa5b1" metalness={0.8} roughness={0.22} />
+            </mesh>
+            <mesh position={[-0.35, 0.065, 0.35]} rotation={[0, Math.PI / 4, 0]}>
+              <cylinderGeometry args={[0.06, 0.06, 0.02, 3]} />
+              <meshStandardMaterial color="#f5b82e" />
+            </mesh>
+          </group>
+
+          {/* 4 Rel Slot DIMM beserta Klip Pengunci Ujung */}
+          {(['A1', 'A2', 'B1', 'B2'] as RamSlotId[]).map((slotId, sIdx) => (
+            <group key={slotId} position={[slotXMap[slotId], 0.08, -0.32]}>
+              <mesh>
+                <boxGeometry args={[0.1, 0.1, 1.25]} />
+                <meshStandardMaterial color={sIdx % 2 === 1 ? '#2f3942' : '#1b2026'} />
+              </mesh>
+              <mesh position={[0, 0.07, -0.64]}>
+                <boxGeometry args={[0.11, 0.09, 0.06]} />
+                <meshStandardMaterial color="#cfd8e0" />
+              </mesh>
+              <mesh position={[0, 0.07, 0.64]}>
+                <boxGeometry args={[0.11, 0.09, 0.06]} />
+                <meshStandardMaterial color="#cfd8e0" />
+              </mesh>
+            </group>
           ))}
 
-          {/* Keping RAM yang Terpasang pada Slot Masing-Masing */}
+          {/* Keping RAM yang Terpasang pada Slot Masing-Masing (Lengkap dengan Chip DRAM & Heatspreader) */}
           {(['A1', 'A2', 'B1', 'B2'] as RamSlotId[]).map((slotId) => {
             const mod = assemblyState.ramModules[slotId];
             if (!mod) return null;
@@ -899,6 +933,12 @@ function InteractiveBuild3DAssembly({
                     metalness={0.25}
                   />
                 </mesh>
+                {[-0.42, -0.16, 0.16, 0.42].map((cz, cIdx) => (
+                  <mesh key={`ram-ic-${cIdx}`} position={[0.042, 0, cz]}>
+                    <boxGeometry args={[0.018, 0.22, 0.16]} />
+                    <meshStandardMaterial color="#14181d" />
+                  </mesh>
+                ))}
                 <mesh position={[0, 0.24, 0]}>
                   <boxGeometry args={[0.09, 0.06, 1.24]} />
                   <meshStandardMaterial color="#d5dde6" metalness={0.8} roughness={0.2} />
@@ -907,7 +947,7 @@ function InteractiveBuild3DAssembly({
             );
           })}
 
-          {/* Prosesor (CPU) Terpasang */}
+          {/* Prosesor (CPU) Terpasang (Substrat Hijau + Pelat IHS Perak + Segitiga Emas) */}
           {assemblyState.cpu && (
             <group position={[-0.35, 0.14, -0.35]}>
               <mesh castShadow>
@@ -917,6 +957,10 @@ function InteractiveBuild3DAssembly({
               <mesh position={[0, 0.05, 0]} castShadow>
                 <boxGeometry args={[0.62, 0.06, 0.62]} />
                 <meshStandardMaterial color="#cfd8e0" metalness={0.85} roughness={0.2} />
+              </mesh>
+              <mesh position={[-0.3, 0.04, 0.3]} rotation={[0, Math.PI / 4, 0]}>
+                <cylinderGeometry args={[0.055, 0.055, 0.02, 3]} />
+                <meshStandardMaterial color="#f5b82e" />
               </mesh>
             </group>
           )}
@@ -929,21 +973,31 @@ function InteractiveBuild3DAssembly({
             </mesh>
           )}
 
-          {/* Pendingin CPU (Tower Heatsink + Kipas) */}
+          {/* Pendingin CPU (Tower Heatsink Bersirip + 4 Ujung Pipa Tembaga Heatpipe + Kipas PWM) */}
           {assemblyState.cooler && (
             <group position={[-0.35, 0.56, -0.35]}>
               <mesh castShadow>
-                <boxGeometry args={[0.78, 0.62, 0.68]} />
-                <meshStandardMaterial color="#8f9aa4" metalness={0.78} roughness={0.25} />
+                <boxGeometry args={[0.74, 0.62, 0.68]} />
+                <meshStandardMaterial color="#9aa5b1" metalness={0.8} roughness={0.22} />
               </mesh>
+              {[-0.22, -0.07, 0.07, 0.22].map((hz, hIdx) => (
+                <mesh key={`hp-${hIdx}`} position={[0, 0.33, hz]}>
+                  <cylinderGeometry args={[0.035, 0.035, 0.05, segments]} />
+                  <meshStandardMaterial color="#c87d4b" metalness={0.85} roughness={0.2} />
+                </mesh>
+              ))}
               <mesh position={[0.42, 0, 0]}>
                 <boxGeometry args={[0.12, 0.58, 0.64]} />
                 <meshStandardMaterial color="#1f252b" />
               </mesh>
+              <mesh position={[0.49, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+                <cylinderGeometry args={[0.24, 0.24, 0.03, segments]} />
+                <meshStandardMaterial color="#39424a" metalness={0.6} roughness={0.3} />
+              </mesh>
             </group>
           )}
 
-          {/* Media Penyimpanan SSD NVMe M.2 */}
+          {/* Media Penyimpanan SSD NVMe M.2 (PCB + Pin Emas + Controller Perak + NAND + Standoff) */}
           {assemblyState.storage && (
             <group position={[-0.25, 0.08, 0.28]}>
               <mesh castShadow>
@@ -952,26 +1006,46 @@ function InteractiveBuild3DAssembly({
                   color={assemblyState.storage.hasOsInstalled ? '#0f6b4a' : '#8f4b00'}
                 />
               </mesh>
-              <mesh position={[0.1, 0.03, 0]}>
+              <mesh position={[-0.41, 0.005, 0]}>
+                <boxGeometry args={[0.07, 0.042, 0.22]} />
+                <meshStandardMaterial color="#e0b138" metalness={0.85} roughness={0.2} />
+              </mesh>
+              <mesh position={[-0.18, 0.03, 0]}>
+                <boxGeometry args={[0.16, 0.03, 0.18]} />
+                <meshStandardMaterial color="#b8c2cc" metalness={0.8} roughness={0.2} />
+              </mesh>
+              <mesh position={[0.14, 0.03, 0]}>
                 <boxGeometry args={[0.28, 0.03, 0.22]} />
                 <meshStandardMaterial color="#14181d" />
+              </mesh>
+              <mesh position={[0.43, 0.03, 0]}>
+                <cylinderGeometry args={[0.04, 0.04, 0.06, segments]} />
+                <meshStandardMaterial color="#d8e0e8" metalness={0.85} roughness={0.2} />
               </mesh>
             </group>
           )}
 
-          {/* Kartu Grafis (GPU) di Slot PCIe x16 */}
+          {/* Kartu Grafis (GPU Dual-Fan + Pipa Heatpipe Tembaga + Bracket Belakang) di Slot PCIe x16 */}
           {assemblyState.gpu && (
             <group position={[-0.15, 0.36, 0.65]}>
               <mesh castShadow>
                 <boxGeometry args={[1.85, 0.52, 0.32]} />
                 <meshStandardMaterial color="#262e36" metalness={0.65} roughness={0.32} />
               </mesh>
-              <mesh position={[-0.45, 0, 0.17]}>
-                <cylinderGeometry args={[0.18, 0.18, 0.04, segments]} />
+              <mesh position={[0, 0.27, 0]} rotation={[0, 0, Math.PI / 2]}>
+                <cylinderGeometry args={[0.03, 0.03, 1.5, segments]} />
+                <meshStandardMaterial color="#c87d4b" metalness={0.85} roughness={0.2} />
+              </mesh>
+              <mesh position={[-0.94, 0.04, 0]}>
+                <boxGeometry args={[0.05, 0.58, 0.36]} />
+                <meshStandardMaterial color="#9aa5b1" metalness={0.8} roughness={0.25} />
+              </mesh>
+              <mesh position={[-0.45, 0, 0.17]} rotation={[Math.PI / 2, 0, 0]}>
+                <cylinderGeometry args={[0.2, 0.2, 0.04, segments]} />
                 <meshStandardMaterial color="#14181d" />
               </mesh>
-              <mesh position={[0.45, 0, 0.17]}>
-                <cylinderGeometry args={[0.18, 0.18, 0.04, segments]} />
+              <mesh position={[0.45, 0, 0.17]} rotation={[Math.PI / 2, 0, 0]}>
+                <cylinderGeometry args={[0.2, 0.2, 0.04, segments]} />
                 <meshStandardMaterial color="#14181d" />
               </mesh>
             </group>
@@ -1025,17 +1099,27 @@ function InteractiveBuild3DAssembly({
         </group>
       )}
 
-      {/* Unit Catu Daya (PSU) di Sisi Kanan Bawah Casing */}
+      {/* Unit Catu Daya (PSU ATX + Grille Kipas Konsentris + Stiker Spesifikasi) di Sisi Kanan Bawah Casing */}
       {assemblyState.psu && (
         <group position={[1.55, 0.28, 0.95]}>
           <mesh castShadow>
             <boxGeometry args={[1.05, 0.62, 0.95]} />
             <meshStandardMaterial color="#1f2429" metalness={0.55} roughness={0.4} />
           </mesh>
+          <mesh position={[0, 0, 0.48]}>
+            <boxGeometry args={[0.82, 0.36, 0.02]} />
+            <meshStandardMaterial color="#cfd8e0" />
+          </mesh>
           <mesh position={[0, 0.32, 0]}>
             <cylinderGeometry args={[0.34, 0.34, 0.03, segments]} />
-            <meshStandardMaterial color="#6c7782" metalness={0.75} roughness={0.25} />
+            <meshStandardMaterial color="#121518" />
           </mesh>
+          {[0.14, 0.24, 0.32].map((r, rIdx) => (
+            <mesh key={`psu-ring-${rIdx}`} position={[0, 0.335, 0]} rotation={[Math.PI / 2, 0, 0]}>
+              <torusGeometry args={[r, 0.01, 6, segments]} />
+              <meshStandardMaterial color="#9aa5b1" metalness={0.8} roughness={0.25} />
+            </mesh>
+          ))}
         </group>
       )}
     </group>

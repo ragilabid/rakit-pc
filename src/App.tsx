@@ -223,28 +223,34 @@ export function App() {
 
         <div className="tab-bar" role="tablist" aria-label={t(activeLesson.titleKey)}>
           <button
+            id="tab-overview"
             type="button"
             role="tab"
             className="tab-btn"
             aria-selected={activeTab === 'overview'}
+            aria-controls="panel-overview"
             onClick={() => setActiveTab('overview')}
           >
             {t('lessonPage.tabOverview')}
           </button>
           <button
+            id="tab-specs"
             type="button"
             role="tab"
             className="tab-btn"
             aria-selected={activeTab === 'specs'}
+            aria-controls="panel-specs"
             onClick={() => setActiveTab('specs')}
           >
             {t('lessonPage.tabSpecs')}
           </button>
           <button
+            id="tab-practice"
             type="button"
             role="tab"
             className="tab-btn"
             aria-selected={activeTab === 'practice'}
+            aria-controls="panel-practice"
             onClick={() => setActiveTab('practice')}
           >
             {t('lessonPage.tabPractice')}
@@ -252,7 +258,7 @@ export function App() {
         </div>
 
         {activeTab === 'overview' && (
-          <div role="tabpanel">
+          <div id="panel-overview" role="tabpanel" aria-labelledby="tab-overview">
             <p>
               <strong>{t(activeLesson.summaryKey)}</strong>
             </p>
@@ -271,7 +277,7 @@ export function App() {
         )}
 
         {activeTab === 'specs' && (
-          <div role="tabpanel">
+          <div id="panel-specs" role="tabpanel" aria-labelledby="tab-specs">
             <table className="spec-table">
               <thead>
                 <tr>
@@ -292,7 +298,7 @@ export function App() {
         )}
 
         {activeTab === 'practice' && (
-          <div role="tabpanel">
+          <div id="panel-practice" role="tabpanel" aria-labelledby="tab-practice">
             <p>{t(activeLesson.practicePromptKey)}</p>
             <p style={{ color: 'var(--color-text-secondary)' }}>{t(activeLesson.practiceTipKey)}</p>
             <QuizPanel lessonId={activeLesson.id} />
@@ -439,23 +445,27 @@ export function App() {
   const renderResultsPage = () => {
     const sim = lastSimulationResult;
     const quizSummary = calculateQuizSummary(allQuizQuestions, quizAnswers);
-    const totalScore = sim ? sim.totalScore : 95;
-    const resultScore = sim ? sim.resultScore : 60;
-    const timeScore = sim ? sim.timeScore : 20;
-    const attemptScore = sim ? sim.attemptScore : 15;
-    const attempts = sim ? sim.attempts : 2;
-    const elapsedSec = sim ? sim.elapsedSeconds : 220;
+    const hasSimulationRun = sim !== null;
+    const totalScore = sim ? sim.totalScore : 0;
+    const resultScore = sim ? sim.resultScore : 0;
+    const timeScore = sim ? sim.timeScore : 0;
+    const attemptScore = sim ? sim.attemptScore : 0;
+    const warningPenalty = sim ? sim.warningPenalty : 0;
+    const attempts = sim ? sim.attempts : 0;
+    const elapsedSec = sim ? sim.elapsedSeconds : 0;
     const mm = String(Math.floor(elapsedSec / 60)).padStart(2, '0');
     const ss = String(elapsedSec % 60).padStart(2, '0');
     const formattedTime = `${mm}:${ss}`;
-    const isSuccess = sim ? sim.isPostSuccess : true;
-    const statusText = isSuccess
-      ? t('results.statusSuccess')
-      : t('results.statusFailed', { status: sim?.postStatus ?? 'POST_ERROR' });
+    const isSuccess = sim ? sim.isPostSuccess : false;
+    const statusText = !hasSimulationRun
+      ? t('results.statusNotStarted')
+      : isSuccess
+        ? t('results.statusSuccess')
+        : t('results.statusFailed', { status: sim.postStatus });
     const feedbackList =
       sim && sim.feedbackItems.length > 0
         ? sim.feedbackItems
-        : [t('results.feedbackItem1'), t('results.feedbackItem2')];
+        : [t('results.emptySimulationFeedback')];
 
     return (
       <div className="full-page-container" data-testid="teacher-results-screen">
@@ -469,7 +479,11 @@ export function App() {
               className="teacher-metric-status"
               data-testid="result-status-text"
               style={{
-                color: isSuccess ? 'var(--color-accent-pcb)' : 'var(--color-status-error)',
+                color: !hasSimulationRun
+                  ? 'var(--color-text-secondary)'
+                  : isSuccess
+                    ? 'var(--color-accent-pcb)'
+                    : 'var(--color-status-error)',
               }}
             >
               {statusText}
@@ -512,15 +526,38 @@ export function App() {
         <ul className="divided-list">
           <li className="divided-row">
             <span>{t('results.breakdownResult')}</span>
-            <strong style={{ fontFamily: 'var(--font-mono)' }}>{resultScore} / 60</strong>
+            <strong
+              style={{ fontFamily: 'var(--font-mono)' }}
+              data-testid="result-breakdown-result"
+            >
+              {resultScore} / 60
+            </strong>
           </li>
           <li className="divided-row">
             <span>{t('results.breakdownTime')}</span>
-            <strong style={{ fontFamily: 'var(--font-mono)' }}>{timeScore} / 20</strong>
+            <strong style={{ fontFamily: 'var(--font-mono)' }} data-testid="result-breakdown-time">
+              {timeScore} / 20
+            </strong>
           </li>
           <li className="divided-row">
             <span>{t('results.breakdownAttempts')}</span>
-            <strong style={{ fontFamily: 'var(--font-mono)' }}>{attemptScore} / 20</strong>
+            <strong
+              style={{ fontFamily: 'var(--font-mono)' }}
+              data-testid="result-breakdown-attempts"
+            >
+              {attemptScore} / 20
+            </strong>
+          </li>
+          <li className="divided-row">
+            <span>{t('results.breakdownWarnings')}</span>
+            <strong
+              style={{ fontFamily: 'var(--font-mono)' }}
+              data-testid="result-breakdown-warnings"
+            >
+              {warningPenalty > 0
+                ? t('results.penaltyPoints', { points: warningPenalty })
+                : t('results.noPenaltyPoints')}
+            </strong>
           </li>
         </ul>
 
@@ -595,9 +632,14 @@ export function App() {
       </button>
 
       {confirmResetOpen && (
-        <div className="modal-backdrop" role="dialog" aria-modal="true">
+        <div
+          className="modal-backdrop"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="confirm-reset-title"
+        >
           <div className="modal-dialog">
-            <h2 className="group-heading" style={{ marginTop: 0 }}>
+            <h2 id="confirm-reset-title" className="group-heading" style={{ marginTop: 0 }}>
               {t('settings.confirmTitle')}
             </h2>
             <p>{t('settings.confirmDescription', { total: totalLessons })}</p>
@@ -625,6 +667,9 @@ export function App() {
 
   return (
     <div className="app-shell">
+      <a href="#main-content" className="skip-link">
+        {t('app.skipToMain')}
+      </a>
       <header className="top-bar">
         <div className="brand-group">
           <a href="#beranda" className="brand-link">
@@ -717,7 +762,11 @@ export function App() {
         </div>
       )}
 
-      <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <main
+        id="main-content"
+        tabIndex={-1}
+        style={{ flex: 1, display: 'flex', flexDirection: 'column' }}
+      >
         {(route.page === 'home' || route.page === 'lessons') && (
           <div className="workbench-grid">
             <StagePreview

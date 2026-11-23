@@ -13,3 +13,11 @@ createRoot(rootElement).render(
     <App />
   </StrictMode>,
 );
+
+if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {
+      // Abaikan kegagalan registrasi SW di mode pengembangan atau browser yang membatasi SW
+    });
+  });
+}

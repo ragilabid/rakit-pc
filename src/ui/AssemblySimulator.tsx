@@ -74,9 +74,16 @@ export function AssemblySimulator({
   const setLastSimulationResult = useProgressStore((s) => s.setLastSimulationResult);
 
   const startTimeRef = useRef<number | null>(null);
+  const [liveElapsedSeconds, setLiveElapsedSeconds] = useState<number>(0);
 
   useEffect(() => {
     startTimeRef.current = Date.now();
+    const interval = setInterval(() => {
+      if (startTimeRef.current !== null) {
+        setLiveElapsedSeconds(Math.max(1, Math.round((Date.now() - startTimeRef.current) / 1000)));
+      }
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const [selectedMbId, setSelectedMbId] = useState<string>(catalog.motherboards[0]!.id);
@@ -98,29 +105,131 @@ export function AssemblySimulator({
 
   const powerSummary = calculatePowerRequirement(assemblyState);
 
+  const countCompletedSteps = (st: AssemblyState): number => {
+    let count = 0;
+    if (st.motherboard) count += 1;
+    if (st.cpu) count += 1;
+    if (st.thermalPasteApplied) count += 1;
+    if (st.cooler) count += 1;
+    if (Object.keys(st.ramModules).length > 0) count += 1;
+    if (st.storage) count += 1;
+    if (st.pcCase) count += 1;
+    if (st.isMountedInCase) count += 1;
+    if (st.psu) count += 1;
+    if (st.powerCables.ATX_24PIN && st.powerCables.CPU_8PIN && st.frontPanel.connected) count += 1;
+    return count;
+  };
+
+  const syncLiveResultToStore = (
+    nextState: AssemblyState,
+    latestRej: RuleViolation | null,
+    simResult: PostSimulationResult | null,
+  ) => {
+    const startMs = startTimeRef.current ?? Date.now();
+    const elapsedSeconds = Math.max(15, Math.round((Date.now() - startMs) / 1000));
+
+    if (simResult) {
+      const score = calculateAssemblyScore({
+        isPostSuccess: simResult.success,
+        elapsedSeconds,
+        targetSeconds: 300,
+        attempts: nextState.attempts,
+        warningCount: simResult.warnings.length,
+      });
+
+      const feedbackItems: string[] = [];
+      if (simResult.primaryIssue) {
+        feedbackItems.push(
+          `${simResult.primaryIssue.reason} (${simResult.primaryIssue.remediation})`,
+        );
+      }
+      for (const w of simResult.warnings) {
+        feedbackItems.push(`${w.reason} (${w.remediation})`);
+      }
+      for (const rej of nextState.physicalRejections.slice(-3)) {
+        feedbackItems.push(`[Fisik] ${rej.reason}`);
+      }
+      if (feedbackItems.length === 0) {
+        feedbackItems.push(t('results.feedbackItem1'));
+        feedbackItems.push(t('results.feedbackItem2'));
+      }
+
+      setLastSimulationResult({
+        isPostSuccess: simResult.success,
+        postStatus: simResult.status,
+        beepPattern: simResult.beep ? simResult.beep.pattern : null,
+        totalScore: score.totalScore,
+        resultScore: score.resultScore,
+        timeScore: score.timeScore,
+        attemptScore: score.attemptScore,
+        warningPenalty: score.warningPenalty,
+        elapsedSeconds,
+        attempts: nextState.attempts,
+        feedbackItems,
+      });
+      return;
+    }
+
+    // Jika sedang merakit (belum menekan tombol POST), hitung progres komponen secara dinamis
+    const stepsDone = countCompletedSteps(nextState);
+    const partialResultScore = Math.round((stepsDone / 10) * 30);
+    const extraAttempts = Math.max(0, nextState.attempts - 1);
+    const partialAttemptScore = stepsDone > 0 ? Math.max(4, 20 - extraAttempts * 5) : 0;
+    const partialFeedback: string[] = [];
+
+    if (latestRej) {
+      partialFeedback.push(
+        `[Fisik - ${latestRej.code}] ${latestRej.reason} (${latestRej.remediation})`,
+      );
+    }
+    for (const rej of nextState.physicalRejections.slice(-3)) {
+      const msg = `[Fisik] ${rej.reason}`;
+      if (!partialFeedback.includes(msg)) {
+        partialFeedback.push(msg);
+      }
+    }
+    partialFeedback.push(
+      `Progres perakitan komponen: ${stepsDone}/10 tahap selesai. Klik "Nyalakan PC (Simulasi POST)" pada langkah 9 untuk menguji POST dan memperoleh skor penuh.`,
+    );
+
+    setLastSimulationResult({
+      isPostSuccess: false,
+      postStatus: `MERAKIT (${stepsDone}/10)`,
+      beepPattern: null,
+      totalScore: partialResultScore + partialAttemptScore,
+      resultScore: partialResultScore,
+      timeScore: 0,
+      attemptScore: partialAttemptScore,
+      warningPenalty: 0,
+      elapsedSeconds,
+      attempts: nextState.attempts,
+      feedbackItems: partialFeedback,
+    });
+  };
+
   const applyAction = (result: {
     ok: boolean;
     state: AssemblyState;
     rejection?: RuleViolation;
   }) => {
     onChangeAssemblyState(result.state);
-    if (!result.ok && result.rejection) {
-      setLatestRejection(result.rejection);
-    } else {
-      setLatestRejection(null);
-    }
+    const nextRej = !result.ok && result.rejection ? result.rejection : null;
+    setLatestRejection(nextRej);
     setPostResult(null);
     setDiagnosisFeedback(null);
     onPostStatusChange(null);
+    syncLiveResultToStore(result.state, nextRej, null);
   };
 
   const handleResetBench = () => {
     startTimeRef.current = Date.now();
+    setLiveElapsedSeconds(0);
     onChangeAssemblyState(createAssemblyState());
     setLatestRejection(null);
     setPostResult(null);
     setDiagnosisFeedback(null);
     onPostStatusChange(null);
+    setLastSimulationResult(null);
   };
 
   const handleAutoAssembleValid = () => {
@@ -130,6 +239,7 @@ export function AssemblySimulator({
     setPostResult(null);
     setDiagnosisFeedback(null);
     onPostStatusChange(null);
+    syncLiveResultToStore(validState, null, null);
   };
 
   const handlePowerOnPost = () => {
@@ -139,46 +249,7 @@ export function AssemblySimulator({
     setDiagnosisFeedback(null);
     onPostStatusChange(simResult.success);
 
-    const startMs = startTimeRef.current ?? Date.now();
-    const elapsedSeconds = Math.max(15, Math.round((Date.now() - startMs) / 1000));
-    const score = calculateAssemblyScore({
-      isPostSuccess: simResult.success,
-      elapsedSeconds,
-      targetSeconds: 300,
-      attempts: assemblyState.attempts,
-      warningCount: simResult.warnings.length,
-    });
-
-    const feedbackItems: string[] = [];
-    if (simResult.primaryIssue) {
-      feedbackItems.push(
-        `${simResult.primaryIssue.reason} (${simResult.primaryIssue.remediation})`,
-      );
-    }
-    for (const w of simResult.warnings) {
-      feedbackItems.push(`${w.reason} (${w.remediation})`);
-    }
-    for (const rej of assemblyState.physicalRejections.slice(-3)) {
-      feedbackItems.push(`[Fisik] ${rej.reason}`);
-    }
-    if (feedbackItems.length === 0) {
-      feedbackItems.push(t('results.feedbackItem1'));
-      feedbackItems.push(t('results.feedbackItem2'));
-    }
-
-    setLastSimulationResult({
-      isPostSuccess: simResult.success,
-      postStatus: simResult.status,
-      beepPattern: simResult.beep ? simResult.beep.pattern : null,
-      totalScore: score.totalScore,
-      resultScore: score.resultScore,
-      timeScore: score.timeScore,
-      attemptScore: score.attemptScore,
-      warningPenalty: score.warningPenalty,
-      elapsedSeconds,
-      attempts: assemblyState.attempts,
-      feedbackItems,
-    });
+    syncLiveResultToStore(assemblyState, latestRejection, simResult);
 
     if (simResult.success) {
       completeLesson('rakit-pc');
@@ -222,7 +293,7 @@ export function AssemblySimulator({
         </div>
       </div>
 
-      {/* Ringkasan Daya & Percobaan */}
+      {/* Ringkasan Daya, Waktu, & Percobaan */}
       <div className="simulator-status-strip">
         <span data-testid="power-meter-readout">
           {t('simulator.powerMeterLabel', {
@@ -232,6 +303,13 @@ export function AssemblySimulator({
         </span>
         <span data-testid="attempts-counter">
           {t('simulator.attemptsCounterLabel', { attempts: assemblyState.attempts })}
+        </span>
+        <span data-testid="elapsed-timer-readout">
+          {t('simulator.elapsedTimerLabel', {
+            time: `${String(Math.floor(liveElapsedSeconds / 60)).padStart(2, '0')}:${String(
+              liveElapsedSeconds % 60,
+            ).padStart(2, '0')}`,
+          })}
         </span>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
           <button
