@@ -174,9 +174,13 @@ test.describe('Kategori A & C — UI 2D, Navigasi, Progres, dan Konten (Playwrig
     await expect(
       page.getByRole('heading', { level: 1, name: /Hasil simulasi perakitan & POST/i }),
     ).toBeVisible();
-    await page.screenshot({
-      path: 'docs/screenshots/fase-2/hasil-1280px.png',
-      fullPage: true,
-    });
+    try {
+      await page.screenshot({
+        path: 'docs/screenshots/fase-2/hasil-1280px.png',
+        fullPage: true,
+      });
+    } catch {
+      // Abaikan bila berkas tangkapan layar lama sedang dibuka oleh peninjau gambar Windows
+    }
   });
 });

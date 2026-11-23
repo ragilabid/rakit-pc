@@ -68,6 +68,23 @@ a {
   outline-offset: 2px;
 }
 
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0.5rem;
+  z-index: 100;
+  background-color: var(--color-accent-pcb);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus-visible {
+  left: 0.5rem;
+}
+
 /* Bilah menu atas */
 .app-shell {
   min-height: 100vh;

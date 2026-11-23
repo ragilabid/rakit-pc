@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { AssemblyState } from '../domain/assembly';
 import { t } from '../i18n';
 import { useProgressStore } from '../store/useProgressStore';
-import { PrimitiveHardwareScene } from '../three/PrimitiveHardwareScene';
 import {
   CAMERA_LIMITS,
   applyKeyboardCameraStep,
@@ -14,6 +13,12 @@ import {
   shouldIgnoreStageKeyEvent,
   type CameraOrbitState,
 } from '../three/stageController';
+
+const LazyHardwareScene = lazy(() =>
+  import('../three/PrimitiveHardwareScene').then((mod) => ({
+    default: mod.PrimitiveHardwareScene,
+  })),
+);
 
 export interface StagePartItem {
   id: string;
@@ -284,19 +289,31 @@ export function StagePreview({
           }}
         >
           {!effectiveFallback2d ? (
-            <PrimitiveHardwareScene
-              lessonId={lessonId}
-              lessonTitle={lessonTitle}
-              parts={primitiveParts}
-              selectedPartId={activePart?.id ?? ''}
-              onSelectPart={setSelectedPartId}
-              cameraState={cameraState}
-              qualityMode={qualityMode}
-              isRenderPaused={isRenderPaused}
-              onFpsSample={handleFpsSample}
-              assemblyState={assemblyState}
-              postSuccess={postSuccess}
-            />
+            <Suspense
+              fallback={
+                <div
+                  className="stage-status-bar"
+                  role="status"
+                  data-testid="stage-suspense-fallback"
+                >
+                  {t('stage.loadingModelText', { progress: 60 })}
+                </div>
+              }
+            >
+              <LazyHardwareScene
+                lessonId={lessonId}
+                lessonTitle={lessonTitle}
+                parts={primitiveParts}
+                selectedPartId={activePart?.id ?? ''}
+                onSelectPart={setSelectedPartId}
+                cameraState={cameraState}
+                qualityMode={qualityMode}
+                isRenderPaused={isRenderPaused}
+                onFpsSample={handleFpsSample}
+                assemblyState={assemblyState}
+                postSuccess={postSuccess}
+              />
+            </Suspense>
           ) : (
             <svg
               className="stage-schematic-svg"

@@ -1,5 +1,15 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const customBaseUrl = process.env.PLAYWRIGHT_BASE_URL;
+const baseURL =
+  customBaseUrl && customBaseUrl.trim().length > 0 ? customBaseUrl.trim() : 'http://127.0.0.1:4173';
+
+const isExternalTarget = Boolean(
+  customBaseUrl &&
+  !customBaseUrl.includes('127.0.0.1:4173') &&
+  !customBaseUrl.includes('localhost:4173'),
+);
+
 export default defineConfig({
   testDir: './tests/e2e',
   fullyParallel: true,
@@ -7,7 +17,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   reporter: 'list',
   use: {
-    baseURL: 'http://127.0.0.1:4173',
+    baseURL,
     trace: 'on-first-retry',
   },
   projects: [
@@ -16,9 +26,11 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
-  webServer: {
-    command: 'npm run preview -- --host 127.0.0.1 --port 4173',
-    url: 'http://127.0.0.1:4173',
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: isExternalTarget
+    ? undefined
+    : {
+        command: 'npm run preview -- --host 127.0.0.1 --port 4173',
+        url: 'http://127.0.0.1:4173',
+        reuseExistingServer: !process.env.CI,
+      },
 });
